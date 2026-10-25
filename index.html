@@ -185,13 +185,8 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
-    /* Quick Input Bar & Schedule Form */
-    .quick-bar {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-    .sched-composer {
+    /* Composers (Tasks & Schedule) */
+    .composer {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 18px;
@@ -201,7 +196,7 @@
       flex-direction: column;
       gap: 10px;
     }
-    .sched-time-row {
+    .composer-row {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -243,7 +238,7 @@
       min-width: 0;
       width: 100%;
     }
-    .sched-composer .input {
+    .composer .input {
       background: var(--surface-2);
       padding: 10px 12px;
       border-radius: 12px;
@@ -265,16 +260,58 @@
     }
     .prio-btn {
       width: 44px;
+      height: 44px;
       border-radius: 14px;
       border: 1px solid var(--border);
-      background: var(--surface);
+      background: var(--surface-2);
       font-size: 16px;
       cursor: pointer;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .prio-btn.high {
       border-color: var(--warning);
       background: rgba(245, 158, 11, 0.15);
+    }
+
+    /* Categories / Tags filter row for Tasks */
+    .categories-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 14px;
+      scrollbar-width: none;
+      align-items: center;
+    }
+    .categories-row::-webkit-scrollbar { display: none; }
+    .cat-pill {
+      padding: 6px 12px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .cat-pill.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .cat-add-btn {
+      background: var(--surface-2);
+      border: 1px dashed var(--border);
+      color: var(--text-muted);
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
     /* Progress Bar */
@@ -359,8 +396,8 @@
       text-decoration: line-through;
     }
 
-    /* Schedule Time Column & Yandex Maps Pill */
-    .sched-time-col {
+    /* Schedule & Task Time Badges */
+    .time-col {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -371,29 +408,38 @@
       min-width: 68px;
       flex-shrink: 0;
       text-align: center;
+      cursor: pointer;
     }
-    .sched-t-start {
+    .t-start {
       font-size: 13px;
       font-weight: 800;
       color: var(--accent);
     }
-    .sched-t-sep {
+    .t-sep {
       width: 1px;
       height: 8px;
       background: var(--border);
       margin: 2px 0;
     }
-    .sched-t-end {
+    .t-end {
       font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
     }
-    .sched-meta-row {
+    .meta-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 6px;
       margin-top: 7px;
+    }
+    .cat-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-glow);
+      padding: 3px 8px;
+      border-radius: 7px;
     }
     .dur-badge {
       font-size: 11px;
@@ -660,7 +706,7 @@
       justify-content: center;
     }
 
-    /* Fullscreen Modal (Note Editor, Schedule Editor & Settings) */
+    /* Fullscreen Modals */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -777,13 +823,28 @@
         <button class="seg-btn" id="modeScheduleBtn" onclick="setTodayMode('schedule')">По часам</button>
       </div>
 
-      <!-- Tasks Mode -->
+      <!-- Tasks Mode (With Categories, Optional Time & Priority) -->
       <div id="tasksBlock">
-        <div class="quick-bar">
-          <input type="text" id="taskInput" class="input" placeholder="Добавить задачу на день..." onkeydown="if(event.key==='Enter') addTask()" />
-          <button class="prio-btn" id="prioToggle" onclick="togglePrio()" title="Важность">⚡</button>
-          <button class="btn-primary" onclick="addTask()">+</button>
+        <div class="composer">
+          <div class="composer-row">
+            <div class="time-box">
+              <span class="time-box-label">Время (опц.)</span>
+              <input type="time" id="taskTime" class="time-field" value="" />
+            </div>
+            <button class="prio-btn" id="taskPrioToggle" onclick="toggleTaskPrio()" title="Важность">⚡</button>
+          </div>
+          <div style="display:flex;gap:8px">
+            <input type="text" id="taskInput" class="input" placeholder="Добавить задачу..." onkeydown="if(event.key==='Enter') addTask()" />
+            <button class="btn-primary" onclick="addTask()">+</button>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <select id="taskCatSelect" class="input" style="background:var(--surface-2);font-size:13px;padding:8px 10px"></select>
+            <button class="cat-add-btn" onclick="promptNewCategory()">+ Категория</button>
+          </div>
         </div>
+
+        <div class="categories-row" id="taskCategoriesFilter"></div>
+
         <div class="progress-wrap">
           <span id="taskStatsText">Выполнено 0 из 0</span>
           <div class="progress-track"><div class="progress-fill" id="taskProgressFill" style="width:0%"></div></div>
@@ -793,8 +854,8 @@
 
       <!-- Schedule Mode (With Start/End Time & Yandex Maps Location) -->
       <div id="scheduleBlock" style="display:none">
-        <div class="sched-composer">
-          <div class="sched-time-row">
+        <div class="composer">
+          <div class="composer-row">
             <div class="time-box">
               <span class="time-box-label">Начало</span>
               <input type="time" id="schedTime" class="time-field" value="10:00" onchange="autoAdjustEndTime()" />
@@ -884,7 +945,7 @@
         <strong style="font-size:18px">Редактировать событие</strong>
         <button class="icon-btn" onclick="closeSchedEditor()">✕</button>
       </div>
-      <div class="sched-time-row">
+      <div class="composer-row">
         <div class="time-box">
           <span class="time-box-label">Начало</span>
           <input type="time" id="editSchedStart" class="time-field" />
@@ -899,6 +960,28 @@
       <input type="text" id="editSchedLoc" class="input" placeholder="📍 Место / адрес (Яндекс Карты)..." />
       <div style="display:flex;gap:10px;margin-top:4px">
         <button class="btn-primary" style="flex:1;padding:12px;font-size:15px" onclick="saveSchedEdit()">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task Edit Modal -->
+  <div class="modal-backdrop" id="taskEditModal" onclick="if(event.target===this) closeTaskEditor()">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong style="font-size:18px">Редактировать задачу</strong>
+        <button class="icon-btn" onclick="closeTaskEditor()">✕</button>
+      </div>
+      <div class="composer-row">
+        <div class="time-box">
+          <span class="time-box-label">Время (опц.)</span>
+          <input type="time" id="editTaskTime" class="time-field" />
+        </div>
+        <button class="prio-btn" id="editTaskPrioBtn" onclick="toggleEditTaskPrio()" title="Важность">⚡</button>
+      </div>
+      <input type="text" id="editTaskText" class="input" placeholder="Текст задачи..." />
+      <select id="editTaskCatSelect" class="input" style="background:var(--surface-2)"></select>
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <button class="btn-primary" style="flex:1;padding:12px;font-size:15px" onclick="saveTaskEdit()">Сохранить</button>
       </div>
     </div>
   </div>
@@ -981,6 +1064,7 @@
     const STORAGE_KEY = 'obsidian_flow_v1';
     const CLOUD_CFG_KEY = 'obsidian_cloud_cfg_v1';
     const TAGS = ['#важное', '#идеи', '#дневник', '#проект', '#учеба'];
+    const DEFAULT_CATEGORIES = ['Все', 'Работа', 'Учеба', 'Быт'];
     const ACCENTS = [
       { name: 'Violet', color: '#8b5cf6', glow: 'rgba(139,92,246,0.22)' },
       { name: 'Emerald', color: '#10b981', glow: 'rgba(16,185,129,0.22)' },
@@ -990,10 +1074,7 @@
 
     const todayISO = () => new Date().toISOString().slice(0, 10);
 
-    let cloudConfig = {
-      dbUrl: '',
-      secret: ''
-    };
+    let cloudConfig = { dbUrl: '', secret: '' };
 
     let state = {
       updatedAt: 0,
@@ -1003,6 +1084,8 @@
       todayMode: 'tasks',
       noteScope: 'quick',
       activeTag: 'Все',
+      activeTaskCategory: 'Все',
+      taskCategories: DEFAULT_CATEGORIES.slice(1),
       tasks: [],
       schedule: [],
       notes: [
@@ -1024,9 +1107,11 @@
       counters: {}
     };
 
-    let currentPrio = 'normal';
+    let currentTaskPrio = 'normal';
+    let editTaskPrio = 'normal';
     let editingNoteId = null;
     let editingSchedId = null;
+    let editingTaskId = null;
     let editorPinned = false;
     let editorTag = '#дневник';
     let syncTimer = null;
@@ -1044,6 +1129,7 @@
         }
       } catch (e) { console.error(e); }
       if (!state.selectedDate) state.selectedDate = todayISO();
+      if (!state.taskCategories) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
       applyTheme();
       setTodayMode(state.todayMode || 'tasks', false);
       updateCloudIndicator();
@@ -1060,7 +1146,7 @@
       }
     }
 
-    /* Cloud Sync (Firebase Realtime Database REST API) */
+    /* Cloud Sync */
     function isCloudConfigured() {
       return Boolean(cloudConfig.dbUrl && cloudConfig.secret);
     }
@@ -1075,6 +1161,7 @@
     function updateCloudIndicator(status = null, msg = null) {
       const dot = document.getElementById('syncDot');
       const txt = document.getElementById('cloudStatusText');
+      if (!dot) return;
       dot.className = 'sync-dot';
       if (!isCloudConfigured()) {
         if (txt) txt.textContent = 'Облако не подключено';
@@ -1110,8 +1197,8 @@
         updateCloudIndicator('online', 'Отправлено в облако ✓');
       } catch (err) {
         console.error(err);
-        updateCloudIndicator('error', 'Ошибка отправки (проверь ссылку и Rules)');
-        if (manual) alert('Не удалось отправить данные. Проверь ссылку Firebase и чтобы в разделе Rules стояло true.');
+        updateCloudIndicator('error', 'Ошибка отправки (проверь Rules)');
+        if (manual) alert('Не удалось отправить данные. Проверь ссылку и правила (Rules) в Firebase.');
       }
     }
 
@@ -1127,7 +1214,6 @@
         const remote = await res.json();
 
         if (!remote) {
-          // В облаке ещё пусто — выгружаем текущие данные устройства
           await pushToCloud(false);
           return;
         }
@@ -1138,6 +1224,7 @@
         if (manual || remoteTime > localTime) {
           const keepDate = state.selectedDate || todayISO();
           state = { ...state, ...remote, selectedDate: keepDate };
+          if (!state.taskCategories) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
           saveState(false);
           applyTheme();
           renderAll();
@@ -1157,7 +1244,7 @@
       const urlInp = document.getElementById('cloudUrlInput').value.trim();
       const secInp = document.getElementById('cloudSecretInput').value.trim();
       if (!urlInp || !secInp) {
-        alert('Заполни оба поля: ссылку на Firebase и свой секретный пароль.');
+        alert('Заполни оба поля.');
         return;
       }
       cloudConfig.dbUrl = urlInp;
@@ -1167,11 +1254,8 @@
     }
 
     function manualCloudSync() {
-      if (!isCloudConfigured()) {
-        openSettings();
-      } else {
-        pullFromCloud(true);
-      }
+      if (!isCloudConfigured()) openSettings();
+      else pullFromCloud(true);
     }
 
     function forceAppUpdate() {
@@ -1179,14 +1263,10 @@
       window.location.replace(base + '?v=' + Date.now());
     }
 
-    // Автосинхронизация при разворачивании приложения на iPhone/ноутбуке и каждые 15 сек
     window.addEventListener('focus', () => { if (isCloudConfigured()) pullFromCloud(false); });
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible' && isCloudConfigured()) pullFromCloud(false);
     });
-    setInterval(() => {
-      if (document.visibilityState === 'visible' && isCloudConfigured()) pullFromCloud(false);
-    }, 15000);
 
     function applyTheme() {
       document.documentElement.classList.toggle('light', state.theme === 'light');
@@ -1248,24 +1328,79 @@
       if (shouldSave) saveState(false);
     }
 
-    function togglePrio() {
-      currentPrio = currentPrio === 'normal' ? 'high' : 'normal';
-      document.getElementById('prioToggle').classList.toggle('high', currentPrio === 'high');
+    /* Tasks Logic */
+    function toggleTaskPrio() {
+      currentTaskPrio = currentTaskPrio === 'normal' ? 'high' : 'normal';
+      document.getElementById('taskPrioToggle').classList.toggle('high', currentTaskPrio === 'high');
+    }
+
+    function toggleEditTaskPrio() {
+      editTaskPrio = editTaskPrio === 'normal' ? 'high' : 'normal';
+      document.getElementById('editTaskPrioBtn').classList.toggle('high', editTaskPrio === 'high');
+    }
+
+    function promptNewCategory() {
+      const name = prompt('Название новой категории (например, Спорт, Дом, Проект):');
+      if (!name || !name.trim()) return;
+      const clean = name.trim();
+      if (!state.taskCategories.includes(clean)) {
+        state.taskCategories.push(clean);
+        saveState();
+        renderTaskCategories();
+      }
+      state.activeTaskCategory = clean;
+      renderTaskCategories();
+      renderToday();
+    }
+
+    function renderTaskCategories() {
+      const cats = ['Все', ...(state.taskCategories || [])];
+      const filterRow = document.getElementById('taskCategoriesFilter');
+      filterRow.innerHTML = '';
+      cats.forEach(c => {
+        const pill = document.createElement('button');
+        pill.className = 'cat-pill' + (state.activeTaskCategory === c ? ' active' : '');
+        pill.textContent = c;
+        pill.onclick = () => { state.activeTaskCategory = c; renderTaskCategories(); renderToday(); };
+        filterRow.appendChild(pill);
+      });
+
+      const select = document.getElementById('taskCatSelect');
+      const editSelect = document.getElementById('editTaskCatSelect');
+      [select, editSelect].forEach(sel => {
+        if (!sel) return;
+        const curVal = sel.value;
+        sel.innerHTML = '';
+        state.taskCategories.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c;
+          opt.textContent = c;
+          sel.appendChild(opt);
+        });
+        if (state.taskCategories.includes(curVal)) sel.value = curVal;
+      });
     }
 
     function addTask() {
       const inp = document.getElementById('taskInput');
+      const timeInp = document.getElementById('taskTime');
+      const catSel = document.getElementById('taskCatSelect');
       const text = inp.value.trim();
       if (!text) return;
       if (!state.tasks) state.tasks = [];
+
       state.tasks.unshift({
         id: 't_' + Date.now(),
         text,
+        time: timeInp.value || '',
+        category: catSel ? catSel.value : (state.taskCategories[0] || 'Работа'),
         done: false,
-        prio: currentPrio,
+        prio: currentTaskPrio,
         date: state.selectedDate
       });
+
       inp.value = '';
+      timeInp.value = '';
       saveState();
       renderAll();
     }
@@ -1281,7 +1416,40 @@
       renderAll();
     }
 
-    /* Schedule helpers: End Time, Duration & Yandex Maps URL */
+    function openTaskEditor(id) {
+      const t = (state.tasks || []).find(x => x.id === id);
+      if (!t) return;
+      editingTaskId = id;
+      document.getElementById('editTaskTime').value = t.time || '';
+      document.getElementById('editTaskText').value = t.text || '';
+      editTaskPrio = t.prio || 'normal';
+      document.getElementById('editTaskPrioBtn').classList.toggle('high', editTaskPrio === 'high');
+      
+      const sel = document.getElementById('editTaskCatSelect');
+      if (sel && t.category) sel.value = t.category;
+
+      document.getElementById('taskEditModal').classList.add('open');
+    }
+
+    function closeTaskEditor() {
+      document.getElementById('taskEditModal').classList.remove('open');
+      editingTaskId = null;
+    }
+
+    function saveTaskEdit() {
+      const t = (state.tasks || []).find(x => x.id === editingTaskId);
+      if (!t) return;
+      t.time = document.getElementById('editTaskTime').value || '';
+      t.text = document.getElementById('editTaskText').value.trim() || t.text;
+      t.prio = editTaskPrio;
+      const sel = document.getElementById('editTaskCatSelect');
+      if (sel) t.category = sel.value;
+      saveState();
+      closeTaskEditor();
+      renderAll();
+    }
+
+    /* Schedule helpers */
     function timeToMinutes(t) {
       if (!t || !t.includes(':')) return 0;
       const [h, m] = t.split(':').map(Number);
@@ -1395,22 +1563,38 @@
     }
 
     function renderToday() {
-      const dayTasks = (state.tasks || []).filter(t => t.date === state.selectedDate);
+      renderTaskCategories();
+
+      const dayTasks = (state.tasks || []).filter(t => {
+        if (t.date !== state.selectedDate) return false;
+        if (state.activeTaskCategory && state.activeTaskCategory !== 'Все' && t.category !== state.activeTaskCategory) return false;
+        return true;
+      });
+
       const doneCount = dayTasks.filter(t => t.done).length;
       document.getElementById('taskStatsText').textContent = `Выполнено ${doneCount} из ${dayTasks.length}`;
       const pct = dayTasks.length ? Math.round((doneCount / dayTasks.length) * 100) : 0;
       document.getElementById('taskProgressFill').style.width = pct + '%';
 
       const tList = document.getElementById('tasksList');
-      tList.innerHTML = dayTasks.length ? '' : '<div class="empty-state">На этот день задач пока нет</div>';
+      tList.innerHTML = dayTasks.length ? '' : '<div class="empty-state">В этой категории задач пока нет</div>';
       dayTasks.forEach(t => {
+        const hasTime = t.time && t.time.trim().length > 0;
         const div = document.createElement('div');
         div.className = 'item-card' + (t.done ? ' done' : '');
         div.innerHTML = `
           <div class="check-circle" onclick="toggleTask('${t.id}')">✓</div>
-          <div class="item-body" onclick="toggleTask('${t.id}')">
-            <span class="item-title">${escapeHtml(t.text)}</span>
-            ${t.prio === 'high' ? '<span class="badge-prio">⚡ Важно</span>' : ''}
+          ${hasTime ? `
+            <div class="time-col" onclick="openTaskEditor('${t.id}')">
+              <span class="t-start">${escapeHtml(t.time)}</span>
+            </div>
+          ` : ''}
+          <div class="item-body" onclick="openTaskEditor('${t.id}')">
+            <div class="item-title">${escapeHtml(t.text)}</div>
+            <div class="meta-row">
+              ${t.category ? `<span class="cat-badge">${escapeHtml(t.category)}</span>` : ''}
+              ${t.prio === 'high' ? '<span class="badge-prio">⚡ Важно</span>' : ''}
+            </div>
           </div>
           <button class="del-btn" onclick="deleteTask('${t.id}')">✕</button>
         `;
@@ -1430,13 +1614,13 @@
         div.className = 'item-card' + (s.done ? ' done' : '') + (activeNow ? ' now-active' : '');
         div.innerHTML = `
           <div class="check-circle" onclick="toggleSched('${s.id}')">✓</div>
-          <div class="sched-time-col" onclick="openSchedEditor('${s.id}')">
-            <span class="sched-t-start">${escapeHtml(s.time)}</span>
-            ${endT ? `<div class="sched-t-sep"></div><span class="sched-t-end">${escapeHtml(endT)}</span>` : ''}
+          <div class="time-col" onclick="openSchedEditor('${s.id}')">
+            <span class="t-start">${escapeHtml(s.time)}</span>
+            ${endT ? `<div class="t-sep"></div><span class="t-end">${escapeHtml(endT)}</span>` : ''}
           </div>
           <div class="item-body" onclick="openSchedEditor('${s.id}')">
             <div class="item-title">${escapeHtml(s.text)}</div>
-            <div class="sched-meta-row">
+            <div class="meta-row">
               ${activeNow ? `<span class="now-badge">СЕЙЧАС</span>` : ''}
               ${dur ? `<span class="dur-badge">⏱ ${dur}</span>` : ''}
               ${hasLoc ? `<a class="ymaps-link" href="${buildYandexMapsUrl(s.location)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📍 ${escapeHtml(s.location)} ↗</a>` : ''}
