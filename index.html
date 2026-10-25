@@ -90,11 +90,24 @@
       justify-content: center;
       font-size: 18px;
       cursor: pointer;
+      position: relative;
       transition: transform 0.12s ease, background 0.2s;
     }
     .icon-btn:active {
       transform: scale(0.93);
     }
+    .sync-dot {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
+    .sync-dot.online { background: var(--success); box-shadow: 0 0 6px var(--success); }
+    .sync-dot.syncing { background: var(--warning); }
+    .sync-dot.error { background: var(--danger); }
 
     /* Week Strip */
     .week-strip {
@@ -228,6 +241,7 @@
       font-size: 15px;
       outline: none;
       min-width: 0;
+      width: 100%;
     }
     .sched-composer .input {
       background: var(--surface-2);
@@ -500,12 +514,12 @@
 
     /* Habits & Counters */
     .section-label {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.6px;
       color: var(--text-muted);
-      margin: 18px 0 10px;
+      margin: 14px 0 8px;
     }
     .habit-card {
       background: var(--surface);
@@ -668,9 +682,10 @@
       border-radius: 24px 24px 0 0;
       padding: 18px 16px calc(24px + var(--safe-bottom));
       max-height: 92vh;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .editor-title {
       background: transparent;
@@ -697,17 +712,33 @@
     .color-row {
       display: flex;
       gap: 12px;
-      margin: 8px 0 14px;
+      margin: 4px 0 8px;
     }
     .color-dot {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       cursor: pointer;
       border: 3px solid transparent;
     }
     .color-dot.active {
       border-color: var(--text);
+    }
+    .cloud-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cloud-status-line {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .empty-state {
       text-align: center;
@@ -728,8 +759,12 @@
         <div class="header-subtitle" id="headerDate"></div>
       </div>
       <div class="header-actions">
+        <button class="icon-btn" id="cloudBtn" onclick="manualCloudSync()" title="Облачная синхронизация">
+          ☁️
+          <span class="sync-dot" id="syncDot"></span>
+        </button>
         <button class="icon-btn" id="themeBtn" title="Сменить тему">🌙</button>
-        <button class="icon-btn" id="settingsBtn" title="Настройки и Бэкап">⚙️</button>
+        <button class="icon-btn" id="settingsBtn" title="Настройки и Облако">⚙️</button>
       </div>
     </header>
 
@@ -885,24 +920,39 @@
     </div>
   </div>
 
-  <!-- Settings & Backup Modal -->
+  <!-- Settings, Cloud Sync & Backup Modal -->
   <div class="modal-backdrop" id="settingsModal" onclick="if(event.target===this) closeSettings()">
     <div class="modal-sheet">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <strong style="font-size:18px">Настройки и Бэкап</strong>
+        <strong style="font-size:18px">Облако и Настройки</strong>
         <button class="icon-btn" onclick="closeSettings()">✕</button>
       </div>
+
+      <div class="section-label" style="margin-top:4px">☁️ Облачная база (Телефон ↔ Ноутбук)</div>
+      <div class="cloud-box">
+        <input type="url" id="cloudUrlInput" class="input" style="padding:10px 12px;font-size:13px" placeholder="Ссылка Firebase (https://...-rtdb.firebaseio.com)" />
+        <input type="text" id="cloudSecretInput" class="input" style="padding:10px 12px;font-size:13px" placeholder="Личный секретный пароль (напр. damskiy_777)" />
+        <div style="display:flex;gap:8px">
+          <button class="btn-primary" style="flex:1;padding:10px;font-size:13px" onclick="saveCloudConfig()">🔗 Подключить и синхр.</button>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="seg-btn" style="background:var(--surface-2);color:var(--text);font-size:12px" onclick="pushToCloud(true)">⬆ Отправить в облако</button>
+          <button class="seg-btn" style="background:var(--surface-2);color:var(--text);font-size:12px" onclick="pullFromCloud(true)">⬇ Скачать из облака</button>
+        </div>
+        <div class="cloud-status-line">
+          <span id="cloudStatusText">Облако не подключено</span>
+          <button onclick="forceAppUpdate()" style="background:none;border:none;color:var(--accent);font-size:12px;font-weight:600;cursor:pointer">🔄 Обновить код приложения</button>
+        </div>
+      </div>
+
       <div class="section-label">Акцентный цвет (Obsidian)</div>
       <div class="color-row" id="accentPicker"></div>
 
-      <div class="section-label">Сохранность данных</div>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:8px">
-        Все записи хранятся в памяти устройства. Скачай файл бэкапа, чтобы перенести данные между iPhone и ноутбуком.
-      </p>
+      <div class="section-label">Резервный файл (.json)</div>
       <div style="display:flex;gap:10px">
-        <button class="btn-primary" style="flex:1;padding:12px;font-size:14px" onclick="exportData()">⬇ Экспорт (.json)</button>
-        <label class="btn-primary" style="flex:1;padding:12px;font-size:14px;text-align:center;background:var(--surface-2);color:var(--text)">
-          ⬆ Импорт (.json)
+        <button class="btn-primary" style="flex:1;padding:11px;font-size:13px" onclick="exportData()">⬇ Экспорт файла</button>
+        <label class="btn-primary" style="flex:1;padding:11px;font-size:13px;text-align:center;background:var(--surface-2);color:var(--text)">
+          ⬆ Импорт файла
           <input type="file" accept=".json" style="display:none" onchange="importData(event)" />
         </label>
       </div>
@@ -929,6 +979,7 @@
 
   <script>
     const STORAGE_KEY = 'obsidian_flow_v1';
+    const CLOUD_CFG_KEY = 'obsidian_cloud_cfg_v1';
     const TAGS = ['#важное', '#идеи', '#дневник', '#проект', '#учеба'];
     const ACCENTS = [
       { name: 'Violet', color: '#8b5cf6', glow: 'rgba(139,92,246,0.22)' },
@@ -939,7 +990,13 @@
 
     const todayISO = () => new Date().toISOString().slice(0, 10);
 
+    let cloudConfig = {
+      dbUrl: '',
+      secret: ''
+    };
+
     let state = {
+      updatedAt: 0,
       theme: 'dark',
       accent: '#8b5cf6',
       selectedDate: todayISO(),
@@ -972,6 +1029,7 @@
     let editingSchedId = null;
     let editorPinned = false;
     let editorTag = '#дневник';
+    let syncTimer = null;
 
     function loadState() {
       try {
@@ -980,15 +1038,155 @@
           const parsed = JSON.parse(raw);
           state = { ...state, ...parsed };
         }
+        const rawCfg = localStorage.getItem(CLOUD_CFG_KEY);
+        if (rawCfg) {
+          cloudConfig = { ...cloudConfig, ...JSON.parse(rawCfg) };
+        }
       } catch (e) { console.error(e); }
       if (!state.selectedDate) state.selectedDate = todayISO();
       applyTheme();
-      setTodayMode(state.todayMode || 'tasks');
+      setTodayMode(state.todayMode || 'tasks', false);
+      updateCloudIndicator();
     }
 
-    function saveState() {
+    function saveState(triggerCloud = true) {
+      if (triggerCloud) {
+        state.updatedAt = Date.now();
+      }
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      if (triggerCloud && isCloudConfigured()) {
+        clearTimeout(syncTimer);
+        syncTimer = setTimeout(() => pushToCloud(false), 350);
+      }
     }
+
+    /* Cloud Sync (Firebase Realtime Database REST API) */
+    function isCloudConfigured() {
+      return Boolean(cloudConfig.dbUrl && cloudConfig.secret);
+    }
+
+    function getCloudEndpoint() {
+      let base = cloudConfig.dbUrl.trim().replace(/\/+$/, '');
+      if (!base.startsWith('http')) base = 'https://' + base;
+      const safeKey = encodeURIComponent(cloudConfig.secret.trim());
+      return `${base}/obsidian_sync/${safeKey}.json`;
+    }
+
+    function updateCloudIndicator(status = null, msg = null) {
+      const dot = document.getElementById('syncDot');
+      const txt = document.getElementById('cloudStatusText');
+      dot.className = 'sync-dot';
+      if (!isCloudConfigured()) {
+        if (txt) txt.textContent = 'Облако не подключено';
+        return;
+      }
+      if (status === 'syncing') {
+        dot.classList.add('syncing');
+        if (txt) txt.textContent = msg || 'Синхронизация...';
+      } else if (status === 'error') {
+        dot.classList.add('error');
+        if (txt) txt.textContent = msg || 'Ошибка связи с базой';
+      } else {
+        dot.classList.add('online');
+        const t = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        if (txt) txt.textContent = msg || `Синхронизировано в ${t}`;
+      }
+    }
+
+    async function pushToCloud(manual = false) {
+      if (!isCloudConfigured()) {
+        if (manual) alert('Сначала введи ссылку Firebase и секретный пароль');
+        return;
+      }
+      try {
+        updateCloudIndicator('syncing', 'Отправка в облако...');
+        if (!state.updatedAt) state.updatedAt = Date.now();
+        const res = await fetch(getCloudEndpoint(), {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(state)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        updateCloudIndicator('online', 'Отправлено в облако ✓');
+      } catch (err) {
+        console.error(err);
+        updateCloudIndicator('error', 'Ошибка отправки (проверь ссылку и Rules)');
+        if (manual) alert('Не удалось отправить данные. Проверь ссылку Firebase и чтобы в разделе Rules стояло true.');
+      }
+    }
+
+    async function pullFromCloud(manual = false) {
+      if (!isCloudConfigured()) {
+        if (manual) openSettings();
+        return;
+      }
+      try {
+        updateCloudIndicator('syncing', 'Проверка облака...');
+        const res = await fetch(getCloudEndpoint() + '?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const remote = await res.json();
+
+        if (!remote) {
+          // В облаке ещё пусто — выгружаем текущие данные устройства
+          await pushToCloud(false);
+          return;
+        }
+
+        const remoteTime = remote.updatedAt || 0;
+        const localTime = state.updatedAt || 0;
+
+        if (manual || remoteTime > localTime) {
+          const keepDate = state.selectedDate || todayISO();
+          state = { ...state, ...remote, selectedDate: keepDate };
+          saveState(false);
+          applyTheme();
+          renderAll();
+          updateCloudIndicator('online', 'Данные загружены из облака ✓');
+        } else if (localTime > remoteTime) {
+          await pushToCloud(false);
+        } else {
+          updateCloudIndicator('online');
+        }
+      } catch (err) {
+        console.error(err);
+        updateCloudIndicator('error', 'Ошибка загрузки из облака');
+      }
+    }
+
+    function saveCloudConfig() {
+      const urlInp = document.getElementById('cloudUrlInput').value.trim();
+      const secInp = document.getElementById('cloudSecretInput').value.trim();
+      if (!urlInp || !secInp) {
+        alert('Заполни оба поля: ссылку на Firebase и свой секретный пароль.');
+        return;
+      }
+      cloudConfig.dbUrl = urlInp;
+      cloudConfig.secret = secInp;
+      localStorage.setItem(CLOUD_CFG_KEY, JSON.stringify(cloudConfig));
+      pullFromCloud(true);
+    }
+
+    function manualCloudSync() {
+      if (!isCloudConfigured()) {
+        openSettings();
+      } else {
+        pullFromCloud(true);
+      }
+    }
+
+    function forceAppUpdate() {
+      const base = window.location.href.split('?')[0];
+      window.location.replace(base + '?v=' + Date.now());
+    }
+
+    // Автосинхронизация при разворачивании приложения на iPhone/ноутбуке и каждые 15 сек
+    window.addEventListener('focus', () => { if (isCloudConfigured()) pullFromCloud(false); });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && isCloudConfigured()) pullFromCloud(false);
+    });
+    setInterval(() => {
+      if (document.visibilityState === 'visible' && isCloudConfigured()) pullFromCloud(false);
+    }, 15000);
 
     function applyTheme() {
       document.documentElement.classList.toggle('light', state.theme === 'light');
@@ -1024,7 +1222,7 @@
         const d = new Date(base);
         d.setDate(base.getDate() + i);
         const iso = d.toISOString().slice(0, 10);
-        const hasData = state.tasks.some(t => t.date === iso) || state.schedule.some(s => s.date === iso);
+        const hasData = (state.tasks || []).some(t => t.date === iso) || (state.schedule || []).some(s => s.date === iso);
         const pill = document.createElement('div');
         pill.className = 'day-pill' + (iso === state.selectedDate ? ' active' : '');
         pill.innerHTML = `
@@ -1032,7 +1230,7 @@
           <span class="day-num">${d.getDate()}</span>
           ${hasData ? '<div class="day-dot"></div>' : '<div style="height:8px"></div>'}
         `;
-        pill.onclick = () => { state.selectedDate = iso; saveState(); renderAll(); };
+        pill.onclick = () => { state.selectedDate = iso; saveState(false); renderAll(); };
         strip.appendChild(pill);
       }
       const selDateObj = new Date(state.selectedDate);
@@ -1041,13 +1239,13 @@
       });
     }
 
-    function setTodayMode(mode) {
+    function setTodayMode(mode, shouldSave = true) {
       state.todayMode = mode;
       document.getElementById('modeTasksBtn').classList.toggle('active', mode === 'tasks');
       document.getElementById('modeScheduleBtn').classList.toggle('active', mode === 'schedule');
       document.getElementById('tasksBlock').style.display = mode === 'tasks' ? 'block' : 'none';
       document.getElementById('scheduleBlock').style.display = mode === 'schedule' ? 'block' : 'none';
-      saveState();
+      if (shouldSave) saveState(false);
     }
 
     function togglePrio() {
@@ -1059,6 +1257,7 @@
       const inp = document.getElementById('taskInput');
       const text = inp.value.trim();
       if (!text) return;
+      if (!state.tasks) state.tasks = [];
       state.tasks.unshift({
         id: 't_' + Date.now(),
         text,
@@ -1072,12 +1271,12 @@
     }
 
     function toggleTask(id) {
-      const t = state.tasks.find(x => x.id === id);
+      const t = (state.tasks || []).find(x => x.id === id);
       if (t) { t.done = !t.done; saveState(); renderAll(); }
     }
 
     function deleteTask(id) {
-      state.tasks = state.tasks.filter(x => x.id !== id);
+      state.tasks = (state.tasks || []).filter(x => x.id !== id);
       saveState();
       renderAll();
     }
@@ -1099,7 +1298,7 @@
     function autoAdjustEndTime() {
       const startVal = document.getElementById('schedTime').value;
       if (!startVal) return;
-      const endMins = timeToMinutes(startVal) + 90; // default +1h 30m
+      const endMins = timeToMinutes(startVal) + 90;
       document.getElementById('schedEndTime').value = minutesToTime(endMins);
     }
 
@@ -1135,6 +1334,7 @@
       const text = inp.value.trim();
       const location = locInp.value.trim();
       if (!text) return;
+      if (!state.schedule) state.schedule = [];
 
       state.schedule.push({
         id: 's_' + Date.now(),
@@ -1148,7 +1348,6 @@
       state.schedule.sort((a, b) => a.time.localeCompare(b.time));
       inp.value = '';
       locInp.value = '';
-      // Advance next slot start time to current endTime for fast sequential planning
       document.getElementById('schedTime').value = endTime;
       document.getElementById('schedEndTime').value = minutesToTime(timeToMinutes(endTime) + 90);
       saveState();
@@ -1156,18 +1355,18 @@
     }
 
     function toggleSched(id) {
-      const s = state.schedule.find(x => x.id === id);
+      const s = (state.schedule || []).find(x => x.id === id);
       if (s) { s.done = !s.done; saveState(); renderAll(); }
     }
 
     function deleteSched(id) {
-      state.schedule = state.schedule.filter(x => x.id !== id);
+      state.schedule = (state.schedule || []).filter(x => x.id !== id);
       saveState();
       renderAll();
     }
 
     function openSchedEditor(id) {
-      const s = state.schedule.find(x => x.id === id);
+      const s = (state.schedule || []).find(x => x.id === id);
       if (!s) return;
       editingSchedId = id;
       document.getElementById('editSchedStart').value = s.time || '10:00';
@@ -1183,7 +1382,7 @@
     }
 
     function saveSchedEdit() {
-      const s = state.schedule.find(x => x.id === editingSchedId);
+      const s = (state.schedule || []).find(x => x.id === editingSchedId);
       if (!s) return;
       s.time = document.getElementById('editSchedStart').value || s.time;
       s.endTime = document.getElementById('editSchedEnd').value || '';
@@ -1196,7 +1395,7 @@
     }
 
     function renderToday() {
-      const dayTasks = state.tasks.filter(t => t.date === state.selectedDate);
+      const dayTasks = (state.tasks || []).filter(t => t.date === state.selectedDate);
       const doneCount = dayTasks.filter(t => t.done).length;
       document.getElementById('taskStatsText').textContent = `Выполнено ${doneCount} из ${dayTasks.length}`;
       const pct = dayTasks.length ? Math.round((doneCount / dayTasks.length) * 100) : 0;
@@ -1218,7 +1417,7 @@
         tList.appendChild(div);
       });
 
-      const daySched = state.schedule.filter(s => s.date === state.selectedDate);
+      const daySched = (state.schedule || []).filter(s => s.date === state.selectedDate);
       const sList = document.getElementById('scheduleList');
       sList.innerHTML = daySched.length ? '' : '<div class="empty-state">Расписание по часам пусто</div>';
       daySched.forEach(s => {
@@ -1262,6 +1461,7 @@
       const inp = document.getElementById('quickNoteInput');
       const text = inp.value.trim();
       if (!text) return;
+      if (!state.notes) state.notes = [];
       const now = new Date();
       const timeStr = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
       state.notes.unshift({
@@ -1290,7 +1490,7 @@
       });
 
       const q = (document.getElementById('noteSearch').value || '').toLowerCase();
-      const filtered = state.notes
+      const filtered = (state.notes || [])
         .filter(n => (n.scope || 'quick') === state.noteScope)
         .filter(n => state.activeTag === 'Все' || n.tag === state.activeTag)
         .filter(n => !q || (n.title + ' ' + n.body).toLowerCase().includes(q))
@@ -1320,7 +1520,7 @@
 
     function openNoteEditor(id = null) {
       editingNoteId = id;
-      const existing = state.notes.find(n => n.id === id);
+      const existing = (state.notes || []).find(n => n.id === id);
       document.getElementById('editorTitle').value = existing ? existing.title : '';
       document.getElementById('editorBody').value = existing ? existing.body : '';
       editorPinned = existing ? !!existing.pinned : false;
@@ -1352,6 +1552,7 @@
       const title = document.getElementById('editorTitle').value.trim() || 'Заметка';
       const body = document.getElementById('editorBody').value.trim();
       if (!body && !title) { closeNoteEditor(); return; }
+      if (!state.notes) state.notes = [];
 
       if (editingNoteId) {
         const n = state.notes.find(x => x.id === editingNoteId);
@@ -1379,7 +1580,7 @@
 
     function deleteCurrentNote() {
       if (!editingNoteId) return;
-      state.notes = state.notes.filter(n => n.id !== editingNoteId);
+      state.notes = (state.notes || []).filter(n => n.id !== editingNoteId);
       saveState();
       closeNoteEditor();
       renderNotes();
@@ -1401,7 +1602,7 @@
       }
       const tIso = todayISO();
 
-      state.habits.forEach(h => {
+      (state.habits || []).forEach(h => {
         const hist = h.history || {};
         let streak = 0;
         for (let i = 0; i < 30; i++) {
@@ -1429,6 +1630,7 @@
         hList.appendChild(card);
       });
 
+      if (!state.counters) state.counters = {};
       const dayCounters = state.counters[tIso] || { water: 0, sleep: 7, focus: 0 };
       document.getElementById('cntWater').textContent = dayCounters.water;
       document.getElementById('cntSleep').textContent = dayCounters.sleep;
@@ -1436,7 +1638,7 @@
     }
 
     function toggleHabit(id) {
-      const h = state.habits.find(x => x.id === id);
+      const h = (state.habits || []).find(x => x.id === id);
       if (!h) return;
       if (!h.history) h.history = {};
       const tIso = todayISO();
@@ -1449,6 +1651,7 @@
       const inp = document.getElementById('habitInput');
       const name = inp.value.trim();
       if (!name) return;
+      if (!state.habits) state.habits = [];
       state.habits.push({ id: 'h_' + Date.now(), name, history: {} });
       inp.value = '';
       saveState();
@@ -1456,32 +1659,37 @@
     }
 
     function deleteHabit(id) {
-      state.habits = state.habits.filter(h => h.id !== id);
+      state.habits = (state.habits || []).filter(h => h.id !== id);
       saveState();
       renderTrackers();
     }
 
     function changeCounter(key, delta) {
       const tIso = todayISO();
+      if (!state.counters) state.counters = {};
       if (!state.counters[tIso]) state.counters[tIso] = { water: 0, sleep: 7, focus: 0 };
       state.counters[tIso][key] = Math.max(0, +(state.counters[tIso][key] + delta).toFixed(1));
       saveState();
       renderTrackers();
     }
 
-    /* Settings & Backup */
-    document.getElementById('settingsBtn').onclick = () => {
+    /* Settings & Cloud Setup */
+    function openSettings() {
+      document.getElementById('cloudUrlInput').value = cloudConfig.dbUrl || '';
+      document.getElementById('cloudSecretInput').value = cloudConfig.secret || '';
       const picker = document.getElementById('accentPicker');
       picker.innerHTML = '';
       ACCENTS.forEach(a => {
         const dot = document.createElement('div');
         dot.className = 'color-dot' + (state.accent === a.color ? ' active' : '');
         dot.style.background = a.color;
-        dot.onclick = () => { state.accent = a.color; saveState(); applyTheme(); document.getElementById('settingsBtn').click(); };
+        dot.onclick = () => { state.accent = a.color; saveState(); applyTheme(); openSettings(); };
         picker.appendChild(dot);
       });
       document.getElementById('settingsModal').classList.add('open');
-    };
+    }
+
+    document.getElementById('settingsBtn').onclick = openSettings;
 
     function closeSettings() {
       document.getElementById('settingsModal').classList.remove('open');
@@ -1525,6 +1733,9 @@
 
     loadState();
     renderAll();
+    if (isCloudConfigured()) {
+      pullFromCloud(false);
+    }
   </script>
 </body>
 </html>
