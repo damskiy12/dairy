@@ -172,11 +172,51 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
-    /* Quick Input Bar */
+    /* Quick Input Bar & Schedule Form */
     .quick-bar {
       display: flex;
       gap: 8px;
       margin-bottom: 16px;
+    }
+    .sched-composer {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sched-time-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .time-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 6px 10px;
+    }
+    .time-box-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .time-field {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+      outline: none;
+      text-align: right;
     }
     .input {
       flex: 1;
@@ -187,14 +227,15 @@
       border-radius: 14px;
       font-size: 15px;
       outline: none;
+      min-width: 0;
+    }
+    .sched-composer .input {
+      background: var(--surface-2);
+      padding: 10px 12px;
+      border-radius: 12px;
     }
     .input:focus {
       border-color: var(--accent);
-    }
-    .time-input {
-      width: 96px;
-      flex: none;
-      text-align: center;
     }
     .btn-primary {
       background: var(--accent);
@@ -206,6 +247,7 @@
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 4px 14px var(--accent-glow);
+      flex-shrink: 0;
     }
     .prio-btn {
       width: 44px;
@@ -214,6 +256,7 @@
       background: var(--surface);
       font-size: 16px;
       cursor: pointer;
+      flex-shrink: 0;
     }
     .prio-btn.high {
       border-color: var(--warning);
@@ -256,9 +299,13 @@
       border-radius: 16px;
       padding: 14px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s, border-color 0.2s;
+    }
+    .item-card.now-active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 6px 20px var(--accent-glow);
     }
     .item-card.done {
       opacity: 0.5;
@@ -276,6 +323,7 @@
       color: transparent;
       font-size: 13px;
       font-weight: 800;
+      margin-top: 1px;
     }
     .item-card.done .check-circle {
       background: var(--accent);
@@ -285,24 +333,93 @@
     .item-body {
       flex: 1;
       min-width: 0;
+      cursor: pointer;
     }
     .item-title {
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       word-break: break-word;
+      line-height: 1.35;
     }
     .item-card.done .item-title {
       text-decoration: line-through;
     }
-    .badge-time {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-      background: var(--accent-glow);
-      padding: 4px 8px;
-      border-radius: 8px;
+
+    /* Schedule Time Column & Yandex Maps Pill */
+    .sched-time-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 6px 8px;
+      min-width: 68px;
       flex-shrink: 0;
+      text-align: center;
     }
+    .sched-t-start {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .sched-t-sep {
+      width: 1px;
+      height: 8px;
+      background: var(--border);
+      margin: 2px 0;
+    }
+    .sched-t-end {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .sched-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-top: 7px;
+    }
+    .dur-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--surface-2);
+      padding: 3px 8px;
+      border-radius: 7px;
+    }
+    .now-badge {
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--accent);
+      padding: 3px 7px;
+      border-radius: 7px;
+      letter-spacing: 0.4px;
+    }
+    .ymaps-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fc3f1d;
+      background: rgba(252, 63, 29, 0.12);
+      border: 1px solid rgba(252, 63, 29, 0.28);
+      padding: 3px 9px;
+      border-radius: 8px;
+      text-decoration: none;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: transform 0.1s ease;
+    }
+    .ymaps-link:active {
+      transform: scale(0.96);
+    }
+
     .badge-prio {
       font-size: 11px;
       color: var(--warning);
@@ -313,8 +430,9 @@
       border: none;
       color: var(--text-muted);
       font-size: 18px;
-      padding: 4px 6px;
+      padding: 2px 6px;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     /* Notes */
@@ -528,7 +646,7 @@
       justify-content: center;
     }
 
-    /* Fullscreen Modal (Note Editor & Settings) */
+    /* Fullscreen Modal (Note Editor, Schedule Editor & Settings) */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -638,12 +756,25 @@
         <div class="list" id="tasksList"></div>
       </div>
 
-      <!-- Schedule Mode -->
+      <!-- Schedule Mode (With Start/End Time & Yandex Maps Location) -->
       <div id="scheduleBlock" style="display:none">
-        <div class="quick-bar">
-          <input type="time" id="schedTime" class="input time-input" value="10:00" />
-          <input type="text" id="schedInput" class="input" placeholder="Событие или пара..." onkeydown="if(event.key==='Enter') addSchedule()" />
-          <button class="btn-primary" onclick="addSchedule()">+</button>
+        <div class="sched-composer">
+          <div class="sched-time-row">
+            <div class="time-box">
+              <span class="time-box-label">Начало</span>
+              <input type="time" id="schedTime" class="time-field" value="10:00" onchange="autoAdjustEndTime()" />
+            </div>
+            <span style="color:var(--text-muted);font-weight:700">→</span>
+            <div class="time-box">
+              <span class="time-box-label">Конец</span>
+              <input type="time" id="schedEndTime" class="time-field" value="11:30" />
+            </div>
+          </div>
+          <input type="text" id="schedInput" class="input" placeholder="Событие, пара или встреча..." onkeydown="if(event.key==='Enter') addSchedule()" />
+          <div style="display:flex;gap:8px">
+            <input type="text" id="schedLocation" class="input" placeholder="📍 Место / адрес (для Яндекс Карт)..." onkeydown="if(event.key==='Enter') addSchedule()" />
+            <button class="btn-primary" onclick="addSchedule()">+</button>
+          </div>
         </div>
         <div class="list" id="scheduleList"></div>
       </div>
@@ -710,6 +841,32 @@
 
   <!-- Floating New Note Button -->
   <button class="fab" id="fabNote" onclick="openNoteEditor()">+</button>
+
+  <!-- Schedule Event Edit Modal -->
+  <div class="modal-backdrop" id="schedEditModal" onclick="if(event.target===this) closeSchedEditor()">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong style="font-size:18px">Редактировать событие</strong>
+        <button class="icon-btn" onclick="closeSchedEditor()">✕</button>
+      </div>
+      <div class="sched-time-row">
+        <div class="time-box">
+          <span class="time-box-label">Начало</span>
+          <input type="time" id="editSchedStart" class="time-field" />
+        </div>
+        <span style="color:var(--text-muted);font-weight:700">→</span>
+        <div class="time-box">
+          <span class="time-box-label">Конец</span>
+          <input type="time" id="editSchedEnd" class="time-field" />
+        </div>
+      </div>
+      <input type="text" id="editSchedText" class="input" placeholder="Название события..." />
+      <input type="text" id="editSchedLoc" class="input" placeholder="📍 Место / адрес (Яндекс Карты)..." />
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <button class="btn-primary" style="flex:1;padding:12px;font-size:15px" onclick="saveSchedEdit()">Сохранить</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Note Editor Modal -->
   <div class="modal-backdrop" id="noteModal">
@@ -812,6 +969,7 @@
 
     let currentPrio = 'normal';
     let editingNoteId = null;
+    let editingSchedId = null;
     let editorPinned = false;
     let editorTag = '#дневник';
 
@@ -825,6 +983,7 @@
       } catch (e) { console.error(e); }
       if (!state.selectedDate) state.selectedDate = todayISO();
       applyTheme();
+      setTodayMode(state.todayMode || 'tasks');
     }
 
     function saveState() {
@@ -888,6 +1047,7 @@
       document.getElementById('modeScheduleBtn').classList.toggle('active', mode === 'schedule');
       document.getElementById('tasksBlock').style.display = mode === 'tasks' ? 'block' : 'none';
       document.getElementById('scheduleBlock').style.display = mode === 'schedule' ? 'block' : 'none';
+      saveState();
     }
 
     function togglePrio() {
@@ -922,20 +1082,75 @@
       renderAll();
     }
 
+    /* Schedule helpers: End Time, Duration & Yandex Maps URL */
+    function timeToMinutes(t) {
+      if (!t || !t.includes(':')) return 0;
+      const [h, m] = t.split(':').map(Number);
+      return h * 60 + m;
+    }
+
+    function minutesToTime(mins) {
+      const normalized = ((mins % 1440) + 1440) % 1440;
+      const h = String(Math.floor(normalized / 60)).padStart(2, '0');
+      const m = String(normalized % 60).padStart(2, '0');
+      return `${h}:${m}`;
+    }
+
+    function autoAdjustEndTime() {
+      const startVal = document.getElementById('schedTime').value;
+      if (!startVal) return;
+      const endMins = timeToMinutes(startVal) + 90; // default +1h 30m
+      document.getElementById('schedEndTime').value = minutesToTime(endMins);
+    }
+
+    function calcDurationText(start, end) {
+      if (!start || !end) return '';
+      let diff = timeToMinutes(end) - timeToMinutes(start);
+      if (diff <= 0) diff += 1440;
+      const h = Math.floor(diff / 60);
+      const m = diff % 60;
+      if (h > 0 && m > 0) return `${h} ч ${m} мин`;
+      if (h > 0) return `${h} ч`;
+      return `${m} мин`;
+    }
+
+    function isNowInRange(dateISO, start, end) {
+      if (dateISO !== todayISO() || !start || !end) return false;
+      const now = new Date();
+      const cur = now.getHours() * 60 + now.getMinutes();
+      const s = timeToMinutes(start);
+      const e = timeToMinutes(end);
+      return e >= s ? (cur >= s && cur <= e) : (cur >= s || cur <= e);
+    }
+
+    function buildYandexMapsUrl(loc) {
+      return `https://yandex.ru/maps/?text=${encodeURIComponent(loc.trim())}`;
+    }
+
     function addSchedule() {
-      const time = document.getElementById('schedTime').value || '12:00';
+      const time = document.getElementById('schedTime').value || '10:00';
+      const endTime = document.getElementById('schedEndTime').value || minutesToTime(timeToMinutes(time) + 60);
       const inp = document.getElementById('schedInput');
+      const locInp = document.getElementById('schedLocation');
       const text = inp.value.trim();
+      const location = locInp.value.trim();
       if (!text) return;
+
       state.schedule.push({
         id: 's_' + Date.now(),
         time,
+        endTime,
         text,
+        location,
         done: false,
         date: state.selectedDate
       });
       state.schedule.sort((a, b) => a.time.localeCompare(b.time));
       inp.value = '';
+      locInp.value = '';
+      // Advance next slot start time to current endTime for fast sequential planning
+      document.getElementById('schedTime').value = endTime;
+      document.getElementById('schedEndTime').value = minutesToTime(timeToMinutes(endTime) + 90);
       saveState();
       renderAll();
     }
@@ -948,6 +1163,35 @@
     function deleteSched(id) {
       state.schedule = state.schedule.filter(x => x.id !== id);
       saveState();
+      renderAll();
+    }
+
+    function openSchedEditor(id) {
+      const s = state.schedule.find(x => x.id === id);
+      if (!s) return;
+      editingSchedId = id;
+      document.getElementById('editSchedStart').value = s.time || '10:00';
+      document.getElementById('editSchedEnd').value = s.endTime || minutesToTime(timeToMinutes(s.time || '10:00') + 60);
+      document.getElementById('editSchedText').value = s.text || '';
+      document.getElementById('editSchedLoc').value = s.location || '';
+      document.getElementById('schedEditModal').classList.add('open');
+    }
+
+    function closeSchedEditor() {
+      document.getElementById('schedEditModal').classList.remove('open');
+      editingSchedId = null;
+    }
+
+    function saveSchedEdit() {
+      const s = state.schedule.find(x => x.id === editingSchedId);
+      if (!s) return;
+      s.time = document.getElementById('editSchedStart').value || s.time;
+      s.endTime = document.getElementById('editSchedEnd').value || '';
+      s.text = document.getElementById('editSchedText').value.trim() || s.text;
+      s.location = document.getElementById('editSchedLoc').value.trim();
+      state.schedule.sort((a, b) => a.time.localeCompare(b.time));
+      saveState();
+      closeSchedEditor();
       renderAll();
     }
 
@@ -978,12 +1222,26 @@
       const sList = document.getElementById('scheduleList');
       sList.innerHTML = daySched.length ? '' : '<div class="empty-state">Расписание по часам пусто</div>';
       daySched.forEach(s => {
+        const endT = s.endTime || '';
+        const dur = endT ? calcDurationText(s.time, endT) : '';
+        const activeNow = !s.done && isNowInRange(s.date, s.time, endT);
+        const hasLoc = s.location && s.location.trim().length > 0;
+
         const div = document.createElement('div');
-        div.className = 'item-card' + (s.done ? ' done' : '');
+        div.className = 'item-card' + (s.done ? ' done' : '') + (activeNow ? ' now-active' : '');
         div.innerHTML = `
-          <span class="badge-time">${s.time}</span>
-          <div class="item-body" onclick="toggleSched('${s.id}')">
-            <span class="item-title">${escapeHtml(s.text)}</span>
+          <div class="check-circle" onclick="toggleSched('${s.id}')">✓</div>
+          <div class="sched-time-col" onclick="openSchedEditor('${s.id}')">
+            <span class="sched-t-start">${escapeHtml(s.time)}</span>
+            ${endT ? `<div class="sched-t-sep"></div><span class="sched-t-end">${escapeHtml(endT)}</span>` : ''}
+          </div>
+          <div class="item-body" onclick="openSchedEditor('${s.id}')">
+            <div class="item-title">${escapeHtml(s.text)}</div>
+            <div class="sched-meta-row">
+              ${activeNow ? `<span class="now-badge">СЕЙЧАС</span>` : ''}
+              ${dur ? `<span class="dur-badge">⏱ ${dur}</span>` : ''}
+              ${hasLoc ? `<a class="ymaps-link" href="${buildYandexMapsUrl(s.location)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📍 ${escapeHtml(s.location)} ↗</a>` : ''}
+            </div>
           </div>
           <button class="del-btn" onclick="deleteSched('${s.id}')">✕</button>
         `;
