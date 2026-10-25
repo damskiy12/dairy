@@ -1,0 +1,49 @@
+<invoke name="web_code_canvas:generate_web_app">
+<parameter name="language">HTML</parameter>
+<parameter name="query">Create a sleek, breathable, minimalist mobile-first personal productivity & notes web app (PWA ready for iPhone) called "OBSIDIAN" in a refined "Dark Obsidian" aesthetic with a seamless Light Mode toggle.
+
+CRITICAL UX GOAL: Fix "information overload". The UI must feel calm, spacious, effortless to use with one thumb on a phone (like Things 3, Linear Mobile, and Apple Notes combined), with generous padding, clear typography, zero visual clutter, and instant actions.
+
+BACKWARD COMPATIBLE STORAGE:
+Use the exact same localStorage key `obsidian_flow_v1` so any existing tasks, schedule items, notes, habits, counters, and theme settings from the previous version are preserved seamlessly!
+
+NAVIGATION & LAYOUT (3 Bottom Tabs + Top Header):
+- Top Header: Clean, minimal. Shows current view title & date on the left. On the right: quick Theme Toggle (Dark/Light icon) and a Settings/Backup gear icon (`⚙️` opens a clean bottom sheet with Accent Color picker [Violet, Emerald, Blue, Amber], JSON Export, JSON Import, and a Reset button).
+- Bottom Navigation Bar: ONLY 3 spacious, crystal-clear tabs:
+  1. `Сегодня` (Today: Tasks & Schedule)
+  2. `Заметки` (Notes: Quick Diary & Long-term Base)
+  3. `Трекеры` (Trackers: Daily Habits & Simple Counters)
+
+TAB 1: СЕГОДНЯ (Today - Tasks & Daily Plan)
+- Subtle horizontal 7-day strip at the top to switch days easily (with a subtle dot under days that have items).
+- Clean segmented pill toggle right below: `Задачи (To-Do)` | `По часам (Расписание)`.
+- Instant Quick-Add bar pinned right above the list:
+  - In `Задачи` mode: single clean input "Добавить задачу на день..." + priority dot toggle (Обычный / Важный) + Enter button.
+  - In `По часам` mode: compact time selector (e.g. `10:00`) + input "Событие или блок..." + Add button.
+- Spacious list items with smooth checkbox animations, swipe/tap to delete, and a subtle progress bar at the top showing `Выполнено 2 из 5`. No giant percentage rings or mood sliders cluttering the screen!
+
+TAB 2: ЗАМЕТКИ (Notes - Long-term & Temporary/Diary)
+- Top segmented toggle:
+  - `⚡ Быстрые / Дневник` (Temporary thoughts, daily logs, quick drafts with automatic date/time stamp)
+  - `📚 Долгосрочные` (Permanent notes, projects, knowledge base, lists)
+- Clean search input + horizontal minimal tag filter (`Все`, `#важное`, `#идеи`, `#дневник`).
+- Quick input box at the top of `⚡ Быстрые / Дневник` so the user can type a quick thought and save in 1 tap without even opening a modal.
+- Clean, spacious cards showing Title, a 2-line preview, date, and a pin icon (`📌`).
+- FULL-SCREEN DISTRACTION-FREE NOTE EDITOR: Tapping a note or the floating `+` button opens a clean, full-screen sheet (like iOS Notes / Obsidian):
+  - Large borderless Title input
+  - Toggle pill: `⚡ Временная` vs `📚 Долгосрочная`
+  - Pin toggle (`📌 Закрепить`) and 3-4 quick tag pills (`#важное`, `#идеи`, `#дневник`, `#проект`)
+  - Huge, comfortable textarea for writing without cramped borders
+  - Done (`Готово`) and Delete (`Удалить`) actions at the top.
+
+TAB 3: ТРЕКЕРЫ (Trackers - Habits & Counters)
+- Section 1: **Привычки на сегодня**
+  - Instead of a cramped 7-day spreadsheet grid, display each habit as a clean, tactile horizontal card for TODAY.
+  - Left side: Habit icon & name + subtle 7-day mini dots showing the last week + `🔥 X дн.` streak badge.
+  - Right side: A big, satisfying check button to mark today as done in one tap.
+  - A simple `+ Добавить привычку` button at the bottom.
+- Section 2: **Быстрые счетчики дня**
+  - Clean 3-card row or stack for Water (стаканы), Sleep (часы), Focus (часы) with simple `-` and `+` buttons.
+
+All text in Russian. Smooth iOS-like transitions, safe-area padding for iPhone, no horizontal overflow.</parameter>
+</invoke>
