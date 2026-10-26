@@ -23,7 +23,6 @@
       --success: #10b981;
       --warning: #f59e0b;
 
-      /* Цветовая коррекция: Задачи vs По часам */
       --sched-color: #38bdf8;
       --sched-bg: rgba(56, 189, 248, 0.09);
       --sched-border: rgba(56, 189, 248, 0.32);
@@ -237,12 +236,8 @@
       flex-direction: column;
       gap: 10px;
     }
-    .composer.task-theme {
-      border-left: 3px solid var(--task-timed-color);
-    }
-    .composer.sched-theme {
-      border-left: 3px solid var(--sched-color);
-    }
+    .composer.task-theme { border-left: 3px solid var(--task-timed-color); }
+    .composer.sched-theme { border-left: 3px solid var(--sched-color); }
     .composer-row {
       display: flex;
       align-items: center;
@@ -302,9 +297,7 @@
       padding: 10px 12px;
       border-radius: 12px;
     }
-    .input:focus {
-      border-color: var(--accent);
-    }
+    .input:focus { border-color: var(--accent); }
     .btn-primary {
       background: var(--accent);
       color: #fff;
@@ -356,7 +349,7 @@
       justify-content: center;
     }
 
-    /* Staging & Card Attachments */
+    /* Attachments */
     .attachments-Wrap {
       display: flex;
       flex-wrap: wrap;
@@ -378,30 +371,10 @@
       cursor: pointer;
       text-decoration: none;
     }
-    html.light .att-chip {
-      background: rgba(0, 0, 0, 0.05);
-    }
-    .att-thumb {
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .att-name {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 150px;
-    }
-    .att-del {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 13px;
-      cursor: pointer;
-      padding: 0 2px;
-    }
+    html.light .att-chip { background: rgba(0, 0, 0, 0.05); }
+    .att-thumb { width: 20px; height: 20px; border-radius: 4px; object-fit: cover; flex-shrink: 0; }
+    .att-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 150px; }
+    .att-del { background: none; border: none; color: var(--text-muted); font-size: 13px; cursor: pointer; padding: 0 2px; }
 
     /* Categories / Tags filter row */
     .categories-row {
@@ -465,7 +438,6 @@
       transition: width 0.25s ease;
     }
 
-    /* Sub-group headers inside Tasks */
     .sub-group-title {
       font-size: 11px;
       font-weight: 800;
@@ -478,12 +450,8 @@
       gap: 6px;
     }
 
-    /* ================= DISTINCT VISUAL CARDS: TASKS VS SCHEDULE ================= */
-    .list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    /* Cards */
+    .list { display: flex; flex-direction: column; gap: 10px; }
     .item-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -496,7 +464,6 @@
       position: relative;
     }
 
-    /* 1. КАРТОЧКА «ПО ЧАСАМ» (Холодный голубой неон + таймблок) */
     .item-card.sched-card {
       border-left: 4px solid var(--sched-color);
       background: linear-gradient(135deg, var(--sched-bg) 0%, var(--surface) 70%);
@@ -507,7 +474,6 @@
       box-shadow: 0 0 0 1px var(--sched-color), 0 6px 22px rgba(56, 189, 248, 0.25);
     }
 
-    /* 2. КАРТОЧКА «ЗАДАЧА СО ВРЕМЕНЕМ» (Изумрудный неон) */
     .item-card.task-timed-card {
       border-left: 4px solid var(--task-timed-color);
       background: linear-gradient(135deg, var(--task-timed-bg) 0%, var(--surface) 70%);
@@ -515,7 +481,6 @@
       border-left-width: 4px;
     }
 
-    /* 3. КАРТОЧКА «ОБЩАЯ ЗАДАЧА БЕЗ ВРЕМЕНИ» (Фиолетовый неон) */
     .item-card.task-any-card {
       border-left: 4px solid var(--task-any-color);
       background: linear-gradient(135deg, var(--task-any-bg) 0%, var(--surface) 70%);
@@ -523,7 +488,6 @@
       border-left-width: 4px;
     }
 
-    /* 4. КАРТОЧКА «ВАЖНАЯ ЗАДАЧА ⚡» (Янтарный неон) */
     .item-card.task-urgent-card {
       border-left: 4px solid var(--task-urgent-color);
       background: linear-gradient(135deg, var(--task-urgent-bg) 0%, var(--surface) 75%);
@@ -531,12 +495,8 @@
       border-left-width: 4px;
     }
 
-    .item-card.done {
-      opacity: 0.45;
-      filter: grayscale(0.4);
-    }
+    .item-card.done { opacity: 0.45; filter: grayscale(0.4); }
 
-    /* Разная форма чекбоксов: Круг для Задач, Квадрат для Расписания */
     .check-circle {
       width: 24px;
       height: 24px;
@@ -552,38 +512,15 @@
       font-weight: 800;
       margin-top: 2px;
     }
-    .task-any-card .check-circle {
-      border-color: var(--task-any-color);
-    }
-    .task-urgent-card .check-circle {
-      border-color: var(--task-urgent-color);
-    }
-    .sched-card .check-circle {
-      border-radius: 7px;
-      border-color: var(--sched-color);
-    }
-    .item-card.done .check-circle {
-      background: var(--success);
-      border-color: var(--success);
-      color: #fff;
-    }
+    .task-any-card .check-circle { border-color: var(--task-any-color); }
+    .task-urgent-card .check-circle { border-color: var(--task-urgent-color); }
+    .sched-card .check-circle { border-radius: 7px; border-color: var(--sched-color); }
+    .item-card.done .check-circle { background: var(--success); border-color: var(--success); color: #fff; }
 
-    .item-body {
-      flex: 1;
-      min-width: 0;
-      cursor: pointer;
-    }
-    .item-title {
-      font-size: 15px;
-      font-weight: 650;
-      word-break: break-word;
-      line-height: 1.35;
-    }
-    .item-card.done .item-title {
-      text-decoration: line-through;
-    }
+    .item-body { flex: 1; min-width: 0; cursor: pointer; }
+    .item-title { font-size: 15px; font-weight: 650; word-break: break-word; line-height: 1.35; }
+    .item-card.done .item-title { text-decoration: line-through; }
 
-    /* Капсула времени для «По часам» */
     .time-col-sched {
       display: flex;
       flex-direction: column;
@@ -597,617 +534,191 @@
       text-align: center;
       cursor: pointer;
     }
-    .t-start {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--sched-color);
-    }
-    .t-sep {
-      width: 1px;
-      height: 7px;
-      background: rgba(56, 189, 248, 0.4);
-      margin: 2px 0;
-    }
-    .t-end {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
+    .t-start { font-size: 13px; font-weight: 800; color: var(--sched-color); }
+    .t-sep { width: 1px; height: 7px; background: rgba(56, 189, 248, 0.4); margin: 2px 0; }
+    .t-end { font-size: 11px; font-weight: 700; color: var(--text-muted); }
 
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 6px;
-      margin-top: 7px;
-    }
-    .type-pill-sched {
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      color: var(--sched-color);
-      background: rgba(56, 189, 248, 0.14);
-      padding: 2px 7px;
-      border-radius: 6px;
-    }
-    .task-datetime-badge {
-      font-size: 11px;
-      font-weight: 700;
-      color: #34d399;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.32);
-      padding: 2px 8px;
-      border-radius: 7px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .task-anytime-badge {
-      font-size: 11px;
-      font-weight: 700;
-      color: #c084fc;
-      background: rgba(168, 85, 247, 0.14);
-      padding: 2px 8px;
-      border-radius: 7px;
-    }
-    .cat-badge {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text);
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      padding: 2px 8px;
-      border-radius: 7px;
-    }
-    .dur-badge {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      background: var(--surface-2);
-      padding: 2px 8px;
-      border-radius: 7px;
-    }
-    .now-badge {
-      font-size: 10px;
-      font-weight: 800;
-      color: #000;
-      background: var(--sched-color);
-      padding: 2px 7px;
-      border-radius: 6px;
-      letter-spacing: 0.4px;
-    }
-    .ymaps-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #fc3f1d;
-      background: rgba(252, 63, 29, 0.12);
-      border: 1px solid rgba(252, 63, 29, 0.28);
-      padding: 2px 8px;
-      border-radius: 7px;
-      text-decoration: none;
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .badge-prio {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--warning);
-      background: rgba(245, 158, 11, 0.16);
-      padding: 2px 7px;
-      border-radius: 7px;
-    }
-    .card-actions {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      flex-shrink: 0;
-    }
-    .mini-clip-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 15px;
-      padding: 4px;
-      cursor: pointer;
-      opacity: 0.75;
-    }
+    .meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 7px; }
+    .type-pill-sched { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px; color: var(--sched-color); background: rgba(56, 189, 248, 0.14); padding: 2px 7px; border-radius: 6px; }
+    .task-datetime-badge { font-size: 11px; font-weight: 700; color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.32); padding: 2px 8px; border-radius: 7px; display: inline-flex; align-items: center; gap: 4px; }
+    .task-anytime-badge { font-size: 11px; font-weight: 700; color: #c084fc; background: rgba(168, 85, 247, 0.14); padding: 2px 8px; border-radius: 7px; }
+    .cat-badge { font-size: 11px; font-weight: 700; color: var(--text); background: var(--surface-2); border: 1px solid var(--border); padding: 2px 8px; border-radius: 7px; }
+    .dur-badge { font-size: 11px; font-weight: 600; color: var(--text-muted); background: var(--surface-2); padding: 2px 8px; border-radius: 7px; }
+    .now-badge { font-size: 10px; font-weight: 800; color: #000; background: var(--sched-color); padding: 2px 7px; border-radius: 6px; letter-spacing: 0.4px; }
+    .ymaps-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: #fc3f1d; background: rgba(252, 63, 29, 0.12); border: 1px solid rgba(252, 63, 29, 0.28); padding: 2px 8px; border-radius: 7px; text-decoration: none; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .badge-prio { font-size: 11px; font-weight: 800; color: var(--warning); background: rgba(245, 158, 11, 0.16); padding: 2px 7px; border-radius: 7px; }
+    .card-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+    .mini-clip-btn { background: transparent; border: none; color: var(--text-muted); font-size: 15px; padding: 4px; cursor: pointer; opacity: 0.75; }
     .mini-clip-btn:hover { opacity: 1; }
-    .del-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 17px;
-      padding: 4px;
-      cursor: pointer;
-    }
+    .del-btn { background: transparent; border: none; color: var(--text-muted); font-size: 17px; padding: 4px; cursor: pointer; }
 
-    /* ================= CALENDAR & CONTINUOUS AGENDA STREAM ================= */
-    .cal-top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      gap: 8px;
-    }
-    .cal-month-nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .cal-month-title {
-      font-size: 18px;
-      font-weight: 800;
-      min-width: 140px;
-      text-align: center;
-      text-transform: capitalize;
-    }
-    .cal-mini-btn {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 7px 11px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .cal-grid-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 12px;
-      margin-bottom: 14px;
-    }
-    .cal-weekdays {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      text-align: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-    .cal-days-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-    }
-    .cal-cell {
-      aspect-ratio: 1 / 1.05;
-      border-radius: 12px;
-      background: var(--surface-2);
-      border: 1px solid transparent;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 5px 2px 6px;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.14s ease;
-    }
-    .cal-cell.other-month {
-      opacity: 0.28;
-      background: transparent;
-    }
-    .cal-cell.is-today {
-      border-color: var(--accent);
-    }
-    .cal-cell.selected {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 14px var(--accent-glow);
-    }
-    .cal-cell-num {
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1;
-      margin-top: 2px;
-    }
-    .cal-cell-count {
-      position: absolute;
-      top: 3px;
-      right: 4px;
-      font-size: 9px;
-      font-weight: 800;
-      color: var(--text-muted);
-    }
-    .cal-cell.selected .cal-cell-count {
-      color: rgba(255, 255, 255, 0.85);
-    }
-    .cal-dots {
-      display: flex;
-      gap: 3px;
-      height: 5px;
-      align-items: center;
-    }
-    .c-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-    }
+    /* ================= CALENDAR ================= */
+    .cal-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; }
+    .cal-month-nav { display: flex; align-items: center; gap: 8px; }
+    .cal-month-title { font-size: 18px; font-weight: 800; min-width: 140px; text-align: center; text-transform: capitalize; }
+    .cal-mini-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 7px 11px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .cal-grid-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 12px; margin-bottom: 14px; }
+    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+    .cal-days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    .cal-cell { aspect-ratio: 1 / 1.05; border-radius: 12px; background: var(--surface-2); border: 1px solid transparent; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 5px 2px 6px; cursor: pointer; position: relative; transition: all 0.14s ease; }
+    .cal-cell.other-month { opacity: 0.28; background: transparent; }
+    .cal-cell.is-today { border-color: var(--accent); }
+    .cal-cell.selected { background: var(--accent); color: #fff; box-shadow: 0 4px 14px var(--accent-glow); }
+    .cal-cell-num { font-size: 14px; font-weight: 700; line-height: 1; margin-top: 2px; }
+    .cal-cell-count { position: absolute; top: 3px; right: 4px; font-size: 9px; font-weight: 800; color: var(--text-muted); }
+    .cal-cell.selected .cal-cell-count { color: rgba(255, 255, 255, 0.85); }
+    .cal-dots { display: flex; gap: 3px; height: 5px; align-items: center; }
+    .c-dot { width: 5px; height: 5px; border-radius: 50%; }
     .c-dot.sched { background: var(--sched-color); }
     .c-dot.urgent { background: var(--warning); }
     .c-dot.task { background: var(--task-timed-color); }
     .c-dot.done-all { background: var(--success); }
     .cal-cell.selected .c-dot { background: #fff; }
 
-    /* Legend bar */
-    .cal-legend {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 10px;
-      padding-top: 8px;
-      border-top: 1px solid var(--border);
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+    .cal-legend { display: flex; justify-content: center; gap: 14px; font-size: 11px; color: var(--text-muted); margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border); }
+    .legend-item { display: flex; align-items: center; gap: 5px; }
 
-    /* Continuous Agenda Stream */
-    .agenda-day-group {
-      margin-bottom: 18px;
-    }
-    .agenda-day-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 12px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 8px;
-      position: sticky;
-      top: 8px;
-      z-index: 10;
-      backdrop-filter: blur(12px);
-    }
-    .agenda-day-header.today-Stick {
-      border-color: var(--accent);
-      background: rgba(59, 130, 246, 0.16);
-    }
-    .agenda-day-title {
-      font-size: 14px;
-      font-weight: 800;
-      text-transform: capitalize;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .rel-badge {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 99px;
-      background: var(--surface);
-      color: var(--text-muted);
-    }
-    .rel-badge.today {
-      background: var(--accent);
-      color: #fff;
-    }
-    .rel-badge.tomorrow {
-      background: rgba(16, 185, 129, 0.18);
-      color: var(--success);
-    }
-    .agenda-add-btn {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .free-gap-pill {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--sched-color);
-      border: 1px dashed var(--sched-border);
-      border-radius: 10px;
-      padding: 4px 10px;
-      margin: -2px 0 -2px 20px;
-      background: rgba(56, 189, 248, 0.04);
-    }
+    .agenda-day-group { margin-bottom: 18px; }
+    .agenda-day-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; position: sticky; top: 8px; z-index: 10; backdrop-filter: blur(12px); }
+    .agenda-day-header.today-Stick { border-color: var(--accent); background: rgba(59, 130, 246, 0.16); }
+    .agenda-day-title { font-size: 14px; font-weight: 800; text-transform: capitalize; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .rel-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 99px; background: var(--surface); color: var(--text-muted); }
+    .rel-badge.today { background: var(--accent); color: #fff; }
+    .rel-badge.tomorrow { background: rgba(16, 185, 129, 0.18); color: var(--success); }
+    .agenda-add-btn { background: var(--surface); border: 1px solid var(--border); color: var(--accent); font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 8px; cursor: pointer; flex-shrink: 0; }
+    .free-gap-pill { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--sched-color); border: 1px dashed var(--sched-border); border-radius: 10px; padding: 4px 10px; margin: -2px 0 -2px 20px; background: rgba(56, 189, 248, 0.04); }
 
-    /* Notes */
-    .tags-row {
+    /* ================= SHELF (ПОЛКА) ================= */
+    .shelf-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
       display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-      margin-bottom: 14px;
-      scrollbar-width: none;
-    }
-    .tags-row::-webkit-scrollbar { display: none; }
-    .tag-pill {
-      padding: 6px 12px;
-      border-radius: 99px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 13px;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-    .tag-pill.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-    .note-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 15px;
-      cursor: pointer;
+      gap: 12px;
+      align-items: flex-start;
       position: relative;
     }
-    .note-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-    .note-title {
-      font-size: 16px;
-      font-weight: 700;
-    }
-    .note-preview {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.45;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+    .shelf-thumb-wrap {
+      width: 64px;
+      height: 84px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
       overflow: hidden;
-      white-space: pre-wrap;
-    }
-    .note-meta {
+      flex-shrink: 0;
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--text-muted);
+      justify-content: center;
+      font-size: 24px;
     }
+    .shelf-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .shelf-body { flex: 1; min-width: 0; }
+    .shelf-title { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+    .shelf-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; flex-wrap: wrap; }
+    .shelf-stars { font-weight: 800; color: var(--warning); letter-spacing: 1px; }
+    .shelf-review { font-size: 13px; color: var(--text-muted); line-height: 1.4; white-space: pre-wrap; margin-top: 4px; }
 
-    /* Habits */
-    .section-label {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: var(--text-muted);
-      margin: 14px 0 8px;
-    }
+    /* Notes */
+    .tags-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; }
+    .tags-row::-webkit-scrollbar { display: none; }
+    .tag-pill { padding: 6px 12px; border-radius: 99px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 13px; white-space: nowrap; cursor: pointer; }
+    .tag-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .note-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 15px; cursor: pointer; position: relative; }
+    .note-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+    .note-title { font-size: 16px; font-weight: 700; }
+    .note-preview { font-size: 14px; color: var(--text-muted); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
+    .note-meta { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+
+    /* Trackers (Habits with counts & streaks) */
+    .section-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); margin: 14px 0 8px; }
     .habit-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .habit-dots {
-      display: flex;
-      gap: 5px;
-      margin-top: 6px;
-    }
-    .h-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--surface-2);
-    }
-    .h-dot.on {
-      background: var(--accent);
-    }
-    .habit-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--text-muted);
-      font-size: 18px;
-      font-weight: 800;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .habit-btn.done {
-      background: var(--success);
-      border-color: var(--success);
-      color: #fff;
-    }
-
-    /* Bottom Navigation */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(20, 20, 28, 0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-top: 1px solid var(--border);
-      padding: 8px 12px calc(8px + var(--safe-bottom));
-      z-index: 50;
-    }
-    html.light .bottom-nav {
-      background: rgba(255, 255, 255, 0.9);
-    }
-    .nav-inner {
-      max-width: 520px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
-    }
-    .nav-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      padding: 6px 0;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .nav-btn.active {
-      color: var(--accent);
-    }
-    .nav-icon {
-      font-size: 19px;
-    }
-
-    /* Floating Action Button for Notes */
-    .fab {
-      position: fixed;
-      right: 20px;
-      bottom: calc(82px + var(--safe-bottom));
-      width: 54px;
-      height: 54px;
       border-radius: 18px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      font-size: 28px;
-      box-shadow: 0 8px 24px var(--accent-glow);
-      cursor: pointer;
-      z-index: 40;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Fullscreen Modals */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.68);
-      backdrop-filter: blur(6px);
-      z-index: 100;
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-    }
-    .modal-backdrop.open {
-      display: flex;
-    }
-    .modal-sheet {
-      width: 100%;
-      max-width: 520px;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      border-radius: 24px 24px 0 0;
-      padding: 18px 16px calc(24px + var(--safe-bottom));
-      max-height: 92vh;
-      overflow-y: auto;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-    .editor-title {
-      background: transparent;
-      border: none;
-      color: var(--text);
-      font-size: 22px;
-      font-weight: 800;
-      outline: none;
+    .habit-top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .habit-progress-bar {
       width: 100%;
+      height: 6px;
+      background: var(--surface-2);
+      border-radius: 99px;
+      overflow: hidden;
     }
-    .editor-body {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      color: var(--text);
-      font-size: 16px;
-      line-height: 1.55;
-      padding: 14px;
-      min-height: 280px;
-      resize: none;
-      outline: none;
-      flex: 1;
+    .habit-progress-fill {
+      height: 100%;
+      background: var(--success);
+      border-radius: 99px;
+      transition: width 0.2s ease;
     }
-    .color-row {
-      display: flex;
-      gap: 12px;
-      margin: 4px 0 8px;
+    .habit-dots { display: flex; gap: 5px; margin-top: 2px; }
+    .h-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--surface-2); }
+    .h-dot.on { background: var(--accent); }
+    .habit-btn {
+      width: 44px; height: 44px; border-radius: 14px; border: 1px solid var(--border);
+      background: var(--surface-2); color: var(--text-muted); font-size: 18px; font-weight: 800; cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
     }
-    .color-dot {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 3px solid transparent;
+    .habit-btn.done { background: var(--success); border-color: var(--success); color: #fff; }
+    .habit-counter-controls { display: flex; align-items: center; gap: 6px; }
+    .hc-btn {
+      width: 32px; height: 32px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--surface-2); color: var(--text); font-size: 15px; font-weight: 700; cursor: pointer;
     }
-    .color-dot.active {
-      border-color: var(--text);
+
+    /* Bottom Navigation (5 Tabs) */
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(20, 20, 28, 0.9); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid var(--border); padding: 8px 6px calc(8px + var(--safe-bottom)); z-index: 50;
     }
-    .cloud-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    html.light .bottom-nav { background: rgba(255, 255, 255, 0.9); }
+    .nav-inner { max-width: 520px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+    .nav-btn {
+      background: transparent; border: none; color: var(--text-muted); padding: 5px 0; border-radius: 12px;
+      display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10.5px; font-weight: 600; cursor: pointer;
     }
-    .cloud-status-line {
-      font-size: 12px;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .nav-btn.active { color: var(--accent); }
+    .nav-icon { font-size: 18px; }
+
+    .fab {
+      position: fixed; right: 20px; bottom: calc(82px + var(--safe-bottom));
+      width: 54px; height: 54px; border-radius: 18px; background: var(--accent); color: #fff; border: none;
+      font-size: 28px; box-shadow: 0 8px 24px var(--accent-glow); cursor: pointer; z-index: 40; display: none; align-items: center; justify-content: center;
     }
-    .empty-state {
-      text-align: center;
-      padding: 32px 16px;
-      color: var(--text-muted);
-      font-size: 14px;
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.68); backdrop-filter: blur(6px); z-index: 100;
+      display: none; align-items: flex-end; justify-content: center;
     }
+    .modal-backdrop.open { display: flex; }
+    .modal-sheet {
+      width: 100%; max-width: 520px; background: var(--bg); border-top: 1px solid var(--border);
+      border-radius: 24px 24px 0 0; padding: 18px 16px calc(24px + var(--safe-bottom)); max-height: 92vh; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+    }
+    .editor-title { background: transparent; border: none; color: var(--text); font-size: 22px; font-weight: 800; outline: none; width: 100%; }
+    .editor-body { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; color: var(--text); font-size: 16px; line-height: 1.55; padding: 14px; min-height: 200px; resize: none; outline: none; flex: 1; }
+    .color-row { display: flex; gap: 12px; margin: 4px 0 8px; }
+    .color-dot { width: 34px; height: 34px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; }
+    .color-dot.active { border-color: var(--text); }
+    .cloud-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .cloud-status-line { font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; }
+    .empty-state { text-align: center; padding: 32px 16px; color: var(--text-muted); font-size: 14px; }
     .view-section { display: none; }
     .view-section.active { display: block; }
-
-    /* Image Lightbox Preview */
-    .lightbox-img {
-      max-width: 100%;
-      max-height: 72vh;
-      border-radius: 14px;
-      object-fit: contain;
-      margin: 0 auto;
-      display: block;
-    }
+    .lightbox-img { max-width: 100%; max-height: 72vh; border-radius: 14px; object-fit: contain; margin: 0 auto; display: block; }
   </style>
 </head>
 <body>
-  <!-- Hidden Quick File Input for 1-click card attach -->
   <input type="file" id="quickCardFileInput" multiple style="display:none" onchange="handleQuickCardFiles(event)" />
 
   <div class="app-container">
@@ -1236,7 +747,7 @@
         <button class="seg-btn" id="modeScheduleBtn" onclick="setTodayMode('schedule')">🔵 По часам</button>
       </div>
 
-      <!-- Tasks Mode (Unified Pool: Timed Tasks with Date + Timeless Tasks) -->
+      <!-- Tasks Mode -->
       <div id="tasksBlock">
         <div class="composer task-theme">
           <div class="composer-row">
@@ -1256,8 +767,18 @@
               <input type="file" multiple style="display:none" onchange="handleComposerFiles(event, 'task')" />
             </label>
           </div>
+
+          <div class="composer-row">
+            <select id="taskRepeatSelect" class="input" style="background:var(--surface-2);font-size:13px;padding:8px 10px">
+              <option value="none">🔁 Без повтора (один раз)</option>
+              <option value="day">🔁 Каждый день (на месяц)</option>
+              <option value="every_other">🔁 Через день</option>
+              <option value="week">🔁 Раз в неделю</option>
+            </select>
+          </div>
+
           <div style="display:flex;gap:8px">
-            <input type="text" id="taskInput" class="input" placeholder="Добавить задачу (без времени — общая, со временем — на день)..." onkeydown="if(event.key==='Enter') addTask()" />
+            <input type="text" id="taskInput" class="input" placeholder="Добавить задачу..." onkeydown="if(event.key==='Enter') addTask()" />
             <button class="btn-primary" onclick="addTask()">+</button>
           </div>
           <div id="taskStagingFiles" class="attachments-Wrap" style="display:none"></div>
@@ -1276,7 +797,7 @@
         <div id="tasksList"></div>
       </div>
 
-      <!-- Schedule Mode (Strictly by selected day in week strip) -->
+      <!-- Schedule Mode -->
       <div id="scheduleBlock" style="display:none">
         <div class="composer sched-theme">
           <div class="composer-row">
@@ -1295,7 +816,7 @@
               <input type="file" multiple style="display:none" onchange="handleComposerFiles(event, 'sched')" />
             </label>
           </div>
-          <input type="text" id="schedInput" class="input" placeholder="Событие, пара или встреча по часам..." onkeydown="if(event.key==='Enter') addSchedule()" />
+          <input type="text" id="schedInput" class="input" placeholder="Событие или встреча по часам..." onkeydown="if(event.key==='Enter') addSchedule()" />
           <div id="schedStagingFiles" class="attachments-Wrap" style="display:none"></div>
           <div style="display:flex;gap:8px">
             <input type="text" id="schedLocation" class="input" placeholder="📍 Место / адрес (для Яндекс Карт)..." onkeydown="if(event.key==='Enter') addSchedule()" />
@@ -1306,7 +827,7 @@
       </div>
     </section>
 
-    <!-- TAB 2: CALENDAR & CONTINUOUS AGENDA STREAM -->
+    <!-- TAB 2: CALENDAR -->
     <section id="view-calendar" class="view-section">
       <div class="cal-top-bar">
         <div class="cal-month-nav">
@@ -1320,7 +841,6 @@
         </div>
       </div>
 
-      <!-- Collapsible Month Grid -->
       <div class="cal-grid-card" id="calGridWrap">
         <div class="cal-weekdays">
           <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span style="color:var(--accent)">СБ</span><span style="color:var(--accent)">ВС</span>
@@ -1333,13 +853,11 @@
         </div>
       </div>
 
-      <!-- Search across all calendar items -->
       <div class="quick-bar" style="margin-bottom:10px">
         <input type="text" id="calSearchInput" class="input" style="padding:10px 14px;font-size:14px" placeholder="🔍 Поиск по всем делам, задачам, местам..." oninput="renderCalendar()" />
         <button class="btn-primary" style="font-size:14px;padding:0 14px" onclick="openQuickPlanModal(state.selectedDate)">+ План</button>
       </div>
 
-      <!-- Stream Mode Filter Pills -->
       <div class="categories-row" style="margin-bottom:12px">
         <button class="cat-pill active" id="streamMode-upcoming" onclick="setStreamMode('upcoming')">⏳ Предстоящие подряд</button>
         <button class="cat-pill" id="streamMode-month" onclick="setStreamMode('month')">🗓 Весь месяц подряд</button>
@@ -1347,11 +865,20 @@
         <button class="cat-pill" id="streamMode-urgent" onclick="setStreamMode('urgent')">⚡ Только важное</button>
       </div>
 
-      <!-- Continuous Chronological Feed -->
       <div id="agendaStreamList"></div>
     </section>
 
-    <!-- TAB 3: NOTES -->
+    <!-- TAB 3: SHELF (ПОЛКА) -->
+    <section id="view-shelf" class="view-section">
+      <div class="categories-row" id="shelfCategoriesRow" style="margin-bottom:12px"></div>
+      <div class="quick-bar" style="margin-bottom:12px">
+        <input type="text" id="shelfSearchInput" class="input" placeholder="🔍 Поиск по полке (название, автор, пиво)..." oninput="renderShelf()" />
+        <button class="btn-primary" onclick="openShelfEditor()">+ Добавить</button>
+      </div>
+      <div class="list" id="shelfList"></div>
+    </section>
+
+    <!-- TAB 4: NOTES -->
     <section id="view-notes" class="view-section">
       <div class="segmented">
         <button class="seg-btn active" id="noteScopeQuick" onclick="setNoteScope('quick')">⚡ Быстрые / Дневник</button>
@@ -1371,13 +898,16 @@
       <div class="list" id="notesList"></div>
     </section>
 
-    <!-- TAB 4: TRACKERS (Only Habits, Counters Removed) -->
+    <!-- TAB 5: TRACKERS (Habits with quantitative counts & streaks) -->
     <section id="view-trackers" class="view-section">
-      <div class="section-label" style="margin-top:0">Привычки на каждый день</div>
+      <div class="section-label" style="margin-top:0">Привычки и цели на каждый день</div>
       <div class="list" id="habitsList"></div>
-      <div class="quick-bar" style="margin-top:12px">
-        <input type="text" id="habitInput" class="input" placeholder="Новая привычка (напр. Спорт, Чтение)..." onkeydown="if(event.key==='Enter') addHabit()" />
-        <button class="btn-primary" onclick="addHabit()">+</button>
+      <div class="composer" style="margin-top:14px">
+        <input type="text" id="habitInput" class="input" placeholder="Название привычки (напр. Вода, Отжимания)..." />
+        <div class="composer-row">
+          <input type="number" id="habitTargetInput" class="input" placeholder="Цель (число, напр. 8 или 50)" style="background:var(--surface-2)" />
+          <button class="btn-primary" onclick="addHabit()">+ Привычка</button>
+        </div>
       </div>
     </section>
   </div>
@@ -1385,7 +915,7 @@
   <!-- Floating New Note Button -->
   <button class="fab" id="fabNote" onclick="openNoteEditor()">+</button>
 
-  <!-- Quick Plan Modal (Add Task or Schedule Event from Calendar) -->
+  <!-- Quick Plan Modal -->
   <div class="modal-backdrop" id="quickPlanModal" onclick="if(event.target===this) closeQuickPlanModal()">
     <div class="modal-sheet">
       <div style="display:flex;justify-content:space-between;align-items:center">
@@ -1408,7 +938,6 @@
         <button class="seg-btn" id="qpTypeSchedBtn" onclick="setQpType('sched')">🔵 По часам</button>
       </div>
 
-      <!-- Quick Plan: Task Fields -->
       <div id="qpTaskFields" style="display:flex;flex-direction:column;gap:10px">
         <div class="composer-row">
           <div class="time-box">
@@ -1421,7 +950,6 @@
         <select id="qpTaskCat" class="input" style="background:var(--surface-2)"></select>
       </div>
 
-      <!-- Quick Plan: Schedule Fields -->
       <div id="qpSchedFields" style="display:none;flex-direction:column;gap:10px">
         <div class="composer-row">
           <div class="time-box">
@@ -1434,7 +962,7 @@
             <input type="time" id="qpSchedEnd" class="time-field" value="11:30" />
           </div>
         </div>
-        <input type="text" id="qpSchedText" class="input" placeholder="Событие, пара или встреча..." onkeydown="if(event.key==='Enter') saveQuickPlan()" />
+        <input type="text" id="qpSchedText" class="input" placeholder="Событие или встреча..." onkeydown="if(event.key==='Enter') saveQuickPlan()" />
         <input type="text" id="qpSchedLoc" class="input" placeholder="📍 Место / адрес (Яндекс Карты)..." onkeydown="if(event.key==='Enter') saveQuickPlan()" />
       </div>
 
@@ -1443,11 +971,42 @@
     </div>
   </div>
 
+  <!-- Shelf Item Editor Modal -->
+  <div class="modal-backdrop" id="shelfModal" onclick="if(event.target===this) closeShelfEditor()">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong style="font-size:18px">Запись на Полку</strong>
+        <button class="icon-btn" onclick="closeShelfEditor()">✕</button>
+      </div>
+      <div class="composer-row">
+        <select id="shelfCatSelect" class="input" style="background:var(--surface-2)"></select>
+        <button class="cat-add-btn" onclick="promptNewShelfCategory()">+ Категория</button>
+      </div>
+      <input type="text" id="shelfTitleInput" class="input" placeholder="Название (книга, фильм, сорт пива)..." />
+      <div class="composer-row">
+        <div class="time-box">
+          <span class="time-box-label">Оценка (1-10)</span>
+          <input type="number" id="shelfRatingInput" class="time-field" min="1" max="10" value="8" />
+        </div>
+        <label class="clip-btn" title="Прикрепить фото/обложку">
+          📸
+          <input type="file" accept="image/*" style="display:none" onchange="handleShelfPhoto(event)" />
+        </label>
+      </div>
+      <div id="shelfPhotoPreview" class="attachments-Wrap" style="display:none"></div>
+      <textarea id="shelfReviewInput" class="editor-body" style="min-height:120px" placeholder="Твои впечатления, цитаты, мысли, вкус..."></textarea>
+      <div style="display:flex;gap:10px">
+        <button class="btn-primary" style="flex:1;padding:12px;font-size:15px" onclick="saveShelfItem()">Сохранить на полку</button>
+        <button class="seg-btn" id="shelfDeleteBtn" style="color:var(--danger);display:none" onclick="deleteShelfItem()">Удалить</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Schedule Event Edit Modal -->
   <div class="modal-backdrop" id="schedEditModal" onclick="if(event.target===this) closeSchedEditor()">
     <div class="modal-sheet">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <strong style="font-size:18px;color:var(--sched-color)">🔵 Редактировать событие по часам</strong>
+        <strong style="font-size:18px;color:var(--sched-color)">🔵 Редактировать событие</strong>
         <button class="icon-btn" onclick="closeSchedEditor()">✕</button>
       </div>
       <div class="composer-row">
@@ -1491,7 +1050,7 @@
         <div class="time-box">
           <span class="time-box-label">Время (опц.)</span>
           <input type="time" id="editTaskTime" class="time-field" onchange="onEditTaskTimeChange()" />
-          <button class="clear-time-btn" onclick="clearEditTaskTime()" title="Убрать время (сделать бессрочной)">✕</button>
+          <button class="clear-time-btn" onclick="clearEditTaskTime()" title="Убрать время">✕</button>
         </div>
         <button class="prio-btn" id="editTaskPrioBtn" onclick="toggleEditTaskPrio()" title="Важность">⚡</button>
         <label class="clip-btn" title="Прикрепить файлы">
@@ -1501,7 +1060,7 @@
       </div>
       <div class="composer-row" id="editTaskDateRow">
         <div class="time-box">
-          <span class="time-box-label">Дата (для задачи со временем)</span>
+          <span class="time-box-label">День</span>
           <input type="date" id="editTaskDate" class="time-field" />
         </div>
       </div>
@@ -1543,7 +1102,7 @@
     </div>
   </div>
 
-  <!-- Settings, Cloud Sync & Backup Modal -->
+  <!-- Settings Modal -->
   <div class="modal-backdrop" id="settingsModal" onclick="if(event.target===this) closeSettings()">
     <div class="modal-sheet">
       <div style="display:flex;justify-content:space-between;align-items:center">
@@ -1582,7 +1141,7 @@
     </div>
   </div>
 
-  <!-- Bottom Navigation (4 Tabs) -->
+  <!-- Bottom Navigation (5 Tabs) -->
   <nav class="bottom-nav">
     <div class="nav-inner">
       <button class="nav-btn active" id="nav-today" onclick="switchTab('today')">
@@ -1592,6 +1151,10 @@
       <button class="nav-btn" id="nav-calendar" onclick="switchTab('calendar')">
         <span class="nav-icon">🗓</span>
         <span>Календарь</span>
+      </button>
+      <button class="nav-btn" id="nav-shelf" onclick="switchTab('shelf')">
+        <span class="nav-icon">⭐</span>
+        <span>Полка</span>
       </button>
       <button class="nav-btn" id="nav-notes" onclick="switchTab('notes')">
         <span class="nav-icon">📝</span>
@@ -1609,6 +1172,7 @@
     const CLOUD_CFG_KEY = 'obsidian_cloud_cfg_v1';
     const TAGS = ['#важное', '#идеи', '#дневник', '#проект', '#учеба'];
     const DEFAULT_CATEGORIES = ['Все', 'Работа', 'Учеба', 'Быт'];
+    const DEFAULT_SHELF_CATS = ['🎬 Фильмы', '📖 Книги', '🍺 Пиво / Бар', '🎮 Игры'];
     const ACCENTS = [
       { name: 'Blue', color: '#3b82f6', glow: 'rgba(59,130,246,0.24)' },
       { name: 'Violet', color: '#8b5cf6', glow: 'rgba(139,92,246,0.24)' },
@@ -1635,9 +1199,12 @@
       noteScope: 'quick',
       activeTag: 'Все',
       activeTaskCategory: 'Все',
+      activeShelfCategory: 'Все',
       taskCategories: DEFAULT_CATEGORIES.slice(1),
+      shelfCategories: DEFAULT_SHELF_CATS.slice(),
       tasks: [],
       schedule: [],
+      shelf: [],
       notes: [
         {
           id: 'n1',
@@ -1650,9 +1217,8 @@
         }
       ],
       habits: [
-        { id: 'h1', name: 'Спорт / Разминка', history: {} },
-        { id: 'h2', name: 'Глубокий фокус (без соцсетей)', history: {} },
-        { id: 'h3', name: 'Чтение / Учеба', history: {} }
+        { id: 'h1', name: 'Отжимания', target: 50, history: {} },
+        { id: 'h2', name: 'Вода (стаканы)', target: 8, history: {} }
       ]
     };
 
@@ -1663,19 +1229,19 @@
     let editingNoteId = null;
     let editingSchedId = null;
     let editingTaskId = null;
+    let editingShelfId = null;
     let editorPinned = false;
     let editorTag = '#дневник';
     let syncTimer = null;
 
-    // Staging file buffers
     let stagingTaskFiles = [];
     let stagingSchedFiles = [];
     let stagingQpFiles = [];
     let editingTaskFiles = [];
     let editingSchedFiles = [];
-    let quickAttachTarget = null; // { type: 'task' | 'sched', id: string }
+    let stagingShelfPhoto = null;
+    let quickAttachTarget = null;
 
-    // Calendar view state
     let calYear = new Date().getFullYear();
     let calMonth = new Date().getMonth();
     let calStreamMode = 'upcoming';
@@ -1694,9 +1260,8 @@
         }
       } catch (e) { console.error(e); }
       if (!state.selectedDate) state.selectedDate = todayISO();
-      if (!state.taskCategories || !state.taskCategories.length) {
-        state.taskCategories = DEFAULT_CATEGORIES.slice(1);
-      }
+      if (!state.taskCategories || !state.taskCategories.length) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
+      if (!state.shelfCategories || !state.shelfCategories.length) state.shelfCategories = DEFAULT_SHELF_CATS.slice();
       const selParts = state.selectedDate.split('-').map(Number);
       if (selParts.length === 3) {
         calYear = selParts[0];
@@ -1715,7 +1280,7 @@
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       } catch (err) {
-        alert('Память браузера переполнена (слишком тяжелый файл). Удали часть крупных вложений.');
+        alert('Память браузера переполнена. Удали часть крупных вложений.');
       }
       if (triggerCloud && isCloudConfigured()) {
         clearTimeout(syncTimer);
@@ -1723,7 +1288,7 @@
       }
     }
 
-    /* ================= FILE ATTACHMENTS (PAPERCLIP 📎) ================= */
+    /* ================= FILE ATTACHMENTS ================= */
     function formatBytes(bytes) {
       if (!bytes) return '';
       if (bytes < 1024) return bytes + ' Б';
@@ -1734,7 +1299,7 @@
     function readFileAsAttachment(file) {
       return new Promise((resolve, reject) => {
         if (file.size > 3.5 * 1024 * 1024) {
-          alert(`Файл «${file.name}» слишком большой (${formatBytes(file.size)}). Для быстрой облачной синхронизации прикрепляй файлы до 3.5 МБ.`);
+          alert(`Файл «${file.name}» слишком большой (${formatBytes(file.size)}). Прикрепляй файлы до 3.5 МБ.`);
           return resolve(null);
         }
         const isImg = file.type && file.type.startsWith('image/');
@@ -1750,7 +1315,6 @@
               data: dataUrl
             });
           }
-          // Compress image via canvas so it syncs instantaneously
           const img = new Image();
           img.onload = () => {
             const MAX_SIDE = 1280;
@@ -2017,9 +1581,8 @@
         if (manual || remoteTime > localTime) {
           const keepDate = state.selectedDate || todayISO();
           state = { ...state, ...remote, selectedDate: keepDate };
-          if (!state.taskCategories || !state.taskCategories.length) {
-            state.taskCategories = DEFAULT_CATEGORIES.slice(1);
-          }
+          if (!state.taskCategories || !state.taskCategories.length) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
+          if (!state.shelfCategories || !state.shelfCategories.length) state.shelfCategories = DEFAULT_SHELF_CATS.slice();
           saveState(false);
           applyTheme();
           renderAll();
@@ -2038,10 +1601,7 @@
     function saveCloudConfig() {
       const urlInp = document.getElementById('cloudUrlInput').value.trim();
       const secInp = document.getElementById('cloudSecretInput').value.trim();
-      if (!urlInp || !secInp) {
-        alert('Заполни оба поля.');
-        return;
-      }
+      if (!urlInp || !secInp) { alert('Заполни оба поля.'); return; }
       cloudConfig.dbUrl = urlInp;
       cloudConfig.secret = secInp;
       localStorage.setItem(CLOUD_CFG_KEY, JSON.stringify(cloudConfig));
@@ -2078,11 +1638,11 @@
     };
 
     function switchTab(tab) {
-      ['today', 'calendar', 'notes', 'trackers'].forEach(t => {
+      ['today', 'calendar', 'shelf', 'notes', 'trackers'].forEach(t => {
         document.getElementById('view-' + t).classList.toggle('active', t === tab);
         document.getElementById('nav-' + t).classList.toggle('active', t === tab);
       });
-      const titles = { today: 'Сегодня', calendar: 'Календарь', notes: 'Заметки', trackers: 'Трекеры' };
+      const titles = { today: 'Сегодня', calendar: 'Календарь', shelf: 'Полка', notes: 'Заметки', trackers: 'Трекеры' };
       document.getElementById('headerTitle').textContent = titles[tab];
       document.getElementById('fabNote').style.display = tab === 'notes' ? 'flex' : 'none';
       renderAll();
@@ -2145,7 +1705,7 @@
       if (shouldSave) saveState(false);
     }
 
-    /* ================= TASKS LOGIC (OPTION 1: GLOBAL POOL + TIMED BY DAYS) ================= */
+    /* ================= TASKS LOGIC WITH REPEATS ================= */
     function onTaskTimeChange() {
       const val = document.getElementById('taskTime').value;
       const dateBox = document.getElementById('taskDateBox');
@@ -2231,22 +1791,41 @@
       const timeInp = document.getElementById('taskTime');
       const dateInp = document.getElementById('taskDateInput');
       const catSel = document.getElementById('taskCatSelect');
+      const repeatSel = document.getElementById('taskRepeatSelect');
       const text = inp.value.trim();
       if (!text) return;
       if (!state.tasks) state.tasks = [];
 
       const hasTime = Boolean(timeInp.value && timeInp.value.trim());
-      const taskDate = hasTime ? (dateInp.value || state.selectedDate || todayISO()) : '';
+      const baseDate = hasTime ? (dateInp.value || state.selectedDate || todayISO()) : '';
+      const repeatMode = repeatSel ? repeatSel.value : 'none';
 
-      state.tasks.unshift({
-        id: 't_' + Date.now(),
-        text,
-        time: hasTime ? timeInp.value.trim() : '',
-        date: taskDate,
-        category: catSel ? catSel.value : (state.taskCategories[0] || 'Работа'),
-        done: false,
-        prio: currentTaskPrio,
-        attachments: [...stagingTaskFiles]
+      // Generate dates for repeated tasks
+      const datesToGenerate = [];
+      if (repeatMode === 'none' || !hasTime) {
+        datesToGenerate.push(baseDate);
+      } else {
+        const startD = parseISOToLocal(baseDate);
+        const daysCount = repeatMode === 'day' ? 30 : (repeatMode === 'every_other' ? 15 : 8);
+        const step = repeatMode === 'week' ? 7 : (repeatMode === 'every_other' ? 2 : 1);
+        for (let i = 0; i < daysCount; i++) {
+          const d = new Date(startD);
+          d.setDate(startD.getDate() + (i * step));
+          datesToGenerate.push(toLocalISO(d));
+        }
+      }
+
+      datesToGenerate.forEach((dIso, idx) => {
+        state.tasks.unshift({
+          id: 't_' + Date.now() + '_' + idx,
+          text,
+          time: hasTime ? timeInp.value.trim() : '',
+          date: dIso,
+          category: catSel ? catSel.value : (state.taskCategories[0] || 'Работа'),
+          done: false,
+          prio: currentTaskPrio,
+          attachments: [...stagingTaskFiles]
+        });
       });
 
       inp.value = '';
@@ -2432,7 +2011,166 @@
       renderAll();
     }
 
-    /* ================= CARD BUILDERS (COLOR CORRECTION) ================= */
+    /* ================= SHELF (ПОЛКА) ================= */
+    function promptNewShelfCategory() {
+      const name = prompt('Новая категория полки (например, Сериалы, Аниме, Вино):');
+      if (!name || !name.trim()) return;
+      const clean = name.trim();
+      if (!state.shelfCategories.includes(clean)) {
+        state.shelfCategories.push(clean);
+        saveState();
+      }
+      state.activeShelfCategory = clean;
+      renderShelf();
+    }
+
+    function openShelfEditor(id = null) {
+      editingShelfId = id;
+      stagingShelfPhoto = null;
+      const item = id ? (state.shelf || []).find(x => x.id === id) : null;
+
+      const sel = document.getElementById('shelfCatSelect');
+      sel.innerHTML = '';
+      state.shelfCategories.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c;
+        sel.appendChild(opt);
+      });
+
+      document.getElementById('shelfTitleInput').value = item ? (item.title || '') : '';
+      document.getElementById('shelfRatingInput').value = item ? (item.rating || 8) : 8;
+      document.getElementById('shelfReviewInput').value = item ? (item.review || '') : '';
+      if (item && item.category) sel.value = item.category;
+
+      if (item && item.photo) {
+        stagingShelfPhoto = item.photo;
+        document.getElementById('shelfPhotoPreview').style.display = 'flex';
+        document.getElementById('shelfPhotoPreview').innerHTML = `
+          <span class="att-chip">
+            <img src="${item.photo}" class="att-thumb" />
+            <span class="att-name">Фото / Обложка</span>
+            <button class="att-del" onclick="stagingShelfPhoto=null; document.getElementById('shelfPhotoPreview').style.display='none'">✕</button>
+          </span>
+        `;
+      } else {
+        document.getElementById('shelfPhotoPreview').style.display = 'none';
+      }
+
+      document.getElementById('shelfDeleteBtn').style.display = item ? 'block' : 'none';
+      document.getElementById('shelfModal').classList.add('open');
+    }
+
+    function closeShelfEditor() {
+      document.getElementById('shelfModal').classList.remove('open');
+      editingShelfId = null;
+      stagingShelfPhoto = null;
+    }
+
+    async function handleShelfPhoto(event) {
+      const f = event.target.files[0];
+      if (!f) return;
+      const att = await readFileAsAttachment(f);
+      if (att) {
+        stagingShelfPhoto = att.data;
+        document.getElementById('shelfPhotoPreview').style.display = 'flex';
+        document.getElementById('shelfPhotoPreview').innerHTML = `
+          <span class="att-chip">
+            <img src="${att.data}" class="att-thumb" />
+            <span class="att-name">${escapeHtml(f.name)}</span>
+            <button class="att-del" onclick="stagingShelfPhoto=null; document.getElementById('shelfPhotoPreview').style.display='none'">✕</button>
+          </span>
+        `;
+      }
+      event.target.value = '';
+    }
+
+    function saveShelfItem() {
+      const title = document.getElementById('shelfTitleInput').value.trim();
+      if (!title) return;
+      const category = document.getElementById('shelfCatSelect').value;
+      const rating = parseInt(document.getElementById('shelfRatingInput').value) || 8;
+      const review = document.getElementById('shelfReviewInput').value.trim();
+
+      if (!state.shelf) state.shelf = [];
+
+      if (editingShelfId) {
+        const item = state.shelf.find(x => x.id === editingShelfId);
+        if (item) {
+          item.title = title;
+          item.category = category;
+          item.rating = rating;
+          item.review = review;
+          if (stagingShelfPhoto) item.photo = stagingShelfPhoto;
+        }
+      } else {
+        state.shelf.unshift({
+          id: 'sh_' + Date.now(),
+          title,
+          category,
+          rating,
+          review,
+          photo: stagingShelfPhoto || '',
+          date: todayISO()
+        });
+      }
+      saveState();
+      closeShelfEditor();
+      renderShelf();
+    }
+
+    function deleteShelfItem() {
+      if (!editingShelfId) return;
+      state.shelf = (state.shelf || []).filter(x => x.id !== editingShelfId);
+      saveState();
+      closeShelfEditor();
+      renderShelf();
+    }
+
+    function renderShelf() {
+      const cats = ['Все', ...(state.shelfCategories || [])];
+      const row = document.getElementById('shelfCategoriesRow');
+      row.innerHTML = '';
+      cats.forEach(c => {
+        const pill = document.createElement('button');
+        pill.className = 'cat-pill' + (state.activeShelfCategory === c ? ' active' : '');
+        pill.textContent = c;
+        pill.onclick = () => { state.activeShelfCategory = c; renderShelf(); };
+        row.appendChild(pill);
+      });
+
+      const q = (document.getElementById('shelfSearchInput').value || '').toLowerCase();
+      const filtered = (state.shelf || []).filter(item => {
+        if (state.activeShelfCategory && state.activeShelfCategory !== 'Все' && item.category !== state.activeShelfCategory) return false;
+        if (q && !(item.title + ' ' + (item.review || '')).toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      const list = document.getElementById('shelfList');
+      list.innerHTML = filtered.length ? '' : '<div class="empty-state">На полке пока ничего нет. Добавь первую запись!</div>';
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'shelf-card';
+        card.onclick = () => openShelfEditor(item.id);
+        card.innerHTML = `
+          <div class="shelf-thumb-wrap">
+            ${item.photo ? `<img src="${item.photo}" class="shelf-thumb" />` : '⭐'}
+          </div>
+          <div class="shelf-body">
+            <div class="shelf-title">${escapeHtml(item.title)}</div>
+            <div class="shelf-meta">
+              <span class="cat-badge">${escapeHtml(item.category)}</span>
+              <span class="shelf-stars">⭐ ${item.rating}/10</span>
+              <span>• ${formatShortDate(item.date)}</span>
+            </div>
+            ${item.review ? `<div class="shelf-review">${escapeHtml(item.review)}</div>` : ''}
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    /* ================= CARD BUILDERS ================= */
     function buildTaskCardElement(t) {
       const hasTime = Boolean(t.time && t.time.trim());
       const isUrgent = t.prio === 'high';
@@ -2499,7 +2237,6 @@
     function renderToday() {
       renderTaskCategories();
 
-      // Option 1: ALL tasks (both timeless and timed) appear in "Сегодня -> Задачи" regardless of selected day!
       const allFilteredTasks = (state.tasks || []).filter(t => {
         if (state.activeTaskCategory && state.activeTaskCategory !== 'Все' && t.category !== state.activeTaskCategory) return false;
         return true;
@@ -2531,7 +2268,7 @@
         if (timedTasks.length > 0) {
           const h1 = document.createElement('div');
           h1.className = 'sub-group-title';
-          h1.innerHTML = '<span>🟢 Задачи ко времени (распределены по дням)</span>';
+          h1.innerHTML = '<span>🟢 Задачи ко времени</span>';
           tContainer.appendChild(h1);
 
           const timedList = document.createElement('div');
@@ -2543,7 +2280,7 @@
         if (timelessTasks.length > 0) {
           const h2 = document.createElement('div');
           h2.className = 'sub-group-title';
-          h2.innerHTML = '<span>🟣 Общие задачи (без времени — на любой день)</span>';
+          h2.innerHTML = '<span>🟣 Общие задачи (на любой день)</span>';
           tContainer.appendChild(h2);
 
           const anyList = document.createElement('div');
@@ -2553,16 +2290,13 @@
         }
       }
 
-      // Render Schedule for the selected day in the week strip
       const daySched = (state.schedule || []).filter(s => s.date === state.selectedDate);
       const sList = document.getElementById('scheduleList');
       sList.innerHTML = daySched.length ? '' : '<div class="empty-state">На выбранный день расписание по часам пусто</div>';
-      daySched.forEach(s => {
-        sList.appendChild(buildSchedCardElement(s));
-      });
+      daySched.forEach(s => { sList.appendChild(buildSchedCardElement(s)); });
     }
 
-    /* ================= CALENDAR & CONTINUOUS STREAM LOGIC ================= */
+    /* ================= CALENDAR ================= */
     function changeCalMonth(delta) {
       calMonth += delta;
       if (calMonth > 11) { calMonth = 0; calYear++; }
@@ -2635,7 +2369,6 @@
 
         const iso = toLocalISO(cellDate);
         const dSched = (state.schedule || []).filter(s => s.date === iso);
-        // Only timed tasks belong to specific calendar dates
         const dTasks = (state.tasks || []).filter(t => t.time && t.date === iso);
         const totalItems = dSched.length + dTasks.length;
         const hasUrgent = dTasks.some(t => t.prio === 'high' && !t.done);
@@ -2669,14 +2402,11 @@
           saveState(false);
           renderAll();
           const targetEl = document.getElementById('agenda-day-' + iso);
-          if (targetEl) {
-            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
         grid.appendChild(cell);
       }
 
-      // Continuous Agenda Stream
       const streamContainer = document.getElementById('agendaStreamList');
       streamContainer.innerHTML = '';
       const q = (document.getElementById('calSearchInput').value || '').trim().toLowerCase();
@@ -2751,7 +2481,7 @@
           emptyDay.className = 'item-card';
           emptyDay.style.justifyContent = 'space-between';
           emptyDay.innerHTML = `
-            <span style="font-size:14px;color:var(--text-muted)">На этот день дел со временем пока нет</span>
+            <span style="font-size:14px;color:var(--text-muted)">На этот день планов пока нет</span>
             <button class="agenda-add-btn" onclick="openQuickPlanModal('${iso}')">+ Добавить</button>
           `;
           itemsWrap.appendChild(emptyDay);
@@ -2771,9 +2501,7 @@
           }
         });
 
-        dTasks.forEach(t => {
-          itemsWrap.appendChild(buildTaskCardElement(t));
-        });
+        dTasks.forEach(t => { itemsWrap.appendChild(buildTaskCardElement(t)); });
 
         group.appendChild(itemsWrap);
         streamContainer.appendChild(group);
@@ -2784,7 +2512,6 @@
       }
     }
 
-    /* Quick Plan Modal Logic */
     function openQuickPlanModal(dateISO) {
       const targetDate = dateISO || state.selectedDate || todayISO();
       document.getElementById('qpDate').value = targetDate;
@@ -2863,7 +2590,7 @@
       renderAll();
     }
 
-    /* Notes Logic */
+    /* ================= NOTES ================= */
     function setNoteScope(scope) {
       state.noteScope = scope;
       document.getElementById('noteScopeQuick').classList.toggle('active', scope === 'quick');
@@ -3005,7 +2732,7 @@
       document.getElementById('noteModal').classList.remove('open');
     }
 
-    /* Trackers Logic (Only Habits) */
+    /* ================= TRACKERS (WITH COUNTS & STREAKS) ================= */
     function renderTrackers() {
       const hList = document.getElementById('habitsList');
       hList.innerHTML = '';
@@ -3027,42 +2754,92 @@
           if (hist[iso]) streak++;
           else if (i > 0) break;
         }
-        const doneToday = !!hist[tIso];
-        const dotsHtml = last7.map(iso => `<div class="h-dot ${hist[iso] ? 'on' : ''}"></div>`).join('');
+
+        const dayData = hist[tIso] || { count: 0, done: false };
+        const target = h.target || 1;
+        const currentCount = typeof dayData === 'object' ? (dayData.count || 0) : (dayData ? target : 0);
+        const isDone = typeof dayData === 'object' ? (dayData.done || false) : Boolean(dayData);
+        const pct = Math.min(100, Math.round((currentCount / target) * 100));
+
+        const dotsHtml = last7.map(iso => {
+          const past = hist[iso];
+          const pastDone = typeof past === 'object' ? past.done : past;
+          return `<div class="h-dot ${pastDone ? 'on' : ''}"></div>`;
+        }).join('');
 
         const card = document.createElement('div');
         card.className = 'habit-card';
         card.innerHTML = `
-          <div>
-            <div style="font-weight:600;font-size:15px">${escapeHtml(h.name)} <span style="font-size:12px;color:var(--warning);margin-left:6px">🔥 ${streak} дн.</span></div>
-            <div class="habit-dots">${dotsHtml}</div>
+          <div class="habit-top-row">
+            <div>
+              <div style="font-weight:700;font-size:15px">${escapeHtml(h.name)} <span style="font-size:12px;color:var(--warning);margin-left:6px">🔥 ${streak} дн.</span></div>
+              <div style="font-size:12px;color:var(--text-muted);margin-top:2px">${currentCount} / ${target} выполнено</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="habit-counter-controls">
+                <button class="hc-btn" onclick="changeHabitCount('${h.id}', -1)">−</button>
+                <button class="hc-btn" onclick="changeHabitCount('${h.id}', 1)">+</button>
+              </div>
+              <button class="habit-btn ${isDone ? 'done' : ''}" onclick="toggleHabitDone('${h.id}')">✓</button>
+              <button class="del-btn" onclick="deleteHabit('${h.id}')">✕</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:6px">
-            <button class="habit-btn ${doneToday ? 'done' : ''}" onclick="toggleHabit('${h.id}')">✓</button>
-            <button class="del-btn" onclick="deleteHabit('${h.id}')">✕</button>
-          </div>
+          <div class="habit-progress-bar"><div class="habit-progress-fill" style="width:${pct}%"></div></div>
+          <div class="habit-dots">${dotsHtml}</div>
         `;
         hList.appendChild(card);
       });
     }
 
-    function toggleHabit(id) {
+    function changeHabitCount(id, delta) {
       const h = (state.habits || []).find(x => x.id === id);
       if (!h) return;
       if (!h.history) h.history = {};
       const tIso = todayISO();
-      h.history[tIso] = !h.history[tIso];
+      if (!h.history[tIso] || typeof h.history[tIso] !== 'object') {
+        h.history[tIso] = { count: 0, done: false };
+      }
+      const target = h.target || 1;
+      let nc = (h.history[tIso].count || 0) + delta;
+      if (nc < 0) nc = 0;
+      h.history[tIso].count = nc;
+      if (nc >= target) {
+        h.history[tIso].done = true;
+      } else {
+        h.history[tIso].done = false;
+      }
+      saveState();
+      renderTrackers();
+    }
+
+    function toggleHabitDone(id) {
+      const h = (state.habits || []).find(x => x.id === id);
+      if (!h) return;
+      if (!h.history) h.history = {};
+      const tIso = todayISO();
+      const target = h.target || 1;
+      if (!h.history[tIso] || typeof h.history[tIso] !== 'object') {
+        h.history[tIso] = { count: 0, done: false };
+      }
+      const curDone = h.history[tIso].done;
+      h.history[tIso].done = !curDone;
+      if (!curDone) {
+        h.history[tIso].count = target;
+      }
       saveState();
       renderTrackers();
     }
 
     function addHabit() {
       const inp = document.getElementById('habitInput');
+      const targetInp = document.getElementById('habitTargetInput');
       const name = inp.value.trim();
       if (!name) return;
+      const target = parseInt(targetInp.value) || 1;
       if (!state.habits) state.habits = [];
-      state.habits.push({ id: 'h_' + Date.now(), name, history: {} });
+      state.habits.push({ id: 'h_' + Date.now(), name, target, history: {} });
       inp.value = '';
+      targetInp.value = '';
       saveState();
       renderTrackers();
     }
@@ -3073,7 +2850,7 @@
       renderTrackers();
     }
 
-    /* Settings & Cloud Setup */
+    /* ================= SETTINGS ================= */
     function openSettings() {
       document.getElementById('cloudUrlInput').value = cloudConfig.dbUrl || '';
       document.getElementById('cloudSecretInput').value = cloudConfig.secret || '';
@@ -3090,10 +2867,7 @@
     }
 
     document.getElementById('settingsBtn').onclick = openSettings;
-
-    function closeSettings() {
-      document.getElementById('settingsModal').classList.remove('open');
-    }
+    function closeSettings() { document.getElementById('settingsModal').classList.remove('open'); }
 
     function exportData() {
       const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
@@ -3128,6 +2902,7 @@
       renderWeekStrip();
       renderToday();
       renderCalendar();
+      renderShelf();
       renderNotes();
       renderTrackers();
     }
