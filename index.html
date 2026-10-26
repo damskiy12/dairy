@@ -13,6 +13,7 @@
       --bg: #0b0b0f;
       --surface: #14141c;
       --surface-2: #1d1d28;
+      --surface-3: #262635;
       --border: rgba(255, 255, 255, 0.08);
       --text: #f3f4f6;
       --text-muted: #8b8d9b;
@@ -29,6 +30,7 @@
       --bg: #f4f5f8;
       --surface: #ffffff;
       --surface-2: #ebedf2;
+      --surface-3: #e2e5ec;
       --border: rgba(0, 0, 0, 0.08);
       --text: #111827;
       --text-muted: #6b7280;
@@ -47,7 +49,7 @@
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
-      padding-bottom: calc(84px + var(--safe-bottom));
+      padding-bottom: calc(88px + var(--safe-bottom));
       transition: background 0.2s ease, color 0.2s ease;
     }
 
@@ -62,7 +64,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .header-title {
       font-size: 24px;
@@ -186,6 +188,11 @@
     }
 
     /* Composers (Tasks & Schedule) */
+    .quick-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
     .composer {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -276,7 +283,7 @@
       background: rgba(245, 158, 11, 0.15);
     }
 
-    /* Categories / Tags filter row for Tasks */
+    /* Categories / Tags filter row */
     .categories-row {
       display: flex;
       gap: 6px;
@@ -479,11 +486,13 @@
     .ymaps-link:active {
       transform: scale(0.96);
     }
-
     .badge-prio {
       font-size: 11px;
+      font-weight: 700;
       color: var(--warning);
-      margin-left: 6px;
+      background: rgba(245, 158, 11, 0.14);
+      padding: 3px 7px;
+      border-radius: 7px;
     }
     .del-btn {
       background: transparent;
@@ -493,6 +502,193 @@
       padding: 2px 6px;
       cursor: pointer;
       flex-shrink: 0;
+    }
+
+    /* ================= CALENDAR & CONTINUOUS AGENDA STREAM ================= */
+    .cal-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+    .cal-month-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cal-month-title {
+      font-size: 18px;
+      font-weight: 800;
+      min-width: 140px;
+      text-align: center;
+      text-transform: capitalize;
+    }
+    .cal-mini-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 11px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .cal-mini-btn:active {
+      transform: scale(0.95);
+    }
+    .cal-grid-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .cal-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    .cal-cell {
+      aspect-ratio: 1 / 1.05;
+      border-radius: 12px;
+      background: var(--surface-2);
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 2px 6px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.14s ease;
+    }
+    .cal-cell.other-month {
+      opacity: 0.28;
+      background: transparent;
+    }
+    .cal-cell.is-today {
+      border-color: var(--accent);
+    }
+    .cal-cell.selected {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+    .cal-cell-num {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .cal-cell-count {
+      position: absolute;
+      top: 3px;
+      right: 4px;
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+    .cal-cell.selected .cal-cell-count {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .cal-dots {
+      display: flex;
+      gap: 3px;
+      height: 5px;
+      align-items: center;
+    }
+    .c-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+    .c-dot.sched { background: var(--accent); }
+    .c-dot.urgent { background: var(--warning); }
+    .c-dot.task { background: #60a5fa; }
+    .c-dot.done-all { background: var(--success); }
+    .cal-cell.selected .c-dot.sched { background: #fff; }
+
+    /* Continuous Agenda Stream */
+    .agenda-day-group {
+      margin-bottom: 18px;
+    }
+    .agenda-day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      position: sticky;
+      top: 8px;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+    .agenda-day-header.today-Stick {
+      border-color: var(--accent);
+      background: rgba(139, 92, 246, 0.14);
+    }
+    .agenda-day-title {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: capitalize;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .rel-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: var(--surface);
+      color: var(--text-muted);
+    }
+    .rel-badge.today {
+      background: var(--accent);
+      color: #fff;
+    }
+    .rel-badge.tomorrow {
+      background: rgba(16, 185, 129, 0.18);
+      color: var(--success);
+    }
+    .agenda-add-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .free-gap-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 4px 10px;
+      margin: -2px 0 -2px 24px;
+      background: rgba(255, 255, 255, 0.015);
     }
 
     /* Notes */
@@ -642,28 +838,28 @@
       cursor: pointer;
     }
 
-    /* Bottom Navigation */
+    /* Bottom Navigation (4 Tabs) */
     .bottom-nav {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(20, 20, 28, 0.88);
+      background: rgba(20, 20, 28, 0.9);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-top: 1px solid var(--border);
-      padding: 8px 16px calc(8px + var(--safe-bottom));
+      padding: 8px 12px calc(8px + var(--safe-bottom));
       z-index: 50;
     }
     html.light .bottom-nav {
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
     }
     .nav-inner {
       max-width: 520px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
     }
     .nav-btn {
       background: transparent;
@@ -675,7 +871,7 @@
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
     }
@@ -683,7 +879,7 @@
       color: var(--accent);
     }
     .nav-icon {
-      font-size: 20px;
+      font-size: 19px;
     }
 
     /* Floating Action Button for Notes */
@@ -788,7 +984,7 @@
     }
     .empty-state {
       text-align: center;
-      padding: 36px 16px;
+      padding: 32px 16px;
       color: var(--text-muted);
       font-size: 14px;
     }
@@ -800,7 +996,7 @@
   <div class="app-container">
     <!-- Top Header -->
     <header class="header">
-      <div>
+      <div onclick="switchTab('calendar')" style="cursor:pointer">
         <div class="header-title" id="headerTitle">Сегодня</div>
         <div class="header-subtitle" id="headerDate"></div>
       </div>
@@ -823,7 +1019,7 @@
         <button class="seg-btn" id="modeScheduleBtn" onclick="setTodayMode('schedule')">По часам</button>
       </div>
 
-      <!-- Tasks Mode (With Categories, Optional Time & Priority) -->
+      <!-- Tasks Mode -->
       <div id="tasksBlock">
         <div class="composer">
           <div class="composer-row">
@@ -852,7 +1048,7 @@
         <div class="list" id="tasksList"></div>
       </div>
 
-      <!-- Schedule Mode (With Start/End Time & Yandex Maps Location) -->
+      <!-- Schedule Mode -->
       <div id="scheduleBlock" style="display:none">
         <div class="composer">
           <div class="composer-row">
@@ -876,7 +1072,47 @@
       </div>
     </section>
 
-    <!-- TAB 2: NOTES -->
+    <!-- TAB 2: CALENDAR & CONTINUOUS AGENDA STREAM -->
+    <section id="view-calendar" class="view-section">
+      <div class="cal-top-bar">
+        <div class="cal-month-nav">
+          <button class="cal-mini-btn" onclick="changeCalMonth(-1)">‹</button>
+          <div class="cal-month-title" id="calMonthTitle">Октябрь 2026</div>
+          <button class="cal-mini-btn" onclick="changeCalMonth(1)">›</button>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="cal-mini-btn" onclick="jumpToTodayInCal()">Сегодня</button>
+          <button class="cal-mini-btn" id="toggleGridBtn" onclick="toggleCalGrid()">Сетка ▴</button>
+        </div>
+      </div>
+
+      <!-- Collapsible Month Grid -->
+      <div class="cal-grid-card" id="calGridWrap">
+        <div class="cal-weekdays">
+          <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span style="color:var(--accent)">СБ</span><span style="color:var(--accent)">ВС</span>
+        </div>
+        <div class="cal-days-grid" id="calDaysGrid"></div>
+      </div>
+
+      <!-- Search across all calendar items -->
+      <div class="quick-bar" style="margin-bottom:10px">
+        <input type="text" id="calSearchInput" class="input" style="padding:10px 14px;font-size:14px" placeholder="🔍 Поиск по всем делам, парам, местам..." oninput="renderCalendar()" />
+        <button class="btn-primary" style="font-size:14px;padding:0 14px" onclick="openQuickPlanModal(state.selectedDate)">+ План</button>
+      </div>
+
+      <!-- Stream Mode Filter Pills -->
+      <div class="categories-row" style="margin-bottom:12px">
+        <button class="cat-pill active" id="streamMode-upcoming" onclick="setStreamMode('upcoming')">⏳ Предстоящие подряд</button>
+        <button class="cat-pill" id="streamMode-month" onclick="setStreamMode('month')">🗓 Весь месяц подряд</button>
+        <button class="cat-pill" id="streamMode-day" onclick="setStreamMode('day')">🎯 Выбранный день</button>
+        <button class="cat-pill" id="streamMode-urgent" onclick="setStreamMode('urgent')">⚡ Только важное</button>
+      </div>
+
+      <!-- Continuous Chronological Feed -->
+      <div id="agendaStreamList"></div>
+    </section>
+
+    <!-- TAB 3: NOTES -->
     <section id="view-notes" class="view-section">
       <div class="segmented">
         <button class="seg-btn active" id="noteScopeQuick" onclick="setNoteScope('quick')">⚡ Быстрые / Дневник</button>
@@ -896,7 +1132,7 @@
       <div class="list" id="notesList"></div>
     </section>
 
-    <!-- TAB 3: TRACKERS -->
+    <!-- TAB 4: TRACKERS -->
     <section id="view-trackers" class="view-section">
       <div class="section-label" style="margin-top:0">Привычки на сегодня</div>
       <div class="list" id="habitsList"></div>
@@ -938,12 +1174,70 @@
   <!-- Floating New Note Button -->
   <button class="fab" id="fabNote" onclick="openNoteEditor()">+</button>
 
+  <!-- Quick Plan Modal (Add Task or Schedule Event to ANY Date from Calendar) -->
+  <div class="modal-backdrop" id="quickPlanModal" onclick="if(event.target===this) closeQuickPlanModal()">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong style="font-size:18px" id="qpModalTitle">Новый план</strong>
+        <button class="icon-btn" onclick="closeQuickPlanModal()">✕</button>
+      </div>
+      <div class="composer-row">
+        <div class="time-box">
+          <span class="time-box-label">Дата</span>
+          <input type="date" id="qpDate" class="time-field" />
+        </div>
+      </div>
+      <div class="segmented" style="margin-bottom:4px">
+        <button class="seg-btn active" id="qpTypeTaskBtn" onclick="setQpType('task')">Задача</button>
+        <button class="seg-btn" id="qpTypeSchedBtn" onclick="setQpType('sched')">По часам (Событие)</button>
+      </div>
+
+      <!-- Quick Plan: Task Fields -->
+      <div id="qpTaskFields" style="display:flex;flex-direction:column;gap:10px">
+        <div class="composer-row">
+          <div class="time-box">
+            <span class="time-box-label">Время (опц.)</span>
+            <input type="time" id="qpTaskTime" class="time-field" />
+          </div>
+          <button class="prio-btn" id="qpTaskPrioBtn" onclick="toggleQpPrio()" title="Важность">⚡</button>
+        </div>
+        <input type="text" id="qpTaskText" class="input" placeholder="Что нужно сделать..." onkeydown="if(event.key==='Enter') saveQuickPlan()" />
+        <select id="qpTaskCat" class="input" style="background:var(--surface-2)"></select>
+      </div>
+
+      <!-- Quick Plan: Schedule Fields -->
+      <div id="qpSchedFields" style="display:none;flex-direction:column;gap:10px">
+        <div class="composer-row">
+          <div class="time-box">
+            <span class="time-box-label">Начало</span>
+            <input type="time" id="qpSchedStart" class="time-field" value="10:00" />
+          </div>
+          <span style="color:var(--text-muted);font-weight:700">→</span>
+          <div class="time-box">
+            <span class="time-box-label">Конец</span>
+            <input type="time" id="qpSchedEnd" class="time-field" value="11:30" />
+          </div>
+        </div>
+        <input type="text" id="qpSchedText" class="input" placeholder="Событие, пара или встреча..." onkeydown="if(event.key==='Enter') saveQuickPlan()" />
+        <input type="text" id="qpSchedLoc" class="input" placeholder="📍 Место / адрес (Яндекс Карты)..." onkeydown="if(event.key==='Enter') saveQuickPlan()" />
+      </div>
+
+      <button class="btn-primary" style="padding:13px;font-size:15px;margin-top:4px" onclick="saveQuickPlan()">Добавить в календарь</button>
+    </div>
+  </div>
+
   <!-- Schedule Event Edit Modal -->
   <div class="modal-backdrop" id="schedEditModal" onclick="if(event.target===this) closeSchedEditor()">
     <div class="modal-sheet">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <strong style="font-size:18px">Редактировать событие</strong>
         <button class="icon-btn" onclick="closeSchedEditor()">✕</button>
+      </div>
+      <div class="composer-row">
+        <div class="time-box">
+          <span class="time-box-label">Дата</span>
+          <input type="date" id="editSchedDate" class="time-field" />
+        </div>
       </div>
       <div class="composer-row">
         <div class="time-box">
@@ -970,6 +1264,12 @@
       <div style="display:flex;justify-content:space-between;align-items:center">
         <strong style="font-size:18px">Редактировать задачу</strong>
         <button class="icon-btn" onclick="closeTaskEditor()">✕</button>
+      </div>
+      <div class="composer-row">
+        <div class="time-box">
+          <span class="time-box-label">Дата</span>
+          <input type="date" id="editTaskDate" class="time-field" />
+        </div>
       </div>
       <div class="composer-row">
         <div class="time-box">
@@ -1042,12 +1342,16 @@
     </div>
   </div>
 
-  <!-- Bottom Navigation -->
+  <!-- Bottom Navigation (4 Tabs) -->
   <nav class="bottom-nav">
     <div class="nav-inner">
       <button class="nav-btn active" id="nav-today" onclick="switchTab('today')">
         <span class="nav-icon">📅</span>
         <span>Сегодня</span>
+      </button>
+      <button class="nav-btn" id="nav-calendar" onclick="switchTab('calendar')">
+        <span class="nav-icon">🗓</span>
+        <span>Календарь</span>
       </button>
       <button class="nav-btn" id="nav-notes" onclick="switchTab('notes')">
         <span class="nav-icon">📝</span>
@@ -1072,7 +1376,13 @@
       { name: 'Amber', color: '#f59e0b', glow: 'rgba(245,158,11,0.22)' }
     ];
 
-    const todayISO = () => new Date().toISOString().slice(0, 10);
+    const toLocalISO = (d = new Date()) => {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    };
+    const todayISO = () => toLocalISO(new Date());
 
     let cloudConfig = { dbUrl: '', secret: '' };
 
@@ -1109,12 +1419,20 @@
 
     let currentTaskPrio = 'normal';
     let editTaskPrio = 'normal';
+    let qpType = 'task';
+    let qpPrio = 'normal';
     let editingNoteId = null;
     let editingSchedId = null;
     let editingTaskId = null;
     let editorPinned = false;
     let editorTag = '#дневник';
     let syncTimer = null;
+
+    // Calendar view state
+    let calYear = new Date().getFullYear();
+    let calMonth = new Date().getMonth(); // 0-11
+    let calStreamMode = 'upcoming'; // 'upcoming' | 'month' | 'day' | 'urgent'
+    let calGridVisible = true;
 
     function loadState() {
       try {
@@ -1129,7 +1447,14 @@
         }
       } catch (e) { console.error(e); }
       if (!state.selectedDate) state.selectedDate = todayISO();
-      if (!state.taskCategories) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
+      if (!state.taskCategories || !state.taskCategories.length) {
+        state.taskCategories = DEFAULT_CATEGORIES.slice(1);
+      }
+      const selParts = state.selectedDate.split('-').map(Number);
+      if (selParts.length === 3) {
+        calYear = selParts[0];
+        calMonth = selParts[1] - 1;
+      }
       applyTheme();
       setTodayMode(state.todayMode || 'tasks', false);
       updateCloudIndicator();
@@ -1224,7 +1549,9 @@
         if (manual || remoteTime > localTime) {
           const keepDate = state.selectedDate || todayISO();
           state = { ...state, ...remote, selectedDate: keepDate };
-          if (!state.taskCategories) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
+          if (!state.taskCategories || !state.taskCategories.length) {
+            state.taskCategories = DEFAULT_CATEGORIES.slice(1);
+          }
           saveState(false);
           applyTheme();
           renderAll();
@@ -1283,25 +1610,30 @@
     };
 
     function switchTab(tab) {
-      ['today', 'notes', 'trackers'].forEach(t => {
+      ['today', 'calendar', 'notes', 'trackers'].forEach(t => {
         document.getElementById('view-' + t).classList.toggle('active', t === tab);
         document.getElementById('nav-' + t).classList.toggle('active', t === tab);
       });
-      const titles = { today: 'Сегодня', notes: 'Заметки', trackers: 'Трекеры' };
+      const titles = { today: 'Сегодня', calendar: 'Календарь', notes: 'Заметки', trackers: 'Трекеры' };
       document.getElementById('headerTitle').textContent = titles[tab];
       document.getElementById('fabNote').style.display = tab === 'notes' ? 'flex' : 'none';
       renderAll();
     }
 
+    function parseISOToLocal(isoStr) {
+      const [y, m, d] = (isoStr || todayISO()).split('-').map(Number);
+      return new Date(y, (m || 1) - 1, d || 1);
+    }
+
     function renderWeekStrip() {
       const strip = document.getElementById('weekStrip');
       strip.innerHTML = '';
-      const base = new Date();
+      const base = parseISOToLocal(state.selectedDate);
       const dayNames = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
       for (let i = -3; i <= 3; i++) {
         const d = new Date(base);
         d.setDate(base.getDate() + i);
-        const iso = d.toISOString().slice(0, 10);
+        const iso = toLocalISO(d);
         const hasData = (state.tasks || []).some(t => t.date === iso) || (state.schedule || []).some(s => s.date === iso);
         const pill = document.createElement('div');
         pill.className = 'day-pill' + (iso === state.selectedDate ? ' active' : '');
@@ -1310,10 +1642,16 @@
           <span class="day-num">${d.getDate()}</span>
           ${hasData ? '<div class="day-dot"></div>' : '<div style="height:8px"></div>'}
         `;
-        pill.onclick = () => { state.selectedDate = iso; saveState(false); renderAll(); };
+        pill.onclick = () => {
+          state.selectedDate = iso;
+          calYear = d.getFullYear();
+          calMonth = d.getMonth();
+          saveState(false);
+          renderAll();
+        };
         strip.appendChild(pill);
       }
-      const selDateObj = new Date(state.selectedDate);
+      const selDateObj = parseISOToLocal(state.selectedDate);
       document.getElementById('headerDate').textContent = selDateObj.toLocaleDateString('ru-RU', {
         weekday: 'long', day: 'numeric', month: 'long'
       });
@@ -1346,11 +1684,9 @@
       if (!state.taskCategories.includes(clean)) {
         state.taskCategories.push(clean);
         saveState();
-        renderTaskCategories();
       }
       state.activeTaskCategory = clean;
-      renderTaskCategories();
-      renderToday();
+      renderAll();
     }
 
     function renderTaskCategories() {
@@ -1367,7 +1703,8 @@
 
       const select = document.getElementById('taskCatSelect');
       const editSelect = document.getElementById('editTaskCatSelect');
-      [select, editSelect].forEach(sel => {
+      const qpSelect = document.getElementById('qpTaskCat');
+      [select, editSelect, qpSelect].forEach(sel => {
         if (!sel) return;
         const curVal = sel.value;
         sel.innerHTML = '';
@@ -1420,11 +1757,12 @@
       const t = (state.tasks || []).find(x => x.id === id);
       if (!t) return;
       editingTaskId = id;
+      document.getElementById('editTaskDate').value = t.date || state.selectedDate;
       document.getElementById('editTaskTime').value = t.time || '';
       document.getElementById('editTaskText').value = t.text || '';
       editTaskPrio = t.prio || 'normal';
       document.getElementById('editTaskPrioBtn').classList.toggle('high', editTaskPrio === 'high');
-      
+      renderTaskCategories();
       const sel = document.getElementById('editTaskCatSelect');
       if (sel && t.category) sel.value = t.category;
 
@@ -1439,6 +1777,7 @@
     function saveTaskEdit() {
       const t = (state.tasks || []).find(x => x.id === editingTaskId);
       if (!t) return;
+      t.date = document.getElementById('editTaskDate').value || t.date;
       t.time = document.getElementById('editTaskTime').value || '';
       t.text = document.getElementById('editTaskText').value.trim() || t.text;
       t.prio = editTaskPrio;
@@ -1537,6 +1876,7 @@
       const s = (state.schedule || []).find(x => x.id === id);
       if (!s) return;
       editingSchedId = id;
+      document.getElementById('editSchedDate').value = s.date || state.selectedDate;
       document.getElementById('editSchedStart').value = s.time || '10:00';
       document.getElementById('editSchedEnd').value = s.endTime || minutesToTime(timeToMinutes(s.time || '10:00') + 60);
       document.getElementById('editSchedText').value = s.text || '';
@@ -1552,6 +1892,7 @@
     function saveSchedEdit() {
       const s = (state.schedule || []).find(x => x.id === editingSchedId);
       if (!s) return;
+      s.date = document.getElementById('editSchedDate').value || s.date;
       s.time = document.getElementById('editSchedStart').value || s.time;
       s.endTime = document.getElementById('editSchedEnd').value || '';
       s.text = document.getElementById('editSchedText').value.trim() || s.text;
@@ -1630,6 +1971,354 @@
         `;
         sList.appendChild(div);
       });
+    }
+
+    /* ================= CALENDAR & CONTINUOUS STREAM LOGIC ================= */
+    function changeCalMonth(delta) {
+      calMonth += delta;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      if (calMonth < 0) { calMonth = 11; calYear--; }
+      renderCalendar();
+    }
+
+    function jumpToTodayInCal() {
+      const now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+      state.selectedDate = todayISO();
+      saveState(false);
+      renderAll();
+    }
+
+    function toggleCalGrid() {
+      calGridVisible = !calGridVisible;
+      document.getElementById('calGridWrap').style.display = calGridVisible ? 'block' : 'none';
+      document.getElementById('toggleGridBtn').textContent = calGridVisible ? 'Сетка ▴' : 'Сетка ▾';
+    }
+
+    function setStreamMode(mode) {
+      calStreamMode = mode;
+      ['upcoming', 'month', 'day', 'urgent'].forEach(m => {
+        const el = document.getElementById('streamMode-' + m);
+        if (el) el.classList.toggle('active', m === mode);
+      });
+      renderCalendar();
+    }
+
+    function getRelativeDayLabel(iso) {
+      const tIso = todayISO();
+      if (iso === tIso) return { text: 'Сегодня', cls: 'today' };
+      const dTarget = parseISOToLocal(iso);
+      const dToday = parseISOToLocal(tIso);
+      const diffDays = Math.round((dTarget - dToday) / 86400000);
+      if (diffDays === 1) return { text: 'Завтра', cls: 'tomorrow' };
+      if (diffDays === 2) return { text: 'Послезавтра', cls: '' };
+      if (diffDays > 2) return { text: `Через ${diffDays} дн.`, cls: '' };
+      if (diffDays === -1) return { text: 'Вчера', cls: '' };
+      return { text: `${Math.abs(diffDays)} дн. назад`, cls: '' };
+    }
+
+    function renderCalendar() {
+      const monthNames = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+      document.getElementById('calMonthTitle').textContent = `${monthNames[calMonth]} ${calYear}`;
+
+      // 1. Render Month Grid (Mon-Sun)
+      const grid = document.getElementById('calDaysGrid');
+      grid.innerHTML = '';
+      const firstDay = new Date(calYear, calMonth, 1);
+      const startOffset = (firstDay.getDay() + 6) % 7; // Monday = 0
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      const prevMonthDays = new Date(calYear, calMonth, 0).getDate();
+      const tIso = todayISO();
+
+      const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
+      for (let idx = 0; idx < totalCells; idx++) {
+        let cellDate;
+        let isOther = false;
+        if (idx < startOffset) {
+          cellDate = new Date(calYear, calMonth - 1, prevMonthDays - startOffset + idx + 1);
+          isOther = true;
+        } else if (idx >= startOffset + daysInMonth) {
+          cellDate = new Date(calYear, calMonth + 1, idx - startOffset - daysInMonth + 1);
+          isOther = true;
+        } else {
+          cellDate = new Date(calYear, calMonth, idx - startOffset + 1);
+        }
+
+        const iso = toLocalISO(cellDate);
+        const dSched = (state.schedule || []).filter(s => s.date === iso);
+        const dTasks = (state.tasks || []).filter(t => t.date === iso);
+        const totalItems = dSched.length + dTasks.length;
+        const hasUrgent = dTasks.some(t => t.prio === 'high' && !t.done);
+        const allDone = totalItems > 0 && dSched.every(s => s.done) && dTasks.every(t => t.done);
+
+        let dotsHtml = '';
+        if (allDone) {
+          dotsHtml = '<span class="c-dot done-all"></span>';
+        } else {
+          if (dSched.length > 0) dotsHtml += '<span class="c-dot sched"></span>';
+          if (hasUrgent) dotsHtml += '<span class="c-dot urgent"></span>';
+          if (dTasks.length > 0 && !hasUrgent) dotsHtml += '<span class="c-dot task"></span>';
+        }
+
+        const cell = document.createElement('div');
+        cell.className = 'cal-cell'
+          + (isOther ? ' other-month' : '')
+          + (iso === tIso ? ' is-today' : '')
+          + (iso === state.selectedDate ? ' selected' : '');
+        cell.innerHTML = `
+          ${totalItems > 1 ? `<span class="cal-cell-count">${totalItems}</span>` : ''}
+          <span class="cal-cell-num">${cellDate.getDate()}</span>
+          <div class="cal-dots">${dotsHtml}</div>
+        `;
+        cell.onclick = () => {
+          state.selectedDate = iso;
+          if (isOther) {
+            calYear = cellDate.getFullYear();
+            calMonth = cellDate.getMonth();
+          }
+          saveState(false);
+          renderAll();
+          const targetEl = document.getElementById('agenda-day-' + iso);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        };
+        grid.appendChild(cell);
+      }
+
+      // 2. Render Continuous Agenda Stream ("Все дела подряд")
+      const streamContainer = document.getElementById('agendaStreamList');
+      streamContainer.innerHTML = '';
+      const q = (document.getElementById('calSearchInput').value || '').trim().toLowerCase();
+
+      const monthPrefix = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-`;
+
+      // Collect all unique dates that have items ( plus selectedDate & today )
+      const dateSet = new Set();
+      (state.schedule || []).forEach(s => { if (s.date) dateSet.add(s.date); });
+      (state.tasks || []).forEach(t => { if (t.date) dateSet.add(t.date); });
+      if (!q) {
+        dateSet.add(state.selectedDate);
+        if (calStreamMode === 'upcoming') dateSet.add(tIso);
+      }
+
+      let sortedDates = Array.from(dateSet).sort();
+
+      if (!q) {
+        if (calStreamMode === 'upcoming') {
+          sortedDates = sortedDates.filter(d => d >= tIso || d === state.selectedDate);
+        } else if (calStreamMode === 'month') {
+          sortedDates = sortedDates.filter(d => d.startsWith(monthPrefix));
+        } else if (calStreamMode === 'day') {
+          sortedDates = [state.selectedDate];
+        }
+      }
+
+      let renderedGroups = 0;
+
+      sortedDates.forEach(iso => {
+        let dSched = (state.schedule || []).filter(s => s.date === iso);
+        let dTasks = (state.tasks || []).filter(t => t.date === iso);
+
+        if (calStreamMode === 'urgent' && !q) {
+          dTasks = dTasks.filter(t => t.prio === 'high');
+          dSched = [];
+        }
+
+        if (q) {
+          dSched = dSched.filter(s => ((s.text || '') + ' ' + (s.location || '')).toLowerCase().includes(q));
+          dTasks = dTasks.filter(t => ((t.text || '') + ' ' + (t.category || '')).toLowerCase().includes(q));
+        }
+
+        // Skip empty days unless it's the currently tapped date
+        if (dSched.length === 0 && dTasks.length === 0 && iso !== state.selectedDate) return;
+
+        dSched.sort((a, b) => (a.time || '').localeCompare(b.time || ''));
+        dTasks.sort((a, b) => {
+          if (a.time && b.time) return a.time.localeCompare(b.time);
+          if (a.time) return -1;
+          if (b.time) return 1;
+          return (b.prio === 'high' ? 1 : 0) - (a.prio === 'high' ? 1 : 0);
+        });
+
+        renderedGroups++;
+        const dateObj = parseISOToLocal(iso);
+        const dayStr = dateObj.toLocaleDateString('ru-RU', { weekday: 'short', day: 'numeric', month: 'long' });
+        const rel = getRelativeDayLabel(iso);
+
+        const group = document.createElement('div');
+        group.className = 'agenda-day-group';
+        group.id = 'agenda-day-' + iso;
+
+        const header = document.createElement('div');
+        header.className = 'agenda-day-header' + (iso === tIso ? ' today-Stick' : '');
+        header.innerHTML = `
+          <div class="agenda-day-title">
+            <span>${escapeHtml(dayStr)}</span>
+            <span class="rel-badge ${rel.cls}">${rel.text}</span>
+          </div>
+          <button class="agenda-add-btn" onclick="openQuickPlanModal('${iso}')">+ План</button>
+        `;
+        group.appendChild(header);
+
+        const itemsWrap = document.createElement('div');
+        itemsWrap.className = 'list';
+
+        if (dSched.length === 0 && dTasks.length === 0) {
+          const emptyDay = document.createElement('div');
+          emptyDay.className = 'item-card';
+          emptyDay.style.justifyContent = 'space-between';
+          emptyDay.innerHTML = `
+            <span style="font-size:14px;color:var(--text-muted)">На этот день планов пока нет</span>
+            <button class="agenda-add-btn" onclick="openQuickPlanModal('${iso}')">+ Добавить</button>
+          `;
+          itemsWrap.appendChild(emptyDay);
+        }
+
+        // Render Schedule items with Free Time Window detection
+        dSched.forEach((s, idx) => {
+          const endT = s.endTime || '';
+          const dur = endT ? calcDurationText(s.time, endT) : '';
+          const activeNow = !s.done && isNowInRange(s.date, s.time, endT);
+          const hasLoc = s.location && s.location.trim().length > 0;
+
+          const card = document.createElement('div');
+          card.className = 'item-card' + (s.done ? ' done' : '') + (activeNow ? ' now-active' : '');
+          card.innerHTML = `
+            <div class="check-circle" onclick="toggleSched('${s.id}')">✓</div>
+            <div class="time-col" onclick="openSchedEditor('${s.id}')">
+              <span class="t-start">${escapeHtml(s.time)}</span>
+              ${endT ? `<div class="t-sep"></div><span class="t-end">${escapeHtml(endT)}</span>` : ''}
+            </div>
+            <div class="item-body" onclick="openSchedEditor('${s.id}')">
+              <div class="item-title">${escapeHtml(s.text)}</div>
+              <div class="meta-row">
+                ${activeNow ? `<span class="now-badge">СЕЙЧАС</span>` : ''}
+                ${dur ? `<span class="dur-badge">⏱ ${dur}</span>` : ''}
+                ${hasLoc ? `<a class="ymaps-link" href="${buildYandexMapsUrl(s.location)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📍 ${escapeHtml(s.location)} ↗</a>` : ''}
+              </div>
+            </div>
+            <button class="del-btn" onclick="deleteSched('${s.id}')">✕</button>
+          `;
+          itemsWrap.appendChild(card);
+
+          // Check free gap before next schedule item
+          if (idx < dSched.length - 1 && endT && dSched[idx + 1].time) {
+            const gapMins = timeToMinutes(dSched[idx + 1].time) - timeToMinutes(endT);
+            if (gapMins >= 20) {
+              const gapEl = document.createElement('div');
+              gapEl.className = 'free-gap-pill';
+              gapEl.innerHTML = `☕ Окно ${calcDurationText(endT, dSched[idx + 1].time)}`;
+              itemsWrap.appendChild(gapEl);
+            }
+          }
+        });
+
+        // Render Tasks for that date
+        dTasks.forEach(t => {
+          const hasTime = t.time && t.time.trim().length > 0;
+          const card = document.createElement('div');
+          card.className = 'item-card' + (t.done ? ' done' : '');
+          card.innerHTML = `
+            <div class="check-circle" onclick="toggleTask('${t.id}')">✓</div>
+            ${hasTime ? `
+              <div class="time-col" onclick="openTaskEditor('${t.id}')">
+                <span class="t-start">${escapeHtml(t.time)}</span>
+              </div>
+            ` : ''}
+            <div class="item-body" onclick="openTaskEditor('${t.id}')">
+              <div class="item-title">${escapeHtml(t.text)}</div>
+              <div class="meta-row">
+                ${t.category ? `<span class="cat-badge">${escapeHtml(t.category)}</span>` : ''}
+                ${t.prio === 'high' ? '<span class="badge-prio">⚡ Важно</span>' : ''}
+              </div>
+            </div>
+            <button class="del-btn" onclick="deleteTask('${t.id}')">✕</button>
+          `;
+          itemsWrap.appendChild(card);
+        });
+
+        group.appendChild(itemsWrap);
+        streamContainer.appendChild(group);
+      });
+
+      if (renderedGroups === 0) {
+        streamContainer.innerHTML = '<div class="empty-state">По выбранному фильтру планов пока нет. Нажми «+ План», чтобы добавить!</div>';
+      }
+    }
+
+    /* Quick Plan Modal Logic */
+    function openQuickPlanModal(dateISO) {
+      const targetDate = dateISO || state.selectedDate || todayISO();
+      document.getElementById('qpDate').value = targetDate;
+      const dObj = parseISOToLocal(targetDate);
+      document.getElementById('qpModalTitle').textContent = 'План на ' + dObj.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+      renderTaskCategories();
+      setQpType('task');
+      document.getElementById('quickPlanModal').classList.add('open');
+    }
+
+    function closeQuickPlanModal() {
+      document.getElementById('quickPlanModal').classList.remove('open');
+    }
+
+    function setQpType(type) {
+      qpType = type;
+      document.getElementById('qpTypeTaskBtn').classList.toggle('active', type === 'task');
+      document.getElementById('qpTypeSchedBtn').classList.toggle('active', type === 'sched');
+      document.getElementById('qpTaskFields').style.display = type === 'task' ? 'flex' : 'none';
+      document.getElementById('qpSchedFields').style.display = type === 'sched' ? 'flex' : 'none';
+    }
+
+    function toggleQpPrio() {
+      qpPrio = qpPrio === 'normal' ? 'high' : 'normal';
+      document.getElementById('qpTaskPrioBtn').classList.toggle('high', qpPrio === 'high');
+    }
+
+    function saveQuickPlan() {
+      const targetDate = document.getElementById('qpDate').value || todayISO();
+      if (qpType === 'task') {
+        const text = document.getElementById('qpTaskText').value.trim();
+        if (!text) return;
+        const time = document.getElementById('qpTaskTime').value || '';
+        const cat = document.getElementById('qpTaskCat').value || 'Работа';
+        if (!state.tasks) state.tasks = [];
+        state.tasks.unshift({
+          id: 't_' + Date.now(),
+          text,
+          time,
+          category: cat,
+          done: false,
+          prio: qpPrio,
+          date: targetDate
+        });
+        document.getElementById('qpTaskText').value = '';
+        document.getElementById('qpTaskTime').value = '';
+      } else {
+        const text = document.getElementById('qpSchedText').value.trim();
+        if (!text) return;
+        const time = document.getElementById('qpSchedStart').value || '10:00';
+        const endTime = document.getElementById('qpSchedEnd').value || minutesToTime(timeToMinutes(time) + 90);
+        const location = document.getElementById('qpSchedLoc').value.trim();
+        if (!state.schedule) state.schedule = [];
+        state.schedule.push({
+          id: 's_' + Date.now(),
+          time,
+          endTime,
+          text,
+          location,
+          done: false,
+          date: targetDate
+        });
+        state.schedule.sort((a, b) => a.time.localeCompare(b.time));
+        document.getElementById('qpSchedText').value = '';
+        document.getElementById('qpSchedLoc').value = '';
+      }
+      state.selectedDate = targetDate;
+      saveState();
+      closeQuickPlanModal();
+      renderAll();
     }
 
     /* Notes Logic */
@@ -1782,7 +2471,7 @@
       for (let i = 6; i >= 0; i--) {
         const d = new Date();
         d.setDate(d.getDate() - i);
-        last7.push(d.toISOString().slice(0, 10));
+        last7.push(toLocalISO(d));
       }
       const tIso = todayISO();
 
@@ -1792,7 +2481,7 @@
         for (let i = 0; i < 30; i++) {
           const d = new Date();
           d.setDate(d.getDate() - i);
-          const iso = d.toISOString().slice(0, 10);
+          const iso = toLocalISO(d);
           if (hist[iso]) streak++;
           else if (i > 0) break;
         }
@@ -1911,6 +2600,7 @@
     function renderAll() {
       renderWeekStrip();
       renderToday();
+      renderCalendar();
       renderNotes();
       renderTrackers();
     }
