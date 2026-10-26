@@ -8,6 +8,13 @@
   <meta name="apple-mobile-web-app-title" content="Obsidian" />
   <meta name="theme-color" content="#0b0b0f" />
   <title>OBSIDIAN — Дневник и Планнер</title>
+
+  <!-- Иконка приложения для iPhone (Экран Домой) и Ноутбука -->
+  <link rel="apple-touch-icon" sizes="180x180" href="5402452354927369627.jpg" id="appleIconLink" />
+  <link rel="apple-touch-startup-image" href="5402452354927369627.jpg" />
+  <link rel="icon" type="image/jpeg" href="5402452354927369627.jpg" id="favIconLink" />
+  <link rel="shortcut icon" type="image/jpeg" href="5402452354927369627.jpg" />
+
   <style>
     :root {
       --bg: #0b0b0f;
@@ -82,6 +89,20 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 16px;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .header-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
     }
     .header-title {
       font-size: 24px;
@@ -598,6 +619,7 @@
       gap: 12px;
       align-items: flex-start;
       position: relative;
+      cursor: pointer;
     }
     .shelf-thumb-wrap {
       width: 64px;
@@ -612,15 +634,11 @@
       justify-content: center;
       font-size: 24px;
     }
-    .shelf-thumb {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .shelf-thumb { width: 100%; height: 100%; object-fit: cover; }
     .shelf-body { flex: 1; min-width: 0; }
     .shelf-title { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
     .shelf-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; flex-wrap: wrap; }
-    .shelf-stars { font-weight: 800; color: var(--warning); letter-spacing: 1px; }
+    .shelf-stars { font-weight: 800; color: var(--warning); letter-spacing: 0.5px; }
     .shelf-review { font-size: 13px; color: var(--text-muted); line-height: 1.4; white-space: pre-wrap; margin-top: 4px; }
 
     /* Notes */
@@ -634,7 +652,7 @@
     .note-preview { font-size: 14px; color: var(--text-muted); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
     .note-meta { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--text-muted); }
 
-    /* Trackers (Habits with counts & streaks) */
+    /* Trackers */
     .section-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); margin: 14px 0 8px; }
     .habit-card {
       background: var(--surface);
@@ -646,19 +664,8 @@
       gap: 10px;
     }
     .habit-top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .habit-progress-bar {
-      width: 100%;
-      height: 6px;
-      background: var(--surface-2);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-    .habit-progress-fill {
-      height: 100%;
-      background: var(--success);
-      border-radius: 99px;
-      transition: width 0.2s ease;
-    }
+    .habit-progress-bar { width: 100%; height: 6px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+    .habit-progress-fill { height: 100%; background: var(--success); border-radius: 99px; transition: width 0.2s ease; }
     .habit-dots { display: flex; gap: 5px; margin-top: 2px; }
     .h-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--surface-2); }
     .h-dot.on { background: var(--accent); }
@@ -724,9 +731,12 @@
   <div class="app-container">
     <!-- Top Header -->
     <header class="header">
-      <div onclick="switchTab('calendar')" style="cursor:pointer">
-        <div class="header-title" id="headerTitle">Сегодня</div>
-        <div class="header-subtitle" id="headerDate"></div>
+      <div class="header-brand" onclick="switchTab('calendar')">
+        <img src="5402452354927369627.jpg" class="header-avatar" id="headerAvatarImg" onerror="this.style.display='none'" alt="" />
+        <div>
+          <div class="header-title" id="headerTitle">Сегодня</div>
+          <div class="header-subtitle" id="headerDate"></div>
+        </div>
       </div>
       <div class="header-actions">
         <button class="icon-btn" id="cloudBtn" onclick="manualCloudSync()" title="Облачная синхронизация">
@@ -898,7 +908,7 @@
       <div class="list" id="notesList"></div>
     </section>
 
-    <!-- TAB 5: TRACKERS (Habits with quantitative counts & streaks) -->
+    <!-- TAB 5: TRACKERS -->
     <section id="view-trackers" class="view-section">
       <div class="section-label" style="margin-top:0">Привычки и цели на каждый день</div>
       <div class="list" id="habitsList"></div>
@@ -1113,7 +1123,7 @@
       <div class="section-label" style="margin-top:4px">☁️ Облачная база (Телефон ↔ Ноутбук)</div>
       <div class="cloud-box">
         <input type="url" id="cloudUrlInput" class="input" style="padding:10px 12px;font-size:13px" placeholder="Ссылка Firebase (https://...-rtdb.firebaseio.com)" />
-        <input type="text" id="cloudSecretInput" class="input" style="padding:10px 12px;font-size:13px" placeholder="Личный секретный пароль (напр. damskiy_777)" />
+        <input type="text" id="cloudSecretInput" class="input" style="padding:10px 12px;font-size:13px" placeholder="Личный секретный пароль (напр. 5minutnaZAD)" />
         <div style="display:flex;gap:8px">
           <button class="btn-primary" style="flex:1;padding:10px;font-size:13px" onclick="saveCloudConfig()">🔗 Подключить и синхр.</button>
         </div>
@@ -1170,6 +1180,7 @@
   <script>
     const STORAGE_KEY = 'obsidian_flow_v1';
     const CLOUD_CFG_KEY = 'obsidian_cloud_cfg_v1';
+    const ICON_FILE = '5402452354927369627.jpg';
     const TAGS = ['#важное', '#идеи', '#дневник', '#проект', '#учеба'];
     const DEFAULT_CATEGORIES = ['Все', 'Работа', 'Учеба', 'Быт'];
     const DEFAULT_SHELF_CATS = ['🎬 Фильмы', '📖 Книги', '🍺 Пиво / Бар', '🎮 Игры'];
@@ -1180,6 +1191,31 @@
       { name: 'Amber', color: '#f59e0b', glow: 'rgba(245,158,11,0.24)' }
     ];
 
+    /* Генерация Web App Manifest для установки на ноутбук и телефон с твоей иконкой */
+    (function setupDynamicManifest() {
+      try {
+        const basePath = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
+        const iconUrl = basePath + ICON_FILE;
+        const manifest = {
+          name: 'OBSIDIAN — Дневник и Планнер',
+          short_name: 'Obsidian',
+          start_url: basePath,
+          display: 'standalone',
+          background_color: '#0b0b0f',
+          theme_color: '#0b0b0f',
+          icons: [
+            { src: iconUrl, sizes: '192x192', type: 'image/jpeg', purpose: 'any maskable' },
+            { src: iconUrl, sizes: '512x512', type: 'image/jpeg', purpose: 'any maskable' }
+          ]
+        };
+        const blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = URL.createObjectURL(blob);
+        document.head.appendChild(link);
+      } catch (e) { console.error(e); }
+    })();
+
     const toLocalISO = (d = new Date()) => {
       const y = d.getFullYear();
       const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -1188,7 +1224,7 @@
     };
     const todayISO = () => toLocalISO(new Date());
 
-    let cloudConfig = { dbUrl: '', secret: '' };
+    let cloudConfig = { dbUrl: '', secret: '5minutnaZAD' };
 
     let state = {
       updatedAt: 0,
@@ -1505,12 +1541,13 @@
 
     /* ================= CLOUD SYNC ================= */
     function isCloudConfigured() {
-      return Boolean(cloudConfig.dbUrl && cloudConfig.secret);
+      return Boolean(cloudConfig.dbUrl && cloudConfig.secret && !cloudConfig.dbUrl.includes('github.io'));
     }
 
     function getCloudEndpoint() {
       let base = cloudConfig.dbUrl.trim().replace(/\/+$/, '');
       if (!base.startsWith('http')) base = 'https://' + base;
+      base = base.replace(/\/[^/]+\.json$/i, '');
       const safeKey = encodeURIComponent(cloudConfig.secret.trim());
       return `${base}/obsidian_sync/${safeKey}.json`;
     }
@@ -1539,7 +1576,7 @@
 
     async function pushToCloud(manual = false) {
       if (!isCloudConfigured()) {
-        if (manual) alert('Сначала введи ссылку Firebase и секретный пароль');
+        if (manual) alert('Сначала введи правильную ссылку Firebase (.firebaseio.com) и секретный пароль');
         return;
       }
       try {
@@ -1554,8 +1591,8 @@
         updateCloudIndicator('online', 'Отправлено в облако ✓');
       } catch (err) {
         console.error(err);
-        updateCloudIndicator('error', 'Ошибка отправки (проверь Rules)');
-        if (manual) alert('Не удалось отправить данные. Проверь ссылку и правила (Rules) в Firebase.');
+        updateCloudIndicator('error', 'Ошибка отправки (проверь ссылку и Rules)');
+        if (manual) alert('Не удалось отправить данные. Убедись, что ссылка заканчивается на .firebaseio.com (или .firebasedatabase.app), а в Rules стоит true.');
       }
     }
 
@@ -1601,7 +1638,14 @@
     function saveCloudConfig() {
       const urlInp = document.getElementById('cloudUrlInput').value.trim();
       const secInp = document.getElementById('cloudSecretInput').value.trim();
-      if (!urlInp || !secInp) { alert('Заполни оба поля.'); return; }
+      if (!urlInp || !secInp) {
+        alert('Заполни оба поля.');
+        return;
+      }
+      if (urlInp.includes('github.io')) {
+        alert('Ты вставил ссылку на сам сайт GitHub! Сюда нужно вставить ссылку из панели Firebase Realtime Database (она заканчивается на .firebaseio.com или .firebasedatabase.app).');
+        return;
+      }
       cloudConfig.dbUrl = urlInp;
       cloudConfig.secret = secInp;
       localStorage.setItem(CLOUD_CFG_KEY, JSON.stringify(cloudConfig));
@@ -1800,12 +1844,11 @@
       const baseDate = hasTime ? (dateInp.value || state.selectedDate || todayISO()) : '';
       const repeatMode = repeatSel ? repeatSel.value : 'none';
 
-      // Generate dates for repeated tasks
       const datesToGenerate = [];
-      if (repeatMode === 'none' || !hasTime) {
+      if (repeatMode === 'none') {
         datesToGenerate.push(baseDate);
       } else {
-        const startD = parseISOToLocal(baseDate);
+        const startD = parseISOToLocal(baseDate || state.selectedDate || todayISO());
         const daysCount = repeatMode === 'day' ? 30 : (repeatMode === 'every_other' ? 15 : 8);
         const step = repeatMode === 'week' ? 7 : (repeatMode === 'every_other' ? 2 : 1);
         for (let i = 0; i < daysCount; i++) {
@@ -1815,11 +1858,13 @@
         }
       }
 
+      const effectiveTime = (repeatMode !== 'none' && !hasTime) ? '09:00' : (hasTime ? timeInp.value.trim() : '');
+
       datesToGenerate.forEach((dIso, idx) => {
         state.tasks.unshift({
           id: 't_' + Date.now() + '_' + idx,
           text,
-          time: hasTime ? timeInp.value.trim() : '',
+          time: effectiveTime,
           date: dIso,
           category: catSel ? catSel.value : (state.taskCategories[0] || 'Работа'),
           done: false,
@@ -1830,6 +1875,7 @@
 
       inp.value = '';
       timeInp.value = '';
+      if (repeatSel) repeatSel.value = 'none';
       document.getElementById('taskDateBox').style.display = 'none';
       stagingTaskFiles = [];
       renderStagingAttachments();
@@ -2751,7 +2797,9 @@
           const d = new Date();
           d.setDate(d.getDate() - i);
           const iso = toLocalISO(d);
-          if (hist[iso]) streak++;
+          const rec = hist[iso];
+          const recDone = typeof rec === 'object' ? rec.done : Boolean(rec);
+          if (recDone) streak++;
           else if (i > 0) break;
         }
 
@@ -2803,11 +2851,7 @@
       let nc = (h.history[tIso].count || 0) + delta;
       if (nc < 0) nc = 0;
       h.history[tIso].count = nc;
-      if (nc >= target) {
-        h.history[tIso].done = true;
-      } else {
-        h.history[tIso].done = false;
-      }
+      h.history[tIso].done = nc >= target;
       saveState();
       renderTrackers();
     }
@@ -2852,8 +2896,8 @@
 
     /* ================= SETTINGS ================= */
     function openSettings() {
-      document.getElementById('cloudUrlInput').value = cloudConfig.dbUrl || '';
-      document.getElementById('cloudSecretInput').value = cloudConfig.secret || '';
+      document.getElementById('cloudUrlInput').value = (cloudConfig.dbUrl && !cloudConfig.dbUrl.includes('github.io')) ? cloudConfig.dbUrl : '';
+      document.getElementById('cloudSecretInput').value = cloudConfig.secret || '5minutnaZAD';
       const picker = document.getElementById('accentPicker');
       picker.innerHTML = '';
       ACCENTS.forEach(a => {
