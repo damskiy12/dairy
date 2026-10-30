@@ -116,11 +116,11 @@
     }
     .header-actions {
       display: flex;
-      gap: 8px;
+      gap: 7px;
     }
     .icon-btn {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 12px;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -128,7 +128,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 17px;
       cursor: pointer;
       position: relative;
       transition: transform 0.12s ease, background 0.2s;
@@ -138,8 +138,8 @@
     }
     .sync-dot {
       position: absolute;
-      top: 6px;
-      right: 6px;
+      top: 5px;
+      right: 5px;
       width: 7px;
       height: 7px;
       border-radius: 50%;
@@ -148,6 +148,84 @@
     .sync-dot.online { background: var(--success); box-shadow: 0 0 6px var(--success); }
     .sync-dot.syncing { background: var(--warning); }
     .sync-dot.error { background: var(--danger); }
+
+    /* Active Focus Timer Bar */
+    .focus-bar {
+      display: none;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), var(--surface));
+      border: 1px solid var(--accent);
+      box-shadow: 0 6px 24px var(--accent-glow);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 14px;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .focus-bar.open {
+      display: flex;
+    }
+    .focus-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .focus-task-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+    .focus-clock {
+      font-size: 24px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+    .focus-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .f-mode-pills {
+      display: flex;
+      gap: 4px;
+    }
+    .f-pill {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .f-pill.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .f-act-btn {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 5px 11px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .f-act-btn.primary {
+      background: var(--success);
+      border-color: var(--success);
+      color: #fff;
+    }
 
     /* Week Strip */
     .week-strip {
@@ -215,15 +293,16 @@
     }
     .seg-btn {
       flex: 1;
-      padding: 8px 12px;
+      padding: 8px 6px;
       border: 1px solid transparent;
       background: transparent;
       color: var(--text-muted);
-      font-size: 13.5px;
+      font-size: 12.5px;
       font-weight: 700;
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
     .seg-btn.active {
       background: var(--surface-2);
@@ -650,13 +729,14 @@
     .task-anytime-badge { font-size: 11px; font-weight: 700; color: #c084fc; background: rgba(168, 85, 247, 0.14); padding: 2px 8px; border-radius: 7px; }
     .cat-badge { font-size: 11px; font-weight: 700; color: var(--text); background: var(--surface-2); border: 1px solid var(--border); padding: 2px 8px; border-radius: 7px; }
     .subtask-badge { font-size: 11px; font-weight: 700; color: var(--accent); background: var(--accent-glow); padding: 2px 7px; border-radius: 7px; }
+    .focus-logged-badge { font-size: 11px; font-weight: 700; color: #38bdf8; background: rgba(56,189,248,0.14); padding: 2px 7px; border-radius: 7px; }
     .dur-badge { font-size: 11px; font-weight: 600; color: var(--text-muted); background: var(--surface-2); padding: 2px 8px; border-radius: 7px; }
     .now-badge { font-size: 10px; font-weight: 800; color: #000; background: var(--sched-color); padding: 2px 7px; border-radius: 6px; letter-spacing: 0.4px; }
     .ymaps-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: #fc3f1d; background: rgba(252, 63, 29, 0.12); border: 1px solid rgba(252, 63, 29, 0.28); padding: 2px 8px; border-radius: 7px; text-decoration: none; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .badge-prio { font-size: 11px; font-weight: 800; color: var(--warning); background: rgba(245, 158, 11, 0.16); padding: 2px 7px; border-radius: 7px; }
     .card-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
-    .mini-clip-btn { background: transparent; border: none; color: var(--text-muted); font-size: 15px; padding: 4px 6px; cursor: pointer; opacity: 0.75; }
-    .mini-clip-btn:hover { opacity: 1; }
+    .mini-clip-btn { background: transparent; border: none; color: var(--text-muted); font-size: 14px; padding: 4px 5px; cursor: pointer; opacity: 0.8; }
+    .mini-clip-btn:hover { opacity: 1; color: var(--accent); }
 
     /* ================= CALENDAR ================= */
     .cal-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; }
@@ -725,8 +805,19 @@
     .shelf-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; flex-wrap: wrap; }
     .shelf-stars { font-weight: 800; color: var(--warning); letter-spacing: 0.5px; }
     .shelf-review { font-size: 13px; color: var(--text-muted); line-height: 1.4; white-space: pre-wrap; margin-top: 4px; }
+    .story-share-btn {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 9px;
+      border-radius: 9px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
 
-    /* Notes */
+    /* Notes & Passwords Vault */
     .tags-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; }
     .tags-row::-webkit-scrollbar { display: none; }
     .tag-pill { padding: 6px 12px; border-radius: 99px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 13px; white-space: nowrap; cursor: pointer; }
@@ -736,6 +827,103 @@
     .note-title { font-size: 16px; font-weight: 700; }
     .note-preview { font-size: 14px; color: var(--text-muted); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
     .note-meta { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+
+    /* Password Vault Styles */
+    .vault-lock-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .faceid-big-btn {
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      color: #fff;
+      border: none;
+      border-radius: 16px;
+      padding: 14px 24px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 24px var(--accent-glow);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+    .pwd-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pwd-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .pwd-service {
+      font-size: 15.5px;
+      font-weight: 800;
+    }
+    .pwd-cred-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 7px 10px;
+      font-size: 13px;
+      gap: 8px;
+    }
+    .pwd-mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+    .copy-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 7px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Stats Grid */
+    .stats-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .kpi-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 13px;
+    }
+    .kpi-val {
+      font-size: 23px;
+      font-weight: 900;
+      color: var(--accent);
+      margin-top: 4px;
+    }
 
     /* Trackers */
     .section-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); margin: 14px 0 8px; }
@@ -777,10 +965,7 @@
       padding: 8px 12px;
       gap: 8px;
     }
-    .cat-mgr-actions {
-      display: flex;
-      gap: 6px;
-    }
+    .cat-mgr-actions { display: flex; gap: 6px; }
     .cm-btn {
       background: var(--surface-2);
       border: 1px solid var(--border);
@@ -868,7 +1053,7 @@
     .empty-state { text-align: center; padding: 28px 16px; color: var(--text-muted); font-size: 14px; }
     .view-section { display: none; }
     .view-section.active { display: block; }
-    .lightbox-img { max-width: 100%; max-height: 72vh; border-radius: 14px; object-fit: contain; margin: 0 auto; display: block; }
+    .lightbox-img { max-width: 100%; max-height: 68vh; border-radius: 14px; object-fit: contain; margin: 0 auto; display: block; }
     .btn-danger-soft {
       background: rgba(239, 68, 68, 0.14);
       border: 1px solid rgba(239, 68, 68, 0.35);
@@ -884,10 +1069,10 @@
 <body>
   <input type="file" id="quickCardFileInput" multiple style="display:none" onchange="handleQuickCardFiles(event)" />
 
-  <!-- Undo Toast -->
+  <!-- Undo / Info Toast -->
   <div class="undo-toast" id="undoToast">
     <span id="undoToastText">Удалено</span>
-    <button class="undo-btn" onclick="undoLastDelete()">Отменить ↩</button>
+    <button class="undo-btn" id="undoActionBtn" onclick="undoLastDelete()">Отменить ↩</button>
   </div>
 
   <div class="app-container">
@@ -901,6 +1086,7 @@
         </div>
       </div>
       <div class="header-actions">
+        <button class="icon-btn" onclick="openStatsModal()" title="Статистика и Итоги">📊</button>
         <button class="icon-btn" id="cloudBtn" onclick="manualCloudSync()" title="Облачная синхронизация">
           ☁️
           <span class="sync-dot" id="syncDot"></span>
@@ -909,6 +1095,26 @@
         <button class="icon-btn" id="settingsBtn" title="Настройки и Облако">⚙️</button>
       </div>
     </header>
+
+    <!-- Active Focus Timer Bar (Countdown / Stopwatch Switcher) -->
+    <div class="focus-bar" id="focusBar">
+      <div class="focus-top">
+        <div class="focus-task-name" id="focusTaskTitle">🎯 Фокус-сессия</div>
+        <div class="focus-clock" id="focusClockDisplay">25:00</div>
+      </div>
+      <div class="focus-controls">
+        <div class="f-mode-pills">
+          <button class="f-pill active" id="fMode25" onclick="setFocusMode('pomo25')">⏳ 25м</button>
+          <button class="f-pill" id="fMode45" onclick="setFocusMode('pomo45')">⏳ 45м</button>
+          <button class="f-pill" id="fModeSw" onclick="setFocusMode('stopwatch')">⏱ Секундомер</button>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="f-act-btn primary" id="focusPlayPauseBtn" onclick="toggleFocusRun()">⏸ Пауза</button>
+          <button class="f-act-btn" onclick="finishAndLogFocus()">✓ Записать</button>
+          <button class="f-act-btn" style="color:var(--text-muted)" onclick="cancelFocusBar()">✕</button>
+        </div>
+      </div>
+    </div>
 
     <!-- TAB 1: TODAY -->
     <section id="view-today" class="view-section active">
@@ -929,9 +1135,7 @@
             <button class="btn-primary" onclick="addTask()">+</button>
           </div>
 
-          <!-- Expandable Drawer -->
           <div class="composer-drawer" id="taskComposerDrawer">
-            <!-- Row 1: Date First -> Then Time appears -->
             <div class="composer-row">
               <div class="time-box">
                 <span class="time-box-label">📅 Дата (опц.)</span>
@@ -950,7 +1154,6 @@
               </label>
             </div>
 
-            <!-- Row 2: Category & Repeat -->
             <div class="composer-row">
               <select id="taskCatSelect" class="input" style="background:var(--surface-2);font-size:13px;padding:8px 10px;flex:1"></select>
               <select id="taskRepeatSelect" class="input" style="background:var(--surface-2);font-size:13px;padding:8px 10px;flex:1.1">
@@ -961,7 +1164,6 @@
               </select>
             </div>
 
-            <!-- Row 3: Subtasks (Checklist) Builder -->
             <div class="composer-row">
               <input type="text" id="stagingSubtaskInput" class="input" style="font-size:13px;padding:7px 10px" placeholder="☑ Добавить подпункт чек-листа (Enter)..." onkeydown="if(event.key==='Enter'){event.preventDefault();addStagingSubtask('task');}" />
               <button class="cat-manage-btn" onclick="addStagingSubtask('task')">+ Пункт</button>
@@ -980,7 +1182,7 @@
         <div id="tasksList"></div>
       </div>
 
-      <!-- Schedule Mode (Compact Composer) -->
+      <!-- Schedule Mode -->
       <div id="scheduleBlock" style="display:none">
         <div class="composer sched-theme">
           <div class="composer-main-bar">
@@ -1065,24 +1267,63 @@
       <div class="list" id="shelfList"></div>
     </section>
 
-    <!-- TAB 4: NOTES -->
+    <!-- TAB 4: NOTES & FACE-ID PASSWORDS -->
     <section id="view-notes" class="view-section">
       <div class="segmented">
-        <button class="seg-btn active" id="noteScopeQuick" onclick="setNoteScope('quick')">⚡ Быстрые / Дневник</button>
+        <button class="seg-btn active" id="noteScopeQuick" onclick="setNoteScope('quick')">⚡ Быстрые</button>
         <button class="seg-btn" id="noteScopeLong" onclick="setNoteScope('long')">📚 Долгосрочные</button>
+        <button class="seg-btn" id="noteScopePasswords" onclick="setNoteScope('passwords')">🔐 Пароли</button>
       </div>
 
-      <div class="quick-bar" id="quickThoughtBar">
-        <input type="text" id="quickNoteInput" class="input" placeholder="Быстрая мысль или итог дня..." onkeydown="if(event.key==='Enter') addQuickNote()" />
-        <button class="btn-primary" onclick="addQuickNote()">↑</button>
+      <!-- Standard Notes Block -->
+      <div id="notesStandardBlock">
+        <div class="quick-bar" id="quickThoughtBar">
+          <input type="text" id="quickNoteInput" class="input" placeholder="Быстрая мысль или итог дня..." onkeydown="if(event.key==='Enter') addQuickNote()" />
+          <button class="btn-primary" onclick="addQuickNote()">↑</button>
+        </div>
+
+        <div class="quick-bar" style="margin-bottom:10px">
+          <input type="text" id="noteSearch" class="input" placeholder="🔍 Поиск по заметкам..." oninput="renderNotes()" />
+        </div>
+
+        <div class="tags-row" id="tagsFilterRow"></div>
+        <div class="list" id="notesList"></div>
       </div>
 
-      <div class="quick-bar" style="margin-bottom:10px">
-        <input type="text" id="noteSearch" class="input" placeholder="🔍 Поиск по заметкам..." oninput="renderNotes()" />
-      </div>
+      <!-- Passwords Vault Block (Face ID Protected) -->
+      <div id="passwordsVaultBlock" style="display:none">
+        <!-- Locked State -->
+        <div id="vaultLockedView" class="vault-lock-card">
+          <div style="font-size:44px">🔐</div>
+          <div style="font-size:18px;font-weight:800">Сейф паролей закрыт</div>
+          <div style="font-size:13px;color:var(--text-muted);max-width:300px;line-height:1.4">
+            Твои пароли и доступы защищены биометрией Face ID / Touch ID и мастер-кодом.
+          </div>
+          <button class="faceid-big-btn" onclick="unlockVaultWithFaceID()">
+            <span>🆔</span>
+            <span>Открыть через Face ID</span>
+          </button>
+          <div class="composer-row" style="width:100%;margin-top:4px">
+            <input type="password" id="vaultPinInput" class="input" style="text-align:center;letter-spacing:4px;font-weight:800" placeholder="Мастер-код / ПИН..." onkeydown="if(event.key==='Enter') unlockVaultWithPin()" />
+            <button class="btn-primary" style="font-size:14px" onclick="unlockVaultWithPin()">Вход</button>
+          </div>
+          <button class="cat-manage-btn" id="setupBiometricBtn" onclick="registerFaceIDCredential()">⚙️ Привязать Face ID / Сменить ПИН</button>
+        </div>
 
-      <div class="tags-row" id="tagsFilterRow"></div>
-      <div class="list" id="notesList"></div>
+        <!-- Unlocked State -->
+        <div id="vaultUnlockedView" style="display:none">
+          <div class="quick-bar" style="margin-bottom:10px">
+            <input type="text" id="pwdSearchInput" class="input" placeholder="🔍 Поиск сервиса или логина..." oninput="renderPasswordsList()" />
+            <button class="btn-primary" style="font-size:13.5px" onclick="openPasswordModal()">+ Пароль</button>
+            <button class="icon-btn" onclick="lockPasswordVault()" title="Заблокировать сейф">🔒</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span style="font-size:12px;color:var(--success);font-weight:700">🔓 Сейф разблокирован (Face ID активен)</span>
+            <button class="cat-manage-btn" onclick="registerFaceIDCredential()">🆔 Настроить Face ID</button>
+          </div>
+          <div class="list" id="passwordsList"></div>
+        </div>
+      </div>
     </section>
 
     <!-- TAB 5: TRACKERS -->
@@ -1102,7 +1343,60 @@
   <!-- Floating New Note Button -->
   <button class="fab" id="fabNote" onclick="openNoteEditor()">+</button>
 
-  <!-- Category Manager Modal (Delete, Rename, Reorder) -->
+  <!-- Statistics & Analytics Modal (📊) -->
+  <div class="modal-backdrop" id="statsModal" onclick="if(event.target===this) closeStatsModal()">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong style="font-size:19px">📊 Статистика и Итоги</strong>
+        <button class="icon-btn" onclick="closeStatsModal()">✕</button>
+      </div>
+      <div class="stats-kpi-grid" id="statsKpiGrid"></div>
+      <div class="section-label">⏱ Время фокуса по категориям</div>
+      <div class="list" id="statsFocusByCat"></div>
+      <div class="section-label">🔥 Рекорды привычек</div>
+      <div class="list" id="statsHabitsList"></div>
+      <div class="section-label">⭐ Топ с твоей Полки</div>
+      <div class="list" id="statsShelfTop"></div>
+    </div>
+  </div>
+
+  <!-- Story Card Generator Preview Modal -->
+  <div class="modal-backdrop" id="storyModal" onclick="if(event.target===this) closeStoryModal()">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong style="font-size:17px">📲 Карточка для Сторис / ТГ</strong>
+        <button class="icon-btn" onclick="closeStoryModal()">✕</button>
+      </div>
+      <img id="storyPreviewImg" class="lightbox-img" src="" alt="Story Card" />
+      <div style="display:flex;gap:10px;margin-top:6px">
+        <button class="btn-primary" style="flex:1;height:44px;font-size:14.5px" onclick="shareStoryCardNative()">📤 Отправить / Сторис</button>
+        <a id="storyDownloadLink" class="cat-manage-btn" style="display:flex;align-items:center;justify-content:center;padding:0 16px;text-decoration:none;font-size:13.5px" download="obsidian_story.png">⬇ Скачать</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Password Entry Modal -->
+  <div class="modal-backdrop" id="passwordModal" onclick="if(event.target===this) closePasswordModal()">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong style="font-size:18px" id="pwdModalTitle">🔐 Запись в сейф</strong>
+        <button class="icon-btn" onclick="closePasswordModal()">✕</button>
+      </div>
+      <input type="text" id="pwdServiceInput" class="input" placeholder="Сервис / Сайт (напр. Bybit, GitHub, Почта)..." />
+      <input type="text" id="pwdLoginInput" class="input" placeholder="Логин / Email / Телефон..." />
+      <div class="composer-row">
+        <input type="text" id="pwdSecretInput" class="input" placeholder="Пароль..." style="font-family:monospace;font-weight:700" />
+        <button class="cat-manage-btn" style="height:42px" onclick="generateStrongPassword()" title="Сгенерировать надежный пароль">🎲 Сгенер.</button>
+      </div>
+      <input type="text" id="pwdNoteInput" class="input" placeholder="Заметка / ПИН / Секретная фраза (опц.)..." />
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <button class="btn-danger-soft" id="pwdDeleteBtn" style="display:none" onclick="deletePasswordFromModal()">🗑 Удалить</button>
+        <button class="btn-primary" style="flex:1;height:44px;font-size:15px" onclick="savePasswordEntry()">Сохранить в сейф</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Manager Modal -->
   <div class="modal-backdrop" id="catManagerModal" onclick="if(event.target===this) closeCategoryManager()">
     <div class="modal-sheet">
       <div style="display:flex;justify-content:space-between;align-items:center">
@@ -1198,8 +1492,9 @@
       </div>
       <div id="shelfPhotoPreview" class="attachments-Wrap" style="display:none"></div>
       <textarea id="shelfReviewInput" class="editor-body" style="min-height:120px" placeholder="Твои впечатления, цитаты, мысли, вкус..."></textarea>
-      <div style="display:flex;gap:10px">
-        <button class="btn-danger-soft" id="shelfDeleteBtn" style="display:none" onclick="deleteShelfItem()">🗑 Удалить</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-danger-soft" id="shelfDeleteBtn" style="display:none" onclick="deleteShelfItem()">🗑</button>
+        <button class="cat-manage-btn" id="shelfStoryModalBtn" style="display:none;padding:0 14px;height:44px" onclick="generateShelfStoryCard(editingShelfId)">📲 Сторис</button>
         <button class="btn-primary" style="flex:1;height:44px;font-size:15px" onclick="saveShelfItem()">Сохранить</button>
       </div>
     </div>
@@ -1250,7 +1545,6 @@
         <strong style="font-size:18px;color:var(--task-timed-color)">🟢 Редактировать задачу</strong>
         <button class="icon-btn" onclick="closeTaskEditor()">✕</button>
       </div>
-      <!-- Date first, then Time -->
       <div class="composer-row">
         <div class="time-box">
           <span class="time-box-label">📅 Дата (опц.)</span>
@@ -1271,7 +1565,6 @@
       <input type="text" id="editTaskText" class="input" placeholder="Текст задачи..." />
       <select id="editTaskCatSelect" class="input" style="background:var(--surface-2)"></select>
 
-      <!-- Subtasks in Edit Modal -->
       <div class="composer-row">
         <input type="text" id="editSubtaskInput" class="input" style="font-size:13px;padding:8px 10px" placeholder="☑ Новый подпункт чек-листа (Enter)..." onkeydown="if(event.key==='Enter'){event.preventDefault();addStagingSubtask('editTask');}" />
         <button class="cat-manage-btn" onclick="addStagingSubtask('editTask')">+ Пункт</button>
@@ -1383,6 +1676,7 @@
   <script>
     const STORAGE_KEY = 'obsidian_flow_v1';
     const CLOUD_CFG_KEY = 'obsidian_cloud_cfg_v1';
+    const BIOMETRIC_CRED_KEY = 'obsidian_faceid_cred_v1';
     const ICON_FILE = '5402452354927369627.jpg';
     const TAGS = ['#важное', '#идеи', '#дневник', '#проект', '#учеба'];
     const DEFAULT_CATEGORIES = ['Все', 'Работа', 'Учеба', 'Быт'];
@@ -1443,6 +1737,9 @@
       tasks: [],
       schedule: [],
       shelf: [],
+      passwords: [],
+      vaultPin: '',
+      focusLogs: [],
       notes: [
         {
           id: 'n1',
@@ -1468,6 +1765,7 @@
     let editingSchedId = null;
     let editingTaskId = null;
     let editingShelfId = null;
+    let editingPwdId = null;
     let editorPinned = false;
     let editorTag = '#дневник';
     let syncTimer = null;
@@ -1482,12 +1780,30 @@
     let stagingShelfPhoto = null;
     let quickAttachTarget = null;
 
-    // Category manager state
-    let catMgrScope = 'task'; // 'task' | 'shelf'
-
-    // Undo Toast state
+    let catMgrScope = 'task';
     let lastDeletedBuffer = null;
     let undoTimeout = null;
+
+    // Password Vault runtime state
+    let vaultUnlocked = false;
+    let revealedPasswords = {};
+
+    // Focus Timer runtime state
+    let focusState = {
+      active: false,
+      running: false,
+      mode: 'pomo25', // 'pomo25' | 'pomo45' | 'stopwatch'
+      targetType: null, // 'task' | 'sched'
+      targetId: null,
+      title: '',
+      category: 'Общее',
+      secondsRemaining: 1500,
+      secondsElapsed: 0,
+      intervalId: null
+    };
+
+    // Story canvas blob cache
+    let latestStoryBlob = null;
 
     let calYear = new Date().getFullYear();
     let calMonth = new Date().getMonth();
@@ -1509,6 +1825,8 @@
       if (!state.selectedDate) state.selectedDate = todayISO();
       if (!state.taskCategories || !state.taskCategories.length) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
       if (!state.shelfCategories || !state.shelfCategories.length) state.shelfCategories = DEFAULT_SHELF_CATS.slice();
+      if (!state.passwords) state.passwords = [];
+      if (!state.focusLogs) state.focusLogs = [];
       const selParts = state.selectedDate.split('-').map(Number);
       if (selParts.length === 3) {
         calYear = selParts[0];
@@ -1534,10 +1852,20 @@
       }
     }
 
-    /* ================= UNDO DELETION SYSTEM ================= */
+    /* ================= TOAST & UNDO SYSTEM ================= */
+    function showQuickToast(msg) {
+      document.getElementById('undoToastText').textContent = msg;
+      document.getElementById('undoActionBtn').style.display = 'none';
+      const toast = document.getElementById('undoToast');
+      toast.classList.add('show');
+      clearTimeout(undoTimeout);
+      undoTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
     function triggerUndoToast(label, type, item) {
       lastDeletedBuffer = { type, item };
       document.getElementById('undoToastText').textContent = label;
+      document.getElementById('undoActionBtn').style.display = 'inline-block';
       const toast = document.getElementById('undoToast');
       toast.classList.add('show');
       clearTimeout(undoTimeout);
@@ -1565,6 +1893,9 @@
       } else if (type === 'habit') {
         if (!state.habits) state.habits = [];
         state.habits.push(item);
+      } else if (type === 'pwd') {
+        if (!state.passwords) state.passwords = [];
+        state.passwords.unshift(item);
       }
       lastDeletedBuffer = null;
       document.getElementById('undoToast').classList.remove('show');
@@ -1572,1886 +1903,327 @@
       renderAll();
     }
 
-    /* ================= COMPACT COMPOSER DRAWERS ================= */
-    function openTaskDrawer() {
-      document.getElementById('taskComposerDrawer').classList.add('open');
-      const btn = document.getElementById('taskDrawerBtn');
-      btn.classList.add('active');
-      btn.textContent = '▴';
-    }
-    function closeTaskDrawer() {
-      document.getElementById('taskComposerDrawer').classList.remove('open');
-      const btn = document.getElementById('taskDrawerBtn');
-      btn.classList.remove('active');
-      btn.textContent = '▾';
-    }
-    function toggleTaskDrawer() {
-      const dr = document.getElementById('taskComposerDrawer');
-      if (dr.classList.contains('open')) closeTaskDrawer();
-      else openTaskDrawer();
-    }
-
-    function openSchedDrawer() {
-      document.getElementById('schedComposerDrawer').classList.add('open');
-      const btn = document.getElementById('schedDrawerBtn');
-      btn.classList.add('active');
-      btn.textContent = '▴';
-    }
-    function closeSchedDrawer() {
-      document.getElementById('schedComposerDrawer').classList.remove('open');
-      const btn = document.getElementById('schedDrawerBtn');
-      btn.classList.remove('active');
-      btn.textContent = '▾';
-    }
-    function toggleSchedDrawer() {
-      const dr = document.getElementById('schedComposerDrawer');
-      if (dr.classList.contains('open')) closeSchedDrawer();
-      else openSchedDrawer();
-    }
-
-    /* ================= SUBTASKS (CHECKLISTS) ================= */
-    function addStagingSubtask(scope) {
-      const inpId = scope === 'task' ? 'stagingSubtaskInput' : 'editSubtaskInput';
-      const inp = document.getElementById(inpId);
-      const text = inp.value.trim();
-      if (!text) return;
-      const obj = { id: 'st_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5), text, done: false };
-      if (scope === 'task') stagingTaskSubtasks.push(obj);
-      else editingTaskSubtasks.push(obj);
-      inp.value = '';
-      renderStagingSubtasks();
-    }
-
-    function removeStagingSubtask(scope, stId) {
-      if (scope === 'task') stagingTaskSubtasks = stagingTaskSubtasks.filter(s => s.id !== stId);
-      else editingTaskSubtasks = editingTaskSubtasks.filter(s => s.id !== stId);
-      renderStagingSubtasks();
-    }
-
-    function renderStagingSubtasks() {
-      const tWrap = document.getElementById('taskStagingSubtasks');
-      if (tWrap) {
-        tWrap.style.display = stagingTaskSubtasks.length ? 'flex' : 'none';
-        tWrap.innerHTML = stagingTaskSubtasks.map(s => `
-          <div class="subtask-staging-item">
-            <span>☑ ${escapeHtml(s.text)}</span>
-            <button class="att-del" onclick="removeStagingSubtask('task', '${s.id}')">✕</button>
-          </div>
-        `).join('');
-      }
-      const eWrap = document.getElementById('editTaskSubtasksWrap');
-      if (eWrap) {
-        eWrap.innerHTML = editingTaskSubtasks.map(s => `
-          <div class="subtask-staging-item">
-            <span>☑ ${escapeHtml(s.text)}</span>
-            <button class="att-del" onclick="removeStagingSubtask('editTask', '${s.id}')">✕</button>
-          </div>
-        `).join('');
-      }
-    }
-
-    function toggleCardSubtask(taskId, stId) {
-      const t = (state.tasks || []).find(x => x.id === taskId);
-      if (!t || !t.subtasks) return;
-      const st = t.subtasks.find(x => x.id === stId);
-      if (!st) return;
-      st.done = !st.done;
-      saveState();
-      renderAll();
-    }
-
-    /* ================= CATEGORY MANAGER ================= */
-    function openCategoryManager(scope) {
-      catMgrScope = scope;
-      document.getElementById('catMgrTitle').textContent = scope === 'task' ? 'Категории задач' : 'Категории полки';
-      document.getElementById('newCatMgrInput').value = '';
-      renderCategoryManagerList();
-      document.getElementById('catManagerModal').classList.add('open');
-    }
-
-    function closeCategoryManager() {
-      document.getElementById('catManagerModal').classList.remove('open');
-    }
-
-    function getActiveCatArray() {
-      return catMgrScope === 'task' ? state.taskCategories : state.shelfCategories;
-    }
-
-    function addCategoryFromMgr() {
-      const inp = document.getElementById('newCatMgrInput');
-      const val = inp.value.trim();
-      if (!val) return;
-      const arr = getActiveCatArray();
-      if (!arr.includes(val)) {
-        arr.push(val);
-        saveState();
-        renderAll();
-        renderCategoryManagerList();
-      }
-      inp.value = '';
-    }
-
-    function moveCategoryInMgr(index, dir) {
-      const arr = getActiveCatArray();
-      const target = index + dir;
-      if (target < 0 || target >= arr.length) return;
-      const tmp = arr[index];
-      arr[index] = arr[target];
-      arr[target] = tmp;
-      saveState();
-      renderAll();
-      renderCategoryManagerList();
-    }
-
-    function renameCategoryInMgr(index) {
-      const arr = getActiveCatArray();
-      const oldName = arr[index];
-      const newName = prompt('Новое название категории:', oldName);
-      if (!newName || !newName.trim() || newName.trim() === oldName) return;
-      const clean = newName.trim();
-      arr[index] = clean;
-      if (catMgrScope === 'task') {
-        (state.tasks || []).forEach(t => { if (t.category === oldName) t.category = clean; });
-        if (state.activeTaskCategory === oldName) state.activeTaskCategory = clean;
-      } else {
-        (state.shelf || []).forEach(s => { if (s.category === oldName) s.category = clean; });
-        if (state.activeShelfCategory === oldName) state.activeShelfCategory = clean;
-      }
-      saveState();
-      renderAll();
-      renderCategoryManagerList();
-    }
-
-    function deleteCategoryInMgr(index) {
-      const arr = getActiveCatArray();
-      if (arr.length <= 1) {
-        alert('Должна остаться хотя бы одна категория.');
-        return;
-      }
-      const removed = arr[index];
-      arr.splice(index, 1);
-      if (catMgrScope === 'task' && state.activeTaskCategory === removed) state.activeTaskCategory = 'Все';
-      if (catMgrScope === 'shelf' && state.activeShelfCategory === removed) state.activeShelfCategory = 'Все';
-      saveState();
-      renderAll();
-      renderCategoryManagerList();
-    }
-
-    function renderCategoryManagerList() {
-      const arr = getActiveCatArray();
-      const list = document.getElementById('catMgrList');
-      list.innerHTML = '';
-      arr.forEach((cat, idx) => {
-        const row = document.createElement('div');
-        row.className = 'cat-mgr-row';
-        row.innerHTML = `
-          <span style="font-weight:700;font-size:14.5px">${escapeHtml(cat)}</span>
-          <div class="cat-mgr-actions">
-            <button class="cm-btn" onclick="moveCategoryInMgr(${idx}, -1)" title="Выше">↑</button>
-            <button class="cm-btn" onclick="moveCategoryInMgr(${idx}, 1)" title="Ниже">↓</button>
-            <button class="cm-btn" onclick="renameCategoryInMgr(${idx})" title="Переименовать">✏️</button>
-            <button class="cm-btn" style="color:var(--danger)" onclick="deleteCategoryInMgr(${idx})" title="Удалить">🗑</button>
-          </div>
-        `;
-        list.appendChild(row);
-      });
-    }
-
-    /* ================= FILE ATTACHMENTS ================= */
-    function formatBytes(bytes) {
-      if (!bytes) return '';
-      if (bytes < 1024) return bytes + ' Б';
-      if (bytes < 1048576) return Math.round(bytes / 1024) + ' КБ';
-      return (bytes / 1048576).toFixed(1) + ' МБ';
-    }
-
-    function readFileAsAttachment(file) {
-      return new Promise((resolve, reject) => {
-        if (file.size > 3.5 * 1024 * 1024) {
-          alert(`Файл «${file.name}» слишком большой (${formatBytes(file.size)}). Прикрепляй файлы до 3.5 МБ.`);
-          return resolve(null);
-        }
-        const isImg = file.type && file.type.startsWith('image/');
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          const dataUrl = ev.target.result;
-          if (!isImg) {
-            return resolve({
-              id: 'f_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-              name: file.name,
-              type: file.type || 'application/octet-stream',
-              size: file.size,
-              data: dataUrl
-            });
-          }
-          const img = new Image();
-          img.onload = () => {
-            const MAX_SIDE = 1280;
-            let w = img.width;
-            let h = img.height;
-            if (w > MAX_SIDE || h > MAX_SIDE) {
-              if (w > h) { h = Math.round(h * (MAX_SIDE / w)); w = MAX_SIDE; }
-              else { w = Math.round(w * (MAX_SIDE / h)); h = MAX_SIDE; }
-            }
-            const canvas = document.createElement('canvas');
-            canvas.width = w;
-            canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, w, h);
-            const compressed = canvas.toDataURL('image/jpeg', 0.82);
-            resolve({
-              id: 'f_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-              name: file.name,
-              type: 'image/jpeg',
-              size: Math.round(compressed.length * 0.75),
-              data: compressed
-            });
-          };
-          img.onerror = () => resolve({
-            id: 'f_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-            name: file.name,
-            type: file.type,
-            size: file.size,
-            data: dataUrl
-          });
-          img.src = dataUrl;
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    async function handleComposerFiles(event, target) {
-      const files = Array.from(event.target.files || []);
-      if (!files.length) return;
-      for (const f of files) {
-        const att = await readFileAsAttachment(f);
-        if (!att) continue;
-        if (target === 'task') stagingTaskFiles.push(att);
-        else if (target === 'sched') stagingSchedFiles.push(att);
-        else if (target === 'qp') stagingQpFiles.push(att);
-        else if (target === 'editTask') editingTaskFiles.push(att);
-        else if (target === 'editSched') editingSchedFiles.push(att);
-      }
-      event.target.value = '';
-      renderStagingAttachments();
-    }
-
-    function removeStagingFile(target, fileId) {
-      if (target === 'task') stagingTaskFiles = stagingTaskFiles.filter(f => f.id !== fileId);
-      else if (target === 'sched') stagingSchedFiles = stagingSchedFiles.filter(f => f.id !== fileId);
-      else if (target === 'qp') stagingQpFiles = stagingQpFiles.filter(f => f.id !== fileId);
-      else if (target === 'editTask') editingTaskFiles = editingTaskFiles.filter(f => f.id !== fileId);
-      else if (target === 'editSched') editingSchedFiles = editingSchedFiles.filter(f => f.id !== fileId);
-      renderStagingAttachments();
-    }
-
-    function renderStagingAttachments() {
-      const configs = [
-        { key: 'task', arr: stagingTaskFiles, wrapId: 'taskStagingFiles', countId: 'taskClipCount', labelId: 'taskClipLabel' },
-        { key: 'sched', arr: stagingSchedFiles, wrapId: 'schedStagingFiles', countId: 'schedClipCount', labelId: 'schedClipLabel' },
-        { key: 'qp', arr: stagingQpFiles, wrapId: 'qpStagingFiles', countId: 'qpClipCount', labelId: 'qpClipLabel' },
-        { key: 'editTask', arr: editingTaskFiles, wrapId: 'editTaskFilesWrap' },
-        { key: 'editSched', arr: editingSchedFiles, wrapId: 'editSchedFilesWrap' }
-      ];
-      configs.forEach(cfg => {
-        const wrap = document.getElementById(cfg.wrapId);
-        if (wrap) {
-          wrap.style.display = cfg.arr.length ? 'flex' : 'none';
-          wrap.innerHTML = cfg.arr.map(f => {
-            const isImg = f.type && f.type.startsWith('image/');
-            return `
-              <span class="att-chip" onclick="openAttachment('${cfg.key}', 'staging', '${f.id}')">
-                ${isImg ? `<img src="${f.data}" class="att-thumb" />` : '📄'}
-                <span class="att-name">${escapeHtml(f.name)}</span>
-                <button class="att-del" onclick="event.stopPropagation(); removeStagingFile('${cfg.key}', '${f.id}')">✕</button>
-              </span>
-            `;
-          }).join('');
-        }
-        if (cfg.countId) {
-          const cntEl = document.getElementById(cfg.countId);
-          const lblEl = document.getElementById(cfg.labelId);
-          if (cntEl) {
-            cntEl.style.display = cfg.arr.length ? 'flex' : 'none';
-            cntEl.textContent = cfg.arr.length;
-          }
-          if (lblEl) lblEl.classList.toggle('has-files', cfg.arr.length > 0);
-        }
-      });
-    }
-
-    function triggerQuickCardAttach(type, id) {
-      quickAttachTarget = { type, id };
-      document.getElementById('quickCardFileInput').click();
-    }
-
-    async function handleQuickCardFiles(event) {
-      const files = Array.from(event.target.files || []);
-      if (!files.length || !quickAttachTarget) return;
-      const list = quickAttachTarget.type === 'task' ? (state.tasks || []) : (state.schedule || []);
-      const item = list.find(x => x.id === quickAttachTarget.id);
-      if (item) {
-        if (!item.attachments) item.attachments = [];
-        for (const f of files) {
-          const att = await readFileAsAttachment(f);
-          if (att) item.attachments.push(att);
-        }
-        saveState();
-        renderAll();
-      }
-      event.target.value = '';
-      quickAttachTarget = null;
-    }
-
-    function removeCardAttachment(itemType, itemId, fileId) {
-      const list = itemType === 'task' ? (state.tasks || []) : (state.schedule || []);
-      const item = list.find(x => x.id === itemId);
-      if (!item || !item.attachments) return;
-      item.attachments = item.attachments.filter(f => f.id !== fileId);
-      saveState();
-      renderAll();
-    }
-
-    function renderCardAttachmentsHtml(itemType, item) {
-      const arr = item.attachments || [];
-      if (!arr.length) return '';
-      const chips = arr.map(f => {
-        const isImg = f.type && f.type.startsWith('image/');
-        return `
-          <span class="att-chip" onclick="event.stopPropagation(); openAttachment('${itemType}', '${item.id}', '${f.id}')">
-            ${isImg ? `<img src="${f.data}" class="att-thumb" />` : '📎'}
-            <span class="att-name">${escapeHtml(f.name)}</span>
-            <button class="att-del" title="Удалить файл" onclick="event.stopPropagation(); removeCardAttachment('${itemType}', '${item.id}', '${f.id}')">✕</button>
-          </span>
-        `;
-      }).join('');
-      return `<div class="attachments-Wrap" onclick="event.stopPropagation()">${chips}</div>`;
-    }
-
-    function openAttachment(sourceType, itemId, fileId) {
-      let fileObj = null;
-      if (itemId === 'staging') {
-        const map = {
-          task: stagingTaskFiles,
-          sched: stagingSchedFiles,
-          qp: stagingQpFiles,
-          editTask: editingTaskFiles,
-          editSched: editingSchedFiles
-        };
-        fileObj = (map[sourceType] || []).find(f => f.id === fileId);
-      } else {
-        const list = sourceType === 'task' ? (state.tasks || []) : (state.schedule || []);
-        const item = list.find(x => x.id === itemId);
-        if (item && item.attachments) {
-          fileObj = item.attachments.find(f => f.id === fileId);
-        }
-      }
-      if (!fileObj) return;
-
-      const isImg = fileObj.type && fileObj.type.startsWith('image/');
-      if (isImg) {
-        document.getElementById('previewFileName').textContent = fileObj.name;
-        document.getElementById('previewImageEl').src = fileObj.data;
-        const dlBtn = document.getElementById('previewDownloadBtn');
-        dlBtn.href = fileObj.data;
-        dlBtn.download = fileObj.name || 'image.jpg';
-        document.getElementById('filePreviewModal').classList.add('open');
-      } else {
-        const a = document.createElement('a');
-        a.href = fileObj.data;
-        a.download = fileObj.name || 'file';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      }
-    }
-
-    function closeFilePreview() {
-      document.getElementById('filePreviewModal').classList.remove('open');
-      document.getElementById('previewImageEl').src = '';
-    }
-
-    /* ================= CLOUD SYNC ================= */
-    function isCloudConfigured() {
-      return Boolean(cloudConfig.dbUrl && cloudConfig.secret && !cloudConfig.dbUrl.includes('github.io'));
-    }
-
-    function getCloudEndpoint() {
-      let base = cloudConfig.dbUrl.trim().replace(/\/+$/, '');
-      if (!base.startsWith('http')) base = 'https://' + base;
-      base = base.replace(/\/[^/]+\.json$/i, '');
-      const safeKey = encodeURIComponent(cloudConfig.secret.trim());
-      return `${base}/obsidian_sync/${safeKey}.json`;
-    }
-
-    function updateCloudIndicator(status = null, msg = null) {
-      const dot = document.getElementById('syncDot');
-      const txt = document.getElementById('cloudStatusText');
-      if (!dot) return;
-      dot.className = 'sync-dot';
-      if (!isCloudConfigured()) {
-        if (txt) txt.textContent = 'Облако не подключено';
-        return;
-      }
-      if (status === 'syncing') {
-        dot.classList.add('syncing');
-        if (txt) txt.textContent = msg || 'Синхронизация...';
-      } else if (status === 'error') {
-        dot.classList.add('error');
-        if (txt) txt.textContent = msg || 'Ошибка связи с базой';
-      } else {
-        dot.classList.add('online');
-        const t = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        if (txt) txt.textContent = msg || `Синхронизировано в ${t}`;
-      }
-    }
-
-    async function pushToCloud(manual = false) {
-      if (!isCloudConfigured()) {
-        if (manual) alert('Сначала введи правильную ссылку Firebase (.firebaseio.com) и секретный пароль');
-        return;
-      }
+    /* ================= FOCUS TIMER (POMODORO / STOPWATCH) ================= */
+    function playTimerChime() {
       try {
-        updateCloudIndicator('syncing', 'Отправка в облако...');
-        if (!state.updatedAt) state.updatedAt = Date.now();
-        const res = await fetch(getCloudEndpoint(), {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(state)
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.15, ctx.currentTime + i * 0.15);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.15 + 0.5);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + i * 0.15);
+          osc.stop(ctx.currentTime + i * 0.15 + 0.55);
         });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        updateCloudIndicator('online', 'Отправлено в облако ✓');
-      } catch (err) {
-        console.error(err);
-        updateCloudIndicator('error', 'Ошибка отправки (проверь ссылку и Rules)');
-        if (manual) alert('Не удалось отправить данные. Убедись, что ссылка заканчивается на .firebaseio.com (или .firebasedatabase.app), а в Rules стоит true.');
-      }
+      } catch (e) {}
     }
 
-    async function pullFromCloud(manual = false) {
-      if (!isCloudConfigured()) {
-        if (manual) openSettings();
-        return;
-      }
-      try {
-        updateCloudIndicator('syncing', 'Проверка облака...');
-        const res = await fetch(getCloudEndpoint() + '?t=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const remote = await res.json();
+    function startFocusOnItem(type, id) {
+      const list = type === 'task' ? (state.tasks || []) : (state.schedule || []);
+      const item = list.find(x => x.id === id);
+      if (!item) return;
 
-        if (!remote) {
-          await pushToCloud(false);
-          return;
+      focusState.active = true;
+      focusState.targetType = type;
+      focusState.targetId = id;
+      focusState.title = item.text || 'Фокус';
+      focusState.category = item.category || (type === 'sched' ? 'По часам' : 'Работа');
+      focusState.secondsElapsed = 0;
+
+      if (focusState.mode === 'pomo25') focusState.secondsRemaining = 25 * 60;
+      else if (focusState.mode === 'pomo45') focusState.secondsRemaining = 45 * 60;
+      else focusState.secondsRemaining = 0;
+
+      document.getElementById('focusTaskTitle').textContent = '🎯 ' + focusState.title;
+      document.getElementById('focusBar').classList.add('open');
+      startFocusInterval();
+      updateFocusUI();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setFocusMode(mode) {
+      focusState.mode = mode;
+      focusState.secondsElapsed = 0;
+      if (mode === 'pomo25') focusState.secondsRemaining = 25 * 60;
+      else if (mode === 'pomo45') focusState.secondsRemaining = 45 * 60;
+      else focusState.secondsRemaining = 0;
+
+      document.getElementById('fMode25').classList.toggle('active', mode === 'pomo25');
+      document.getElementById('fMode45').classList.toggle('active', mode === 'pomo45');
+      document.getElementById('fModeSw').classList.toggle('active', mode === 'stopwatch');
+      updateFocusUI();
+    }
+
+    function startFocusInterval() {
+      clearInterval(focusState.intervalId);
+      focusState.running = true;
+      focusState.intervalId = setInterval(() => {
+        focusState.secondsElapsed++;
+        if (focusState.mode !== 'stopwatch') {
+          focusState.secondsRemaining--;
+          if (focusState.secondsRemaining <= 0) {
+            focusState.secondsRemaining = 0;
+            playTimerChime();
+            finishAndLogFocus();
+            return;
+          }
         }
-
-        const remoteTime = remote.updatedAt || 0;
-        const localTime = state.updatedAt || 0;
-
-        if (manual || remoteTime > localTime) {
-          const keepDate = state.selectedDate || todayISO();
-          state = { ...state, ...remote, selectedDate: keepDate };
-          if (!state.taskCategories || !state.taskCategories.length) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
-          if (!state.shelfCategories || !state.shelfCategories.length) state.shelfCategories = DEFAULT_SHELF_CATS.slice();
-          saveState(false);
-          applyTheme();
-          renderAll();
-          updateCloudIndicator('online', 'Данные загружены из облака ✓');
-        } else if (localTime > remoteTime) {
-          await pushToCloud(false);
-        } else {
-          updateCloudIndicator('online');
-        }
-      } catch (err) {
-        console.error(err);
-        updateCloudIndicator('error', 'Ошибка загрузки из облака');
-      }
+        updateFocusUI();
+      }, 1000);
     }
 
-    function saveCloudConfig() {
-      const urlInp = document.getElementById('cloudUrlInput').value.trim();
-      const secInp = document.getElementById('cloudSecretInput').value.trim();
-      if (!urlInp || !secInp) {
-        alert('Заполни оба поля.');
-        return;
-      }
-      if (urlInp.includes('github.io')) {
-        alert('Ты вставил ссылку на сам сайт GitHub! Сюда нужно вставить ссылку из панели Firebase Realtime Database (она заканчивается на .firebaseio.com или .firebasedatabase.app).');
-        return;
-      }
-      cloudConfig.dbUrl = urlInp;
-      cloudConfig.secret = secInp;
-      localStorage.setItem(CLOUD_CFG_KEY, JSON.stringify(cloudConfig));
-      pullFromCloud(true);
-    }
-
-    function manualCloudSync() {
-      if (!isCloudConfigured()) openSettings();
-      else pullFromCloud(true);
-    }
-
-    function forceAppUpdate() {
-      const base = window.location.href.split('?')[0];
-      window.location.replace(base + '?v=' + Date.now());
-    }
-
-    window.addEventListener('focus', () => { if (isCloudConfigured()) pullFromCloud(false); });
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible' && isCloudConfigured()) pullFromCloud(false);
-    });
-
-    function applyTheme() {
-      document.documentElement.classList.toggle('light', state.theme === 'light');
-      document.getElementById('themeBtn').textContent = state.theme === 'light' ? '☀️' : '🌙';
-      const found = ACCENTS.find(a => a.color === state.accent) || ACCENTS[0];
-      document.documentElement.style.setProperty('--accent', found.color);
-      document.documentElement.style.setProperty('--accent-glow', found.glow);
-    }
-
-    document.getElementById('themeBtn').onclick = () => {
-      state.theme = state.theme === 'dark' ? 'light' : 'dark';
-      saveState();
-      applyTheme();
-    };
-
-    function switchTab(tab) {
-      ['today', 'calendar', 'shelf', 'notes', 'trackers'].forEach(t => {
-        document.getElementById('view-' + t).classList.toggle('active', t === tab);
-        document.getElementById('nav-' + t).classList.toggle('active', t === tab);
-      });
-      const titles = { today: 'Сегодня', calendar: 'Календарь', shelf: 'Полка', notes: 'Заметки', trackers: 'Трекеры' };
-      document.getElementById('headerTitle').textContent = titles[tab];
-      document.getElementById('fabNote').style.display = tab === 'notes' ? 'flex' : 'none';
-      renderAll();
-    }
-
-    function parseISOToLocal(isoStr) {
-      const [y, m, d] = (isoStr || todayISO()).split('-').map(Number);
-      return new Date(y, (m || 1) - 1, d || 1);
-    }
-
-    function formatShortDate(isoStr) {
-      if (!isoStr) return '';
-      const d = parseISOToLocal(isoStr);
-      return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short', weekday: 'short' });
-    }
-
-    function isTaskDated(t) {
-      return Boolean((t.date && t.date.trim()) || (t.time && t.time.trim()));
-    }
-
-    function renderWeekStrip() {
-      const strip = document.getElementById('weekStrip');
-      strip.innerHTML = '';
-      const base = parseISOToLocal(state.selectedDate);
-      const dayNames = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-      for (let i = -3; i <= 3; i++) {
-        const d = new Date(base);
-        d.setDate(base.getDate() + i);
-        const iso = toLocalISO(d);
-        const hasSched = (state.schedule || []).some(s => s.date === iso);
-        const hasDatedTask = (state.tasks || []).some(t => isTaskDated(t) && t.date === iso);
-        const pill = document.createElement('div');
-        pill.className = 'day-pill' + (iso === state.selectedDate ? ' active' : '');
-        pill.innerHTML = `
-          <span class="day-name">${dayNames[d.getDay()]}</span>
-          <span class="day-num">${d.getDate()}</span>
-          <div class="day-dots-mini">
-            ${hasSched ? '<span class="mini-dot sched"></span>' : ''}
-            ${hasDatedTask ? '<span class="mini-dot task"></span>' : ''}
-          </div>
-        `;
-        pill.onclick = () => {
-          state.selectedDate = iso;
-          calYear = d.getFullYear();
-          calMonth = d.getMonth();
-          saveState(false);
-          renderAll();
-        };
-        strip.appendChild(pill);
-      }
-      const selDateObj = parseISOToLocal(state.selectedDate);
-      document.getElementById('headerDate').textContent = selDateObj.toLocaleDateString('ru-RU', {
-        weekday: 'long', day: 'numeric', month: 'long'
-      });
-    }
-
-    function setTodayMode(mode, shouldSave = true) {
-      state.todayMode = mode;
-      document.getElementById('modeTasksBtn').classList.toggle('active', mode === 'tasks');
-      document.getElementById('modeScheduleBtn').classList.toggle('active', mode === 'schedule');
-      document.getElementById('tasksBlock').style.display = mode === 'tasks' ? 'block' : 'none';
-      document.getElementById('scheduleBlock').style.display = mode === 'schedule' ? 'block' : 'none';
-      if (shouldSave) saveState(false);
-    }
-
-    /* ================= DATE FIRST -> THEN TIME LOGIC ================= */
-    function onTaskDateChange() {
-      const dateVal = document.getElementById('taskDateInput').value;
-      const timeBox = document.getElementById('taskTimeBox');
-      if (dateVal) {
-        timeBox.style.display = 'flex';
+    function toggleFocusRun() {
+      if (focusState.running) {
+        clearInterval(focusState.intervalId);
+        focusState.running = false;
       } else {
-        timeBox.style.display = 'none';
-        document.getElementById('taskTime').value = '';
+        startFocusInterval();
       }
+      updateFocusUI();
     }
 
-    function clearTaskDateAndTime() {
-      document.getElementById('taskDateInput').value = '';
-      document.getElementById('taskTime').value = '';
-      document.getElementById('taskTimeBox').style.display = 'none';
+    function updateFocusUI() {
+      const secs = focusState.mode === 'stopwatch' ? focusState.secondsElapsed : focusState.secondsRemaining;
+      const m = String(Math.floor(secs / 60)).padStart(2, '0');
+      const s = String(secs % 60).padStart(2, '0');
+      document.getElementById('focusClockDisplay').textContent = `${m}:${s}`;
+      const btn = document.getElementById('focusPlayPauseBtn');
+      btn.textContent = focusState.running ? '⏸ Пауза' : '▶ Старт';
     }
 
-    function clearTaskTimeOnly() {
-      document.getElementById('taskTime').value = '';
-    }
-
-    function onEditTaskDateChange() {
-      const dateVal = document.getElementById('editTaskDate').value;
-      const timeBox = document.getElementById('editTaskTimeBox');
-      if (dateVal) {
-        timeBox.style.display = 'flex';
-      } else {
-        timeBox.style.display = 'none';
-        document.getElementById('editTaskTime').value = '';
-      }
-    }
-
-    function clearEditTaskDateAndTime() {
-      document.getElementById('editTaskDate').value = '';
-      document.getElementById('editTaskTime').value = '';
-      document.getElementById('editTaskTimeBox').style.display = 'none';
-    }
-
-    function clearEditTaskTimeOnly() {
-      document.getElementById('editTaskTime').value = '';
-    }
-
-    function onQpDateChange() {
-      const d = document.getElementById('qpDate').value;
-      document.getElementById('qpTaskTimeBox').style.display = d ? 'flex' : 'none';
-      if (!d) document.getElementById('qpTaskTime').value = '';
-    }
-
-    function clearQpDate() {
-      document.getElementById('qpDate').value = '';
-      document.getElementById('qpTaskTime').value = '';
-      document.getElementById('qpTaskTimeBox').style.display = 'none';
-    }
-
-    function toggleTaskPrio() {
-      currentTaskPrio = currentTaskPrio === 'normal' ? 'high' : 'normal';
-      document.getElementById('taskPrioToggle').classList.toggle('high', currentTaskPrio === 'high');
-    }
-
-    function toggleEditTaskPrio() {
-      editTaskPrio = editTaskPrio === 'normal' ? 'high' : 'normal';
-      document.getElementById('editTaskPrioBtn').classList.toggle('high', editTaskPrio === 'high');
-    }
-
-    function renderTaskCategories() {
-      const cats = ['Все', ...(state.taskCategories || [])];
-      const filterRow = document.getElementById('taskCategoriesFilter');
-      filterRow.innerHTML = '';
-      cats.forEach(c => {
-        const pill = document.createElement('button');
-        pill.className = 'cat-pill' + (state.activeTaskCategory === c ? ' active' : '');
-        pill.textContent = c;
-        pill.onclick = () => { state.activeTaskCategory = c; renderTaskCategories(); renderToday(); };
-        filterRow.appendChild(pill);
-      });
-      const mgrBtn = document.createElement('button');
-      mgrBtn.className = 'cat-manage-btn';
-      mgrBtn.textContent = '✎ Категории';
-      mgrBtn.onclick = () => openCategoryManager('task');
-      filterRow.appendChild(mgrBtn);
-
-      const select = document.getElementById('taskCatSelect');
-      const editSelect = document.getElementById('editTaskCatSelect');
-      const qpSelect = document.getElementById('qpTaskCat');
-      [select, editSelect, qpSelect].forEach(sel => {
-        if (!sel) return;
-        const curVal = sel.value;
-        sel.innerHTML = '';
-        state.taskCategories.forEach(c => {
-          const opt = document.createElement('option');
-          opt.value = c;
-          opt.textContent = c;
-          sel.appendChild(opt);
-        });
-        if (state.taskCategories.includes(curVal)) sel.value = curVal;
-        else if (state.activeTaskCategory && state.activeTaskCategory !== 'Все') sel.value = state.activeTaskCategory;
-      });
-    }
-
-    function addTask() {
-      const inp = document.getElementById('taskInput');
-      const dateInp = document.getElementById('taskDateInput');
-      const timeInp = document.getElementById('taskTime');
-      const catSel = document.getElementById('taskCatSelect');
-      const repeatSel = document.getElementById('taskRepeatSelect');
-      const text = inp.value.trim();
-      if (!text) return;
-      if (!state.tasks) state.tasks = [];
-
-      // Check if user typed a subtask in the input but didn't press Enter
-      const pendingSub = document.getElementById('stagingSubtaskInput').value.trim();
-      if (pendingSub) addStagingSubtask('task');
-
-      const hasDate = Boolean(dateInp.value && dateInp.value.trim());
-      const hasTime = Boolean(hasDate && timeInp.value && timeInp.value.trim());
-      const repeatMode = repeatSel ? repeatSel.value : 'none';
-      const baseDate = hasDate ? dateInp.value.trim() : (repeatMode !== 'none' ? (state.selectedDate || todayISO()) : '');
-
-      const datesToGenerate = [];
-      if (repeatMode === 'none') {
-        datesToGenerate.push(baseDate);
-      } else {
-        const startD = parseISOToLocal(baseDate || state.selectedDate || todayISO());
-        const daysCount = repeatMode === 'day' ? 30 : (repeatMode === 'every_other' ? 15 : 8);
-        const step = repeatMode === 'week' ? 7 : (repeatMode === 'every_other' ? 2 : 1);
-        for (let i = 0; i < daysCount; i++) {
-          const d = new Date(startD);
-          d.setDate(startD.getDate() + (i * step));
-          datesToGenerate.push(toLocalISO(d));
-        }
-      }
-
-      datesToGenerate.forEach((dIso, idx) => {
-        state.tasks.unshift({
-          id: 't_' + Date.now() + '_' + idx,
-          text,
-          date: dIso,
-          time: hasTime ? timeInp.value.trim() : '',
-          category: catSel ? catSel.value : (state.taskCategories[0] || 'Работа'),
-          done: false,
-          prio: currentTaskPrio,
-          subtasks: stagingTaskSubtasks.map(s => ({ ...s, id: s.id + '_' + idx })),
-          attachments: [...stagingTaskFiles]
-        });
-      });
-
-      inp.value = '';
-      clearTaskDateAndTime();
-      if (repeatSel) repeatSel.value = 'none';
-      stagingTaskFiles = [];
-      stagingTaskSubtasks = [];
-      renderStagingAttachments();
-      renderStagingSubtasks();
-      closeTaskDrawer();
-      saveState();
-      renderAll();
-    }
-
-    function toggleTask(id) {
-      const t = (state.tasks || []).find(x => x.id === id);
-      if (t) { t.done = !t.done; saveState(); renderAll(); }
-    }
-
-    function deleteTaskFromEditor() {
-      if (!editingTaskId) return;
-      const item = (state.tasks || []).find(x => x.id === editingTaskId);
-      state.tasks = (state.tasks || []).filter(x => x.id !== editingTaskId);
-      closeTaskEditor();
-      if (item) triggerUndoToast('Задача удалена', 'task', item);
-      saveState();
-      renderAll();
-    }
-
-    function openTaskEditor(id) {
-      const t = (state.tasks || []).find(x => x.id === id);
-      if (!t) return;
-      editingTaskId = id;
-      const hasDate = Boolean(t.date && t.date.trim());
-      document.getElementById('editTaskDate').value = hasDate ? t.date : '';
-      document.getElementById('editTaskTime').value = t.time || '';
-      document.getElementById('editTaskTimeBox').style.display = hasDate ? 'flex' : 'none';
-      document.getElementById('editTaskText').value = t.text || '';
-      editTaskPrio = t.prio || 'normal';
-      document.getElementById('editTaskPrioBtn').classList.toggle('high', editTaskPrio === 'high');
-      editingTaskFiles = [...(t.attachments || [])];
-      editingTaskSubtasks = (t.subtasks || []).map(s => ({ ...s }));
-      renderStagingAttachments();
-      renderStagingSubtasks();
-      renderTaskCategories();
-      const sel = document.getElementById('editTaskCatSelect');
-      if (sel && t.category) sel.value = t.category;
-
-      document.getElementById('taskEditModal').classList.add('open');
-    }
-
-    function closeTaskEditor() {
-      document.getElementById('taskEditModal').classList.remove('open');
-      editingTaskId = null;
-      editingTaskFiles = [];
-      editingTaskSubtasks = [];
-    }
-
-    function saveTaskEdit() {
-      const t = (state.tasks || []).find(x => x.id === editingTaskId);
-      if (!t) return;
-      const pendingSub = document.getElementById('editSubtaskInput').value.trim();
-      if (pendingSub) addStagingSubtask('editTask');
-
-      const newDate = (document.getElementById('editTaskDate').value || '').trim();
-      const newTime = newDate ? (document.getElementById('editTaskTime').value || '').trim() : '';
-      t.date = newDate;
-      t.time = newTime;
-      t.text = document.getElementById('editTaskText').value.trim() || t.text;
-      t.prio = editTaskPrio;
-      t.attachments = [...editingTaskFiles];
-      t.subtasks = [...editingTaskSubtasks];
-      const sel = document.getElementById('editTaskCatSelect');
-      if (sel) t.category = sel.value;
-      saveState();
-      closeTaskEditor();
-      renderAll();
-    }
-
-    /* ================= SCHEDULE HELPERS ================= */
-    function timeToMinutes(t) {
-      if (!t || !t.includes(':')) return 0;
-      const [h, m] = t.split(':').map(Number);
-      return h * 60 + m;
-    }
-
-    function minutesToTime(mins) {
-      const normalized = ((mins % 1440) + 1440) % 1440;
-      const h = String(Math.floor(normalized / 60)).padStart(2, '0');
-      const m = String(normalized % 60).padStart(2, '0');
-      return `${h}:${m}`;
-    }
-
-    function autoAdjustEndTime() {
-      const startVal = document.getElementById('schedTime').value;
-      if (!startVal) return;
-      const endMins = timeToMinutes(startVal) + 90;
-      document.getElementById('schedEndTime').value = minutesToTime(endMins);
-    }
-
-    function calcDurationText(start, end) {
-      if (!start || !end) return '';
-      let diff = timeToMinutes(end) - timeToMinutes(start);
-      if (diff <= 0) diff += 1440;
-      const h = Math.floor(diff / 60);
-      const m = diff % 60;
-      if (h > 0 && m > 0) return `${h} ч ${m} мин`;
-      if (h > 0) return `${h} ч`;
-      return `${m} мин`;
-    }
-
-    function isNowInRange(dateISO, start, end) {
-      if (dateISO !== todayISO() || !start || !end) return false;
-      const now = new Date();
-      const cur = now.getHours() * 60 + now.getMinutes();
-      const s = timeToMinutes(start);
-      const e = timeToMinutes(end);
-      return e >= s ? (cur >= s && cur <= e) : (cur >= s || cur <= e);
-    }
-
-    function buildYandexMapsUrl(loc) {
-      return `https://yandex.ru/maps/?text=${encodeURIComponent(loc.trim())}`;
-    }
-
-    function addSchedule() {
-      const time = document.getElementById('schedTime').value || '10:00';
-      const endTime = document.getElementById('schedEndTime').value || minutesToTime(timeToMinutes(time) + 60);
-      const inp = document.getElementById('schedInput');
-      const locInp = document.getElementById('schedLocation');
-      const text = inp.value.trim();
-      const location = locInp.value.trim();
-      if (!text) return;
-      if (!state.schedule) state.schedule = [];
-
-      state.schedule.push({
-        id: 's_' + Date.now(),
-        time,
-        endTime,
-        text,
-        location,
-        done: false,
-        date: state.selectedDate,
-        attachments: [...stagingSchedFiles]
-      });
-      state.schedule.sort((a, b) => a.time.localeCompare(b.time));
-      inp.value = '';
-      locInp.value = '';
-      stagingSchedFiles = [];
-      renderStagingAttachments();
-      document.getElementById('schedTime').value = endTime;
-      document.getElementById('schedEndTime').value = minutesToTime(timeToMinutes(endTime) + 90);
-      closeSchedDrawer();
-      saveState();
-      renderAll();
-    }
-
-    function toggleSched(id) {
-      const s = (state.schedule || []).find(x => x.id === id);
-      if (s) { s.done = !s.done; saveState(); renderAll(); }
-    }
-
-    function deleteSchedFromEditor() {
-      if (!editingSchedId) return;
-      const item = (state.schedule || []).find(x => x.id === editingSchedId);
-      state.schedule = (state.schedule || []).filter(x => x.id !== editingSchedId);
-      closeSchedEditor();
-      if (item) triggerUndoToast('Событие удалено', 'sched', item);
-      saveState();
-      renderAll();
-    }
-
-    function openSchedEditor(id) {
-      const s = (state.schedule || []).find(x => x.id === id);
-      if (!s) return;
-      editingSchedId = id;
-      document.getElementById('editSchedDate').value = s.date || state.selectedDate;
-      document.getElementById('editSchedStart').value = s.time || '10:00';
-      document.getElementById('editSchedEnd').value = s.endTime || minutesToTime(timeToMinutes(s.time || '10:00') + 60);
-      document.getElementById('editSchedText').value = s.text || '';
-      document.getElementById('editSchedLoc').value = s.location || '';
-      editingSchedFiles = [...(s.attachments || [])];
-      renderStagingAttachments();
-      document.getElementById('schedEditModal').classList.add('open');
-    }
-
-    function closeSchedEditor() {
-      document.getElementById('schedEditModal').classList.remove('open');
-      editingSchedId = null;
-      editingSchedFiles = [];
-    }
-
-    function saveSchedEdit() {
-      const s = (state.schedule || []).find(x => x.id === editingSchedId);
-      if (!s) return;
-      s.date = document.getElementById('editSchedDate').value || s.date;
-      s.time = document.getElementById('editSchedStart').value || s.time;
-      s.endTime = document.getElementById('editSchedEnd').value || '';
-      s.text = document.getElementById('editSchedText').value.trim() || s.text;
-      s.location = document.getElementById('editSchedLoc').value.trim();
-      s.attachments = [...editingSchedFiles];
-      state.schedule.sort((a, b) => a.time.localeCompare(b.time));
-      saveState();
-      closeSchedEditor();
-      renderAll();
-    }
-
-    /* ================= SHELF (ПОЛКА) ================= */
-    function openShelfEditor(id = null) {
-      editingShelfId = id;
-      stagingShelfPhoto = null;
-      const item = id ? (state.shelf || []).find(x => x.id === id) : null;
-
-      const sel = document.getElementById('shelfCatSelect');
-      sel.innerHTML = '';
-      state.shelfCategories.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c; opt.textContent = c;
-        sel.appendChild(opt);
-      });
-
-      document.getElementById('shelfTitleInput').value = item ? (item.title || '') : '';
-      document.getElementById('shelfRatingInput').value = item ? (item.rating || 8) : 8;
-      document.getElementById('shelfReviewInput').value = item ? (item.review || '') : '';
-      if (item && item.category) sel.value = item.category;
-
-      if (item && item.photo) {
-        stagingShelfPhoto = item.photo;
-        document.getElementById('shelfPhotoPreview').style.display = 'flex';
-        document.getElementById('shelfPhotoPreview').innerHTML = `
-          <span class="att-chip">
-            <img src="${item.photo}" class="att-thumb" />
-            <span class="att-name">Фото / Обложка</span>
-            <button class="att-del" onclick="stagingShelfPhoto=null; document.getElementById('shelfPhotoPreview').style.display='none'">✕</button>
-          </span>
-        `;
-      } else {
-        document.getElementById('shelfPhotoPreview').style.display = 'none';
-      }
-
-      document.getElementById('shelfDeleteBtn').style.display = item ? 'block' : 'none';
-      document.getElementById('shelfModal').classList.add('open');
-    }
-
-    function closeShelfEditor() {
-      document.getElementById('shelfModal').classList.remove('open');
-      editingShelfId = null;
-      stagingShelfPhoto = null;
-    }
-
-    async function handleShelfPhoto(event) {
-      const f = event.target.files[0];
-      if (!f) return;
-      const att = await readFileAsAttachment(f);
-      if (att) {
-        stagingShelfPhoto = att.data;
-        document.getElementById('shelfPhotoPreview').style.display = 'flex';
-        document.getElementById('shelfPhotoPreview').innerHTML = `
-          <span class="att-chip">
-            <img src="${att.data}" class="att-thumb" />
-            <span class="att-name">${escapeHtml(f.name)}</span>
-            <button class="att-del" onclick="stagingShelfPhoto=null; document.getElementById('shelfPhotoPreview').style.display='none'">✕</button>
-          </span>
-        `;
-      }
-      event.target.value = '';
-    }
-
-    function saveShelfItem() {
-      const title = document.getElementById('shelfTitleInput').value.trim();
-      if (!title) return;
-      const category = document.getElementById('shelfCatSelect').value;
-      const rating = parseInt(document.getElementById('shelfRatingInput').value) || 8;
-      const review = document.getElementById('shelfReviewInput').value.trim();
-
-      if (!state.shelf) state.shelf = [];
-
-      if (editingShelfId) {
-        const item = state.shelf.find(x => x.id === editingShelfId);
+    function finishAndLogFocus() {
+      clearInterval(focusState.intervalId);
+      focusState.running = false;
+      const mins = Math.max(1, Math.round(focusState.secondsElapsed / 60));
+      if (focusState.secondsElapsed >= 10) {
+        const list = focusState.targetType === 'task' ? (state.tasks || []) : (state.schedule || []);
+        const item = list.find(x => x.id === focusState.targetId);
         if (item) {
-          item.title = title;
-          item.category = category;
-          item.rating = rating;
-          item.review = review;
-          item.photo = stagingShelfPhoto || '';
+          item.focusedMinutes = (item.focusedMinutes || 0) + mins;
         }
-      } else {
-        state.shelf.unshift({
-          id: 'sh_' + Date.now(),
-          title,
-          category,
-          rating,
-          review,
-          photo: stagingShelfPhoto || '',
-          date: todayISO()
+        if (!state.focusLogs) state.focusLogs = [];
+        state.focusLogs.push({
+          id: 'fl_' + Date.now(),
+          date: todayISO(),
+          minutes: mins,
+          category: focusState.category || 'Общее',
+          title: focusState.title
         });
+        saveState();
+        renderAll();
+        showQuickToast(`Записано +${mins} мин в статистику ✓`);
       }
-      saveState();
-      closeShelfEditor();
-      renderShelf();
+      cancelFocusBar();
     }
 
-    function deleteShelfItem() {
-      if (!editingShelfId) return;
-      const item = (state.shelf || []).find(x => x.id === editingShelfId);
-      state.shelf = (state.shelf || []).filter(x => x.id !== editingShelfId);
-      closeShelfEditor();
-      if (item) triggerUndoToast('Запись с полки удалена', 'shelf', item);
-      saveState();
-      renderShelf();
+    function cancelFocusBar() {
+      clearInterval(focusState.intervalId);
+      focusState.running = false;
+      focusState.active = false;
+      document.getElementById('focusBar').classList.remove('open');
     }
 
-    function renderShelf() {
-      const cats = ['Все', ...(state.shelfCategories || [])];
-      const row = document.getElementById('shelfCategoriesRow');
-      row.innerHTML = '';
-      cats.forEach(c => {
-        const pill = document.createElement('button');
-        pill.className = 'cat-pill' + (state.activeShelfCategory === c ? ' active' : '');
-        pill.textContent = c;
-        pill.onclick = () => { state.activeShelfCategory = c; renderShelf(); };
-        row.appendChild(pill);
-      });
-      const mgrBtn = document.createElement('button');
-      mgrBtn.className = 'cat-manage-btn';
-      mgrBtn.textContent = '✎ Категории';
-      mgrBtn.onclick = () => openCategoryManager('shelf');
-      row.appendChild(mgrBtn);
+    /* ================= STATISTICS & ANALYTICS MODAL (📊) ================= */
+    function openStatsModal() {
+      const allTasks = state.tasks || [];
+      const doneTasks = allTasks.filter(t => t.done).length;
+      const taskPct = allTasks.length ? Math.round((doneTasks / allTasks.length) * 100) : 0;
 
-      const q = (document.getElementById('shelfSearchInput').value || '').toLowerCase();
-      const filtered = (state.shelf || []).filter(item => {
-        if (state.activeShelfCategory && state.activeShelfCategory !== 'Все' && item.category !== state.activeShelfCategory) return false;
-        if (q && !(item.title + ' ' + (item.review || '')).toLowerCase().includes(q)) return false;
-        return true;
-      });
+      const logs = state.focusLogs || [];
+      const totalFocusMins = logs.reduce((acc, l) => acc + (l.minutes || 0), 0);
+      const todayFocusMins = logs.filter(l => l.date === todayISO()).reduce((acc, l) => acc + (l.minutes || 0), 0);
 
-      const list = document.getElementById('shelfList');
-      list.innerHTML = filtered.length ? '' : '<div class="empty-state">На полке пока ничего нет. Добавь первую запись!</div>';
+      const fmtHours = (m) => {
+        if (m < 60) return `${m} мин`;
+        const h = Math.floor(m / 60);
+        const rem = m % 60;
+        return rem > 0 ? `${h} ч ${rem} м` : `${h} ч`;
+      };
 
-      filtered.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'shelf-card';
-        card.onclick = () => openShelfEditor(item.id);
-        card.innerHTML = `
-          <div class="shelf-thumb-wrap">
-            ${item.photo ? `<img src="${item.photo}" class="shelf-thumb" />` : '⭐'}
-          </div>
-          <div class="shelf-body">
-            <div class="shelf-title">${escapeHtml(item.title)}</div>
-            <div class="shelf-meta">
-              <span class="cat-badge">${escapeHtml(item.category)}</span>
-              <span class="shelf-stars">⭐ ${item.rating}/10</span>
-              <span>• ${formatShortDate(item.date)}</span>
-            </div>
-            ${item.review ? `<div class="shelf-review">${escapeHtml(item.review)}</div>` : ''}
-          </div>
-        `;
-        list.appendChild(card);
-      });
-    }
+      const shelfItems = state.shelf || [];
+      const avgRating = shelfItems.length
+        ? (shelfItems.reduce((a, s) => a + (Number(s.rating) || 0), 0) / shelfItems.length).toFixed(1)
+        : '—';
 
-    /* ================= CARD BUILDERS (NO ACCIDENTAL DELETE BUTTON ON CARD) ================= */
-    function buildTaskCardElement(t) {
-      const dated = isTaskDated(t);
-      const isUrgent = t.prio === 'high';
-      const cardClass = isUrgent ? 'task-urgent-card' : (dated ? 'task-timed-card' : 'task-any-card');
-      const dateStr = t.date ? formatShortDate(t.date) : '';
-      const timeStr = t.time ? t.time.trim() : '';
-      const dateTimeLabel = dateStr && timeStr ? `${dateStr} • ${timeStr}` : (dateStr || timeStr);
-
-      const subs = t.subtasks || [];
-      const subsDone = subs.filter(s => s.done).length;
-      const subtasksHtml = subs.length ? `
-        <div class="subtasks-card-list" onclick="event.stopPropagation()">
-          ${subs.map(s => `
-            <div class="subtask-row ${s.done ? 'done' : ''}" onclick="toggleCardSubtask('${t.id}', '${s.id}')">
-              <span class="subtask-box">✓</span>
-              <span>${escapeHtml(s.text)}</span>
-            </div>
-          `).join('')}
+      document.getElementById('statsKpiGrid').innerHTML = `
+        <div class="kpi-box">
+          <div style="font-size:12px;color:var(--text-muted)">🎯 Фокус сегодня</div>
+          <div class="kpi-val">${fmtHours(todayFocusMins)}</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Всего: ${fmtHours(totalFocusMins)}</div>
         </div>
-      ` : '';
-
-      const div = document.createElement('div');
-      div.className = `item-card ${cardClass}` + (t.done ? ' done' : '');
-      div.innerHTML = `
-        <div class="check-circle" onclick="toggleTask('${t.id}')">✓</div>
-        <div class="item-body" onclick="openTaskEditor('${t.id}')">
-          <div class="item-title">${escapeHtml(t.text)}</div>
-          <div class="meta-row">
-            ${dated
-              ? `<span class="task-datetime-badge">📅 ${escapeHtml(dateTimeLabel)}</span>`
-              : `<span class="task-anytime-badge">📌 Общая</span>`
-            }
-            ${t.category ? `<span class="cat-badge">${escapeHtml(t.category)}</span>` : ''}
-            ${subs.length ? `<span class="subtask-badge">☑ ${subsDone}/${subs.length}</span>` : ''}
-            ${isUrgent ? '<span class="badge-prio">⚡ Важно</span>' : ''}
-          </div>
-          ${subtasksHtml}
-          ${renderCardAttachmentsHtml('task', t)}
+        <div class="kpi-box">
+          <div style="font-size:12px;color:var(--text-muted)">✅ Закрыто задач</div>
+          <div class="kpi-val">${doneTasks} / ${allTasks.length}</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Прогресс: ${taskPct}%</div>
         </div>
-        <div class="card-actions">
-          <button class="mini-clip-btn" title="Прикрепить файл" onclick="triggerQuickCardAttach('task', '${t.id}')">📎</button>
+        <div class="kpi-box">
+          <div style="font-size:12px;color:var(--text-muted)">⭐ На Полке</div>
+          <div class="kpi-val">${shelfItems.length}</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Ср. оценка: ${avgRating}</div>
+        </div>
+        <div class="kpi-box">
+          <div style="font-size:12px;color:var(--text-muted)">📝 Заметок в базе</div>
+          <div class="kpi-val">${(state.notes || []).length}</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Паролей: ${(state.passwords || []).length}</div>
         </div>
       `;
-      return div;
-    }
 
-    function buildSchedCardElement(s) {
-      const endT = s.endTime || '';
-      const dur = endT ? calcDurationText(s.time, endT) : '';
-      const activeNow = !s.done && isNowInRange(s.date, s.time, endT);
-      const hasLoc = s.location && s.location.trim().length > 0;
-
-      const div = document.createElement('div');
-      div.className = 'item-card sched-card' + (s.done ? ' done' : '') + (activeNow ? ' now-active' : '');
-      div.innerHTML = `
-        <div class="check-circle" onclick="toggleSched('${s.id}')">✓</div>
-        <div class="time-col-sched" onclick="openSchedEditor('${s.id}')">
-          <span class="t-start">${escapeHtml(s.time)}</span>
-          ${endT ? `<div class="t-sep"></div><span class="t-end">${escapeHtml(endT)}</span>` : ''}
-        </div>
-        <div class="item-body" onclick="openSchedEditor('${s.id}')">
-          <div class="item-title">${escapeHtml(s.text)}</div>
-          <div class="meta-row">
-            <span class="type-pill-sched">По часам</span>
-            ${activeNow ? `<span class="now-badge">СЕЙЧАС</span>` : ''}
-            ${dur ? `<span class="dur-badge">⏱ ${dur}</span>` : ''}
-            ${hasLoc ? `<a class="ymaps-link" href="${buildYandexMapsUrl(s.location)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📍 ${escapeHtml(s.location)} ↗</a>` : ''}
-          </div>
-          ${renderCardAttachmentsHtml('sched', s)}
-        </div>
-        <div class="card-actions">
-          <button class="mini-clip-btn" title="Прикрепить файл" onclick="triggerQuickCardAttach('sched', '${s.id}')">📎</button>
-        </div>
-      `;
-      return div;
-    }
-
-    /* ================= RENDER TODAY TAB ================= */
-    function renderToday() {
-      renderTaskCategories();
-
-      const allFilteredTasks = (state.tasks || []).filter(t => {
-        if (state.activeTaskCategory && state.activeTaskCategory !== 'Все' && t.category !== state.activeTaskCategory) return false;
-        return true;
+      // Focus by category
+      const catTotals = {};
+      logs.forEach(l => {
+        const c = l.category || 'Общее';
+        catTotals[c] = (catTotals[c] || 0) + (l.minutes || 0);
       });
-
-      const doneCount = allFilteredTasks.filter(t => t.done).length;
-      document.getElementById('taskStatsText').textContent = `Выполнено ${doneCount} из ${allFilteredTasks.length}`;
-      const pct = allFilteredTasks.length ? Math.round((doneCount / allFilteredTasks.length) * 100) : 0;
-      document.getElementById('taskProgressFill').style.width = pct + '%';
-
-      const tContainer = document.getElementById('tasksList');
-      tContainer.innerHTML = '';
-
-      if (allFilteredTasks.length === 0) {
-        tContainer.innerHTML = '<div class="empty-state">В этой категории задач пока нет</div>';
+      const catEntries = Object.entries(catTotals).sort((a, b) => b[1] - a[1]);
+      const fCatContainer = document.getElementById('statsFocusByCat');
+      if (!catEntries.length) {
+        fCatContainer.innerHTML = '<div style="font-size:13px;color:var(--text-muted);padding:8px 0">Запусти таймер ▶ на любой задаче, чтобы увидеть аналитику времени по категориям.</div>';
       } else {
-        const datedTasks = allFilteredTasks
-          .filter(t => isTaskDated(t))
-          .sort((a, b) => {
-            const dComp = (a.date || '').localeCompare(b.date || '');
-            if (dComp !== 0) return dComp;
-            return (a.time || '23:59').localeCompare(b.time || '23:59');
-          });
-
-        const timelessTasks = allFilteredTasks
-          .filter(t => !isTaskDated(t))
-          .sort((a, b) => (b.prio === 'high' ? 1 : 0) - (a.prio === 'high' ? 1 : 0));
-
-        if (datedTasks.length > 0) {
-          const h1 = document.createElement('div');
-          h1.className = 'sub-group-title';
-          h1.innerHTML = '<span>🟢 Задачи по датам и времени</span>';
-          tContainer.appendChild(h1);
-
-          const timedList = document.createElement('div');
-          timedList.className = 'list';
-          datedTasks.forEach(t => timedList.appendChild(buildTaskCardElement(t)));
-          tContainer.appendChild(timedList);
-        }
-
-        if (timelessTasks.length > 0) {
-          const h2 = document.createElement('div');
-          h2.className = 'sub-group-title';
-          h2.innerHTML = '<span>🟣 Общие задачи (на любой день)</span>';
-          tContainer.appendChild(h2);
-
-          const anyList = document.createElement('div');
-          anyList.className = 'list';
-          timelessTasks.forEach(t => anyList.appendChild(buildTaskCardElement(t)));
-          tContainer.appendChild(anyList);
-        }
-      }
-
-      const daySched = (state.schedule || []).filter(s => s.date === state.selectedDate);
-      const sList = document.getElementById('scheduleList');
-      sList.innerHTML = daySched.length ? '' : '<div class="empty-state">На выбранный день расписание по часам пусто</div>';
-      daySched.forEach(s => { sList.appendChild(buildSchedCardElement(s)); });
-    }
-
-    /* ================= CALENDAR ================= */
-    function changeCalMonth(delta) {
-      calMonth += delta;
-      if (calMonth > 11) { calMonth = 0; calYear++; }
-      if (calMonth < 0) { calMonth = 11; calYear--; }
-      renderCalendar();
-    }
-
-    function jumpToTodayInCal() {
-      const now = new Date();
-      calYear = now.getFullYear();
-      calMonth = now.getMonth();
-      state.selectedDate = todayISO();
-      saveState(false);
-      renderAll();
-    }
-
-    function toggleCalGrid() {
-      calGridVisible = !calGridVisible;
-      document.getElementById('calGridWrap').style.display = calGridVisible ? 'block' : 'none';
-      document.getElementById('toggleGridBtn').textContent = calGridVisible ? 'Сетка ▴' : 'Сетка ▾';
-    }
-
-    function setStreamMode(mode) {
-      calStreamMode = mode;
-      ['upcoming', 'month', 'day', 'urgent'].forEach(m => {
-        const el = document.getElementById('streamMode-' + m);
-        if (el) el.classList.toggle('active', m === mode);
-      });
-      renderCalendar();
-    }
-
-    function getRelativeDayLabel(iso) {
-      const tIso = todayISO();
-      if (iso === tIso) return { text: 'Сегодня', cls: 'today' };
-      const dTarget = parseISOToLocal(iso);
-      const dToday = parseISOToLocal(tIso);
-      const diffDays = Math.round((dTarget - dToday) / 86400000);
-      if (diffDays === 1) return { text: 'Завтра', cls: 'tomorrow' };
-      if (diffDays === 2) return { text: 'Послезавтра', cls: '' };
-      if (diffDays > 2) return { text: `Через ${diffDays} дн.`, cls: '' };
-      if (diffDays === -1) return { text: 'Вчера', cls: '' };
-      return { text: `${Math.abs(diffDays)} дн. назад`, cls: '' };
-    }
-
-    function renderCalendar() {
-      const monthNames = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-      document.getElementById('calMonthTitle').textContent = `${monthNames[calMonth]} ${calYear}`;
-
-      const grid = document.getElementById('calDaysGrid');
-      grid.innerHTML = '';
-      const firstDay = new Date(calYear, calMonth, 1);
-      const startOffset = (firstDay.getDay() + 6) % 7;
-      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-      const prevMonthDays = new Date(calYear, calMonth, 0).getDate();
-      const tIso = todayISO();
-
-      const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
-      for (let idx = 0; idx < totalCells; idx++) {
-        let cellDate;
-        let isOther = false;
-        if (idx < startOffset) {
-          cellDate = new Date(calYear, calMonth - 1, prevMonthDays - startOffset + idx + 1);
-          isOther = true;
-        } else if (idx >= startOffset + daysInMonth) {
-          cellDate = new Date(calYear, calMonth + 1, idx - startOffset - daysInMonth + 1);
-          isOther = true;
-        } else {
-          cellDate = new Date(calYear, calMonth, idx - startOffset + 1);
-        }
-
-        const iso = toLocalISO(cellDate);
-        const dSched = (state.schedule || []).filter(s => s.date === iso);
-        const dTasks = (state.tasks || []).filter(t => isTaskDated(t) && t.date === iso);
-        const totalItems = dSched.length + dTasks.length;
-        const hasUrgent = dTasks.some(t => t.prio === 'high' && !t.done);
-        const allDone = totalItems > 0 && dSched.every(s => s.done) && dTasks.every(t => t.done);
-
-        let dotsHtml = '';
-        if (allDone) {
-          dotsHtml = '<span class="c-dot done-all"></span>';
-        } else {
-          if (dSched.length > 0) dotsHtml += '<span class="c-dot sched"></span>';
-          if (hasUrgent) dotsHtml += '<span class="c-dot urgent"></span>';
-          if (dTasks.length > 0 && !hasUrgent) dotsHtml += '<span class="c-dot task"></span>';
-        }
-
-        const cell = document.createElement('div');
-        cell.className = 'cal-cell'
-          + (isOther ? ' other-month' : '')
-          + (iso === tIso ? ' is-today' : '')
-          + (iso === state.selectedDate ? ' selected' : '');
-        cell.innerHTML = `
-          ${totalItems > 1 ? `<span class="cal-cell-count">${totalItems}</span>` : ''}
-          <span class="cal-cell-num">${cellDate.getDate()}</span>
-          <div class="cal-dots">${dotsHtml}</div>
-        `;
-        cell.onclick = () => {
-          state.selectedDate = iso;
-          if (isOther) {
-            calYear = cellDate.getFullYear();
-            calMonth = cellDate.getMonth();
-          }
-          saveState(false);
-          renderAll();
-          const targetEl = document.getElementById('agenda-day-' + iso);
-          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        };
-        grid.appendChild(cell);
-      }
-
-      const streamContainer = document.getElementById('agendaStreamList');
-      streamContainer.innerHTML = '';
-      const q = (document.getElementById('calSearchInput').value || '').trim().toLowerCase();
-      const monthPrefix = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-`;
-
-      const dateSet = new Set();
-      (state.schedule || []).forEach(s => { if (s.date) dateSet.add(s.date); });
-      (state.tasks || []).forEach(t => { if (isTaskDated(t) && t.date) dateSet.add(t.date); });
-      if (!q) {
-        dateSet.add(state.selectedDate);
-        if (calStreamMode === 'upcoming') dateSet.add(tIso);
-      }
-
-      let sortedDates = Array.from(dateSet).sort();
-
-      if (!q) {
-        if (calStreamMode === 'upcoming') {
-          sortedDates = sortedDates.filter(d => d >= tIso || d === state.selectedDate);
-        } else if (calStreamMode === 'month') {
-          sortedDates = sortedDates.filter(d => d.startsWith(monthPrefix));
-        } else if (calStreamMode === 'day') {
-          sortedDates = [state.selectedDate];
-        }
-      }
-
-      let renderedGroups = 0;
-
-      sortedDates.forEach(iso => {
-        let dSched = (state.schedule || []).filter(s => s.date === iso);
-        let dTasks = (state.tasks || []).filter(t => isTaskDated(t) && t.date === iso);
-
-        if (calStreamMode === 'urgent' && !q) {
-          dTasks = dTasks.filter(t => t.prio === 'high');
-          dSched = [];
-        }
-
-        if (q) {
-          dSched = dSched.filter(s => ((s.text || '') + ' ' + (s.location || '')).toLowerCase().includes(q));
-          dTasks = dTasks.filter(t => ((t.text || '') + ' ' + (t.category || '')).toLowerCase().includes(q));
-        }
-
-        if (dSched.length === 0 && dTasks.length === 0 && iso !== state.selectedDate) return;
-
-        dSched.sort((a, b) => (a.time || '').localeCompare(b.time || ''));
-        dTasks.sort((a, b) => (a.time || '23:59').localeCompare(b.time || '23:59'));
-
-        renderedGroups++;
-        const dateObj = parseISOToLocal(iso);
-        const dayStr = dateObj.toLocaleDateString('ru-RU', { weekday: 'short', day: 'numeric', month: 'long' });
-        const rel = getRelativeDayLabel(iso);
-
-        const group = document.createElement('div');
-        group.className = 'agenda-day-group';
-        group.id = 'agenda-day-' + iso;
-
-        const header = document.createElement('div');
-        header.className = 'agenda-day-header' + (iso === tIso ? ' today-Stick' : '');
-        header.innerHTML = `
-          <div class="agenda-day-title">
-            <span>${escapeHtml(dayStr)}</span>
-            <span class="rel-badge ${rel.cls}">${rel.text}</span>
-          </div>
-          <button class="agenda-add-btn" onclick="openQuickPlanModal('${iso}')">+ План</button>
-        `;
-        group.appendChild(header);
-
-        const itemsWrap = document.createElement('div');
-        itemsWrap.className = 'list';
-
-        if (dSched.length === 0 && dTasks.length === 0) {
-          const emptyDay = document.createElement('div');
-          emptyDay.className = 'item-card';
-          emptyDay.style.justifyContent = 'space-between';
-          emptyDay.innerHTML = `
-            <span style="font-size:14px;color:var(--text-muted)">На этот день планов пока нет</span>
-            <button class="agenda-add-btn" onclick="openQuickPlanModal('${iso}')">+ Добавить</button>
+        fCatContainer.innerHTML = catEntries.map(([cat, mins]) => {
+          const pct = Math.min(100, Math.round((mins / Math.max(1, totalFocusMins)) * 100));
+          return `
+            <div class="cat-mgr-row" style="flex-direction:column;align-items:stretch;gap:6px">
+              <div style="display:flex;justify-content:space-between;font-size:13.5px;font-weight:700">
+                <span>${escapeHtml(cat)}</span>
+                <span style="color:var(--accent)">${fmtHours(mins)} (${pct}%)</span>
+              </div>
+              <div class="habit-progress-bar"><div class="habit-progress-fill" style="width:${pct}%;background:var(--accent)"></div></div>
+            </div>
           `;
-          itemsWrap.appendChild(emptyDay);
-        }
-
-        dSched.forEach((s, idx) => {
-          itemsWrap.appendChild(buildSchedCardElement(s));
-          const endT = s.endTime || '';
-          if (idx < dSched.length - 1 && endT && dSched[idx + 1].time) {
-            const gapMins = timeToMinutes(dSched[idx + 1].time) - timeToMinutes(endT);
-            if (gapMins >= 20) {
-              const gapEl = document.createElement('div');
-              gapEl.className = 'free-gap-pill';
-              gapEl.innerHTML = `☕ Окно ${calcDurationText(endT, dSched[idx + 1].time)}`;
-              itemsWrap.appendChild(gapEl);
-            }
-          }
-        });
-
-        dTasks.forEach(t => { itemsWrap.appendChild(buildTaskCardElement(t)); });
-
-        group.appendChild(itemsWrap);
-        streamContainer.appendChild(group);
-      });
-
-      if (renderedGroups === 0) {
-        streamContainer.innerHTML = '<div class="empty-state">По выбранному фильтру планов пока нет. Нажми «+ План», чтобы добавить!</div>';
+        }).join('');
       }
-    }
 
-    function openQuickPlanModal(dateISO) {
-      const targetDate = dateISO || state.selectedDate || todayISO();
-      document.getElementById('qpDate').value = targetDate;
-      document.getElementById('qpTaskTimeBox').style.display = 'flex';
-      const dObj = parseISOToLocal(targetDate);
-      document.getElementById('qpModalTitle').textContent = 'План на ' + dObj.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
-      stagingQpFiles = [];
-      renderStagingAttachments();
-      renderTaskCategories();
-      setQpType('task');
-      document.getElementById('quickPlanModal').classList.add('open');
-    }
-
-    function closeQuickPlanModal() {
-      document.getElementById('quickPlanModal').classList.remove('open');
-      stagingQpFiles = [];
-    }
-
-    function setQpType(type) {
-      qpType = type;
-      document.getElementById('qpTypeTaskBtn').classList.toggle('active', type === 'task');
-      document.getElementById('qpTypeSchedBtn').classList.toggle('active', type === 'sched');
-      document.getElementById('qpTaskFields').style.display = type === 'task' ? 'flex' : 'none';
-      document.getElementById('qpSchedFields').style.display = type === 'sched' ? 'flex' : 'none';
-    }
-
-    function toggleQpPrio() {
-      qpPrio = qpPrio === 'normal' ? 'high' : 'normal';
-      document.getElementById('qpTaskPrioBtn').classList.toggle('high', qpPrio === 'high');
-    }
-
-    function saveQuickPlan() {
-      const targetDate = (document.getElementById('qpDate').value || '').trim();
-      if (qpType === 'task') {
-        const text = document.getElementById('qpTaskText').value.trim();
-        if (!text) return;
-        const time = targetDate ? (document.getElementById('qpTaskTime').value || '').trim() : '';
-        const cat = document.getElementById('qpTaskCat').value || 'Работа';
-        if (!state.tasks) state.tasks = [];
-        state.tasks.unshift({
-          id: 't_' + Date.now(),
-          text,
-          date: targetDate,
-          time,
-          category: cat,
-          done: false,
-          prio: qpPrio,
-          subtasks: [],
-          attachments: [...stagingQpFiles]
-        });
-        document.getElementById('qpTaskText').value = '';
-        document.getElementById('qpTaskTime').value = '';
-      } else {
-        const text = document.getElementById('qpSchedText').value.trim();
-        if (!text) return;
-        const sDate = targetDate || todayISO();
-        const time = document.getElementById('qpSchedStart').value || '10:00';
-        const endTime = document.getElementById('qpSchedEnd').value || minutesToTime(timeToMinutes(time) + 90);
-        const location = document.getElementById('qpSchedLoc').value.trim();
-        if (!state.schedule) state.schedule = [];
-        state.schedule.push({
-          id: 's_' + Date.now(),
-          time,
-          endTime,
-          text,
-          location,
-          done: false,
-          date: sDate,
-          attachments: [...stagingQpFiles]
-        });
-        state.schedule.sort((a, b) => a.time.localeCompare(b.time));
-        document.getElementById('qpSchedText').value = '';
-        document.getElementById('qpSchedLoc').value = '';
-      }
-      stagingQpFiles = [];
-      if (targetDate) state.selectedDate = targetDate;
-      saveState();
-      closeQuickPlanModal();
-      renderAll();
-    }
-
-    /* ================= NOTES ================= */
-    function setNoteScope(scope) {
-      state.noteScope = scope;
-      document.getElementById('noteScopeQuick').classList.toggle('active', scope === 'quick');
-      document.getElementById('noteScopeLong').classList.toggle('active', scope === 'long');
-      document.getElementById('quickThoughtBar').style.display = scope === 'quick' ? 'flex' : 'none';
-      renderNotes();
-    }
-
-    function addQuickNote() {
-      const inp = document.getElementById('quickNoteInput');
-      const text = inp.value.trim();
-      if (!text) return;
-      if (!state.notes) state.notes = [];
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-      state.notes.unshift({
-        id: 'n_' + Date.now(),
-        title: `Запись в ${timeStr}`,
-        body: text,
-        scope: 'quick',
-        tag: '#дневник',
-        pinned: false,
-        date: todayISO()
-      });
-      inp.value = '';
-      saveState();
-      renderNotes();
-    }
-
-    function renderNotes() {
-      const tagRow = document.getElementById('tagsFilterRow');
-      tagRow.innerHTML = '';
-      ['Все', ...TAGS].forEach(tag => {
-        const b = document.createElement('button');
-        b.className = 'tag-pill' + (state.activeTag === tag ? ' active' : '');
-        b.textContent = tag;
-        b.onclick = () => { state.activeTag = tag; renderNotes(); };
-        tagRow.appendChild(b);
-      });
-
-      const q = (document.getElementById('noteSearch').value || '').toLowerCase();
-      const filtered = (state.notes || [])
-        .filter(n => (n.scope || 'quick') === state.noteScope)
-        .filter(n => state.activeTag === 'Все' || n.tag === state.activeTag)
-        .filter(n => !q || (n.title + ' ' + n.body).toLowerCase().includes(q))
-        .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
-
-      const list = document.getElementById('notesList');
-      list.innerHTML = filtered.length ? '' : '<div class="empty-state">Заметок в этом разделе пока нет</div>';
-      filtered.forEach(n => {
-        const card = document.createElement('div');
-        card.className = 'note-card';
-        card.onclick = () => openNoteEditor(n.id);
-        card.innerHTML = `
-          <div class="note-card-header">
-            <div class="note-title">${escapeHtml(n.title || 'Без названия')}</div>
-            ${n.pinned ? '<span>📌</span>' : ''}
-          </div>
-          <div class="note-preview">${escapeHtml(n.body || '')}</div>
-          <div class="note-meta">
-            <span>${n.tag || '#заметка'}</span>
-            <span>•</span>
-            <span>${n.date || ''}</span>
-          </div>
-        `;
-        list.appendChild(card);
-      });
-    }
-
-    function openNoteEditor(id = null) {
-      editingNoteId = id;
-      const existing = (state.notes || []).find(n => n.id === id);
-      document.getElementById('editorTitle').value = existing ? existing.title : '';
-      document.getElementById('editorBody').value = existing ? existing.body : '';
-      editorPinned = existing ? !!existing.pinned : false;
-      editorTag = existing ? (existing.tag || '#дневник') : (state.noteScope === 'long' ? '#важное' : '#дневник');
-      document.getElementById('editorPinBtn').style.opacity = editorPinned ? '1' : '0.4';
-      document.getElementById('editorDelBtn').style.display = existing ? 'flex' : 'none';
-      renderEditorTags();
-      document.getElementById('noteModal').classList.add('open');
-    }
-
-    function renderEditorTags() {
-      const row = document.getElementById('editorTagsRow');
-      row.innerHTML = '';
-      TAGS.forEach(t => {
-        const b = document.createElement('button');
-        b.className = 'tag-pill' + (editorTag === t ? ' active' : '');
-        b.textContent = t;
-        b.onclick = () => { editorTag = t; renderEditorTags(); };
-        row.appendChild(b);
-      });
-    }
-
-    function toggleEditorPin() {
-      editorPinned = !editorPinned;
-      document.getElementById('editorPinBtn').style.opacity = editorPinned ? '1' : '0.4';
-    }
-
-    function saveNoteFromEditor() {
-      const title = document.getElementById('editorTitle').value.trim() || 'Заметка';
-      const body = document.getElementById('editorBody').value.trim();
-      if (!body && !title) { closeNoteEditor(); return; }
-      if (!state.notes) state.notes = [];
-
-      if (editingNoteId) {
-        const n = state.notes.find(x => x.id === editingNoteId);
-        if (n) {
-          n.title = title;
-          n.body = body;
-          n.pinned = editorPinned;
-          n.tag = editorTag;
-        }
-      } else {
-        state.notes.unshift({
-          id: 'n_' + Date.now(),
-          title,
-          body,
-          scope: state.noteScope,
-          tag: editorTag,
-          pinned: editorPinned,
-          date: todayISO()
-        });
-      }
-      saveState();
-      closeNoteEditor();
-      renderNotes();
-    }
-
-    function deleteCurrentNote() {
-      if (!editingNoteId) return;
-      const item = (state.notes || []).find(n => n.id === editingNoteId);
-      state.notes = (state.notes || []).filter(n => n.id !== editingNoteId);
-      closeNoteEditor();
-      if (item) triggerUndoToast('Заметка удалена', 'note', item);
-      saveState();
-      renderNotes();
-    }
-
-    function closeNoteEditor() {
-      document.getElementById('noteModal').classList.remove('open');
-    }
-
-    /* ================= TRACKERS (WITH COUNTS & STREAKS) ================= */
-    function renderTrackers() {
-      const hList = document.getElementById('habitsList');
-      hList.innerHTML = '';
-      const last7 = [];
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date();
-        d.setDate(d.getDate() - i);
-        last7.push(toLocalISO(d));
-      }
-      const tIso = todayISO();
-
-      (state.habits || []).forEach(h => {
+      // Habits streaks
+      const hContainer = document.getElementById('statsHabitsList');
+      hContainer.innerHTML = (state.habits || []).map(h => {
         const hist = h.history || {};
         let streak = 0;
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 60; i++) {
           const d = new Date();
           d.setDate(d.getDate() - i);
-          const iso = toLocalISO(d);
-          const rec = hist[iso];
-          const recDone = typeof rec === 'object' ? rec.done : Boolean(rec);
-          if (recDone) streak++;
+          const rec = hist[toLocalISO(d)];
+          const done = typeof rec === 'object' ? rec.done : Boolean(rec);
+          if (done) streak++;
           else if (i > 0) break;
         }
-
-        const dayData = hist[tIso] || { count: 0, done: false };
-        const target = h.target || 1;
-        const currentCount = typeof dayData === 'object' ? (dayData.count || 0) : (dayData ? target : 0);
-        const isDone = typeof dayData === 'object' ? (dayData.done || false) : Boolean(dayData);
-        const pct = Math.min(100, Math.round((currentCount / target) * 100));
-
-        const dotsHtml = last7.map(iso => {
-          const past = hist[iso];
-          const pastDone = typeof past === 'object' ? past.done : past;
-          return `<div class="h-dot ${pastDone ? 'on' : ''}"></div>`;
-        }).join('');
-
-        const card = document.createElement('div');
-        card.className = 'habit-card';
-        card.innerHTML = `
-          <div class="habit-top-row">
-            <div>
-              <div style="font-weight:700;font-size:15px">${escapeHtml(h.name)} <span style="font-size:12px;color:var(--warning);margin-left:6px">🔥 ${streak} дн.</span></div>
-              <div style="font-size:12px;color:var(--text-muted);margin-top:2px">${currentCount} / ${target} выполнено</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:6px">
-              <div class="habit-counter-controls">
-                <button class="hc-btn" onclick="changeHabitCount('${h.id}', -1)">−</button>
-                <button class="hc-btn" onclick="changeHabitCount('${h.id}', 1)">+</button>
-              </div>
-              <button class="habit-btn ${isDone ? 'done' : ''}" onclick="toggleHabitDone('${h.id}')">✓</button>
-              <button class="mini-clip-btn" title="Удалить привычку" onclick="deleteHabit('${h.id}')">🗑</button>
-            </div>
+        return `
+          <div class="cat-mgr-row">
+            <span style="font-weight:700;font-size:14px">${escapeHtml(h.name)}</span>
+            <span style="color:var(--warning);font-weight:800;font-size:13.5px">🔥 ${streak} дн. подряд</span>
           </div>
-          <div class="habit-progress-bar"><div class="habit-progress-fill" style="width:${pct}%"></div></div>
-          <div class="habit-dots">${dotsHtml}</div>
         `;
-        hList.appendChild(card);
+      }).join('') || '<div style="font-size:13px;color:var(--text-muted)">Привычек пока нет</div>';
+
+      // Shelf Top Rated
+      const topShelf = [...shelfItems].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 4);
+      const sContainer = document.getElementById('statsShelfTop');
+      sContainer.innerHTML = topShelf.map(item => `
+        <div class="cat-mgr-row">
+          <span style="font-weight:700;font-size:14px">${escapeHtml(item.title)} <span style="font-size:11.5px;color:var(--text-muted)">(${escapeHtml(item.category)})</span></span>
+          <span style="color:var(--warning);font-weight:800">⭐ ${item.rating}/10</span>
+        </div>
+      `).join('') || '<div style="font-size:13px;color:var(--text-muted)">Записей на Полке пока нет</div>';
+
+      document.getElementById('statsModal').classList.add('open');
+    }
+
+    function closeStatsModal() {
+      document.getElementById('statsModal').classList.remove('open');
+    }
+
+    /* ================= SHELF STORY CARD GENERATOR (9:16 + HAMSTER WATERMARK) ================= */
+    function loadImageElement(src) {
+      return new Promise((resolve) => {
+        if (!src) return resolve(null);
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = src;
       });
     }
 
-    function changeHabitCount(id, delta) {
-      const h = (state.habits || []).find(x => x.id === id);
-      if (!h) return;
-      if (!h.history) h.history = {};
-      const tIso = todayISO();
-      if (!h.history[tIso] || typeof h.history[tIso] !== 'object') {
-        h.history[tIso] = { count: 0, done: false };
+    function drawRoundedRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    function wrapCanvasText(ctx, text, maxWidth, maxLines) {
+      const words = String(text || '').split(/\s+/);
+      const lines = [];
+      let currentLine = '';
+      for (let i = 0; i < words.length; i++) {
+        const testLine = currentLine ? currentLine + ' ' + words[i] : words[i];
+        if (ctx.measureText(testLine).width > maxWidth && currentLine) {
+          lines.push(currentLine);
+          currentLine = words[i];
+          if (lines.length >= maxLines - 1) break;
+        } else {
+          currentLine = testLine;
+        }
       }
-      const target = h.target || 1;
-      let nc = (h.history[tIso].count || 0) + delta;
-      if (nc < 0) nc = 0;
-      h.history[tIso].count = nc;
-      h.history[tIso].done = nc >= target;
-      saveState();
-      renderTrackers();
+      if (currentLine) lines.push(currentLine);
+      return lines;
     }
 
-    function toggleHabitDone(id) {
-      const h = (state.habits || []).find(x => x.id === id);
-      if (!h) return;
-      if (!h.history) h.history = {};
-      const tIso = todayISO();
-      const target = h.target || 1;
-      if (!h.history[tIso] || typeof h.history[tIso] !== 'object') {
-        h.history[tIso] = { count: 0, done: false };
-      }
-      const curDone = h.history[tIso].done;
-      h.history[tIso].done = !curDone;
-      if (!curDone) {
-        h.history[tIso].count = target;
-      }
-      saveState();
-      renderTrackers();
-    }
+    async function generateShelfStoryCard(itemId) {
+      const item = (state.shelf || []).find(x => x.id === itemId);
+      if (!item) return;
 
-    function addHabit() {
-      const inp = document.getElementById('habitInput');
-      const targetInp = document.getElementById('habitTargetInput');
-      const name = inp.value.trim();
-      if (!name) return;
-      const target = parseInt(targetInp.value) || 1;
-      if (!state.habits) state.habits = [];
-      state.habits.push({ id: 'h_' + Date.now(), name, target, history: {} });
-      inp.value = '';
-      targetInp.value = '';
-      saveState();
-      renderTrackers();
-    }
+      const canvas = document.createElement('canvas');
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const ctx = canvas.getContext('2d');
 
-    function deleteHabit(id) {
-      const item = (state.habits || []).find(h => h.id === id);
-      state.habits = (state.habits || []).filter(h => h.id !== id);
-      if (item) triggerUndoToast('Привычка удалена', 'habit', item);
-      saveState();
-      renderTrackers();
-    }
+      // 1. Dark Obsidian Background + Radial Neon Glow
+      const bgGrad = ctx.createLinearGradient(0, 0, 1080, 1920);
+      bgGrad.addColorStop(0, '#09090d');
+      bgGrad.addColorStop(0.5, '#13131f');
+      bgGrad.addColorStop(1, '#0b0b10');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, 1080, 1920);
 
-    /* ================= SETTINGS ================= */
-    function openSettings() {
-      document.getElementById('cloudUrlInput').value = (cloudConfig.dbUrl && !cloudConfig.dbUrl.includes('github.io')) ? cloudConfig.dbUrl : '';
-      document.getElementById('cloudSecretInput').value = cloudConfig.secret || '5minutnaZAD';
-      const picker = document.getElementById('accentPicker');
-      picker.innerHTML = '';
-      ACCENTS.forEach(a => {
-        const dot = document.createElement('div');
-        dot.className = 'color-dot' + (state.accent === a.color ? ' active' : '');
-        dot.style.background = a.color;
-        dot.onclick = () => { state.accent = a.color; saveState(); applyTheme(); openSettings(); };
-        picker.appendChild(dot);
-      });
-      document.getElementById('settingsModal').classList.add('open');
-    }
+      const glow = ctx.createRadialGradient(540, 520, 40, 540, 520, 720);
+      glow.addColorStop(0, state.accent + '44');
+      glow.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, 1080, 1920);
 
-    document.getElementById('settingsBtn').onclick = openSettings;
-    function closeSettings() { document.getElementById('settingsModal').classList.remove('open'); }
+      // 2. Main Glass Card Frame
+      ctx.save();
+      drawRoundedRect(ctx, 72, 110, 936, 1520, 52);
+      ctx.fillStyle = 'rgba(22, 22, 32, 0.88)';
+      ctx.fill();
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.stroke();
+      ctx.restore();
 
-    function exportData() {
-      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `obsidian_backup_${todayISO()}.json`;
-      a.click();
-    }
+      // 3. Top Category Pill & Date
+      ctx.font = '800 32px -apple-system, BlinkMacSystemFont, sans-serif';
+      const catText = (item.category || '⭐ Полка').toUpperCase();
+      ctx.fillStyle = state.accent;
+      ctx.fillText(catText, 136, 200);
 
-    function importData(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const imported = JSON.parse(reader.result);
-          state = { ...state, ...imported };
-          saveState();
-          applyTheme();
-          renderAll();
-          closeSettings();
-        } catch (err) { alert('Ошибка чтения файла бэкапа'); }
-      };
-      reader.readAsText(file);
-    }
+      ctx.font = '600 28px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#8b8d9b';
+      const dateTxt = formatShortDate(item.date);
+      const dW = ctx.measureText(dateTxt).width;
+      ctx.fillText(dateTxt, 944 - dW, 200);
 
-    function escapeHtml(str) {
-      return String(str).replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
-    }
-
-    function renderAll() {
-      renderWeekStrip();
-      renderToday();
-      renderCalendar();
-      renderShelf();
-      renderNotes();
-      renderTrackers();
-    }
-
-    loadState();
-    renderAll();
-    if (isCloudConfigured()) {
-      pullFromCloud(false);
-    }
-  </script>
-</body>
-</html>
+      // 4. Cover Image or Stylish Graphic Box
+      let contentY = 250;
+      const coverImg = await loadImageElement(item.photo);
