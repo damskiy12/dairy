@@ -431,6 +431,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      white-space: nowrap;
     }
     .prio-btn, .clip-btn, .tune-btn {
       width: 38px;
@@ -818,9 +819,9 @@
     }
 
     /* Notes & Passwords Vault */
-    .tags-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; }
+    .tags-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 12px; scrollbar-width: none; align-items: center; }
     .tags-row::-webkit-scrollbar { display: none; }
-    .tag-pill { padding: 6px 12px; border-radius: 99px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 13px; white-space: nowrap; cursor: pointer; }
+    .tag-pill { padding: 5px 11px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 12.5px; font-weight: 600; white-space: nowrap; cursor: pointer; }
     .tag-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .note-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 15px; cursor: pointer; position: relative; }
     .note-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
@@ -976,40 +977,50 @@
       cursor: pointer;
     }
 
-    /* Undo Toast */
+    /* Fixed Compact Undo Toast */
     .undo-toast {
       position: fixed;
       left: 50%;
-      transform: translateX(-50%) translateY(120px);
-      bottom: calc(78px + var(--safe-bottom));
-      background: #1e1e2d;
+      bottom: calc(82px + var(--safe-bottom));
+      transform: translate(-50%, 160px);
+      opacity: 0;
+      visibility: hidden;
+      background: rgba(24, 24, 34, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       color: #fff;
-      border: 1px solid var(--accent);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      padding: 10px 16px;
-      border-radius: 14px;
-      display: flex;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55);
+      padding: 8px 10px 8px 16px;
+      border-radius: 99px;
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
-      font-size: 13.5px;
+      gap: 12px;
+      font-size: 13px;
       font-weight: 600;
+      white-space: nowrap;
+      max-width: 92vw;
       z-index: 200;
-      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
+      transition: transform 0.22s ease, opacity 0.22s ease, visibility 0.22s;
       pointer-events: none;
     }
     .undo-toast.show {
-      transform: translateX(-50%) translateY(0);
+      transform: translate(-50%, 0);
+      opacity: 1;
+      visibility: visible;
       pointer-events: auto;
     }
     .undo-btn {
       background: var(--accent);
       color: #fff;
       border: none;
-      padding: 5px 11px;
-      border-radius: 8px;
-      font-size: 12.5px;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
       font-weight: 700;
+      white-space: nowrap;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     /* Bottom Navigation (5 Tabs) */
@@ -1069,7 +1080,7 @@
 <body>
   <input type="file" id="quickCardFileInput" multiple style="display:none" onchange="handleQuickCardFiles(event)" />
 
-  <!-- Undo / Info Toast -->
+  <!-- Undo / Info Toast (Hidden by default) -->
   <div class="undo-toast" id="undoToast">
     <span id="undoToastText">Удалено</span>
     <button class="undo-btn" id="undoActionBtn" onclick="undoLastDelete()">Отменить ↩</button>
@@ -1096,7 +1107,7 @@
       </div>
     </header>
 
-    <!-- Active Focus Timer Bar (Countdown / Stopwatch Switcher) -->
+    <!-- Active Focus Timer Bar -->
     <div class="focus-bar" id="focusBar">
       <div class="focus-top">
         <div class="focus-task-name" id="focusTaskTitle">🎯 Фокус-сессия</div>
@@ -1125,7 +1136,7 @@
         <button class="seg-btn" id="modeScheduleBtn" onclick="setTodayMode('schedule')">🔵 По часам</button>
       </div>
 
-      <!-- Tasks Mode (Compact Composer + Expandable Drawer) -->
+      <!-- Tasks Mode -->
       <div id="tasksBlock">
         <div class="composer task-theme">
           <div class="composer-main-bar">
@@ -1261,7 +1272,7 @@
     <section id="view-shelf" class="view-section">
       <div class="categories-row" id="shelfCategoriesRow" style="margin-bottom:12px"></div>
       <div class="quick-bar" style="margin-bottom:12px">
-        <input type="text" id="shelfSearchInput" class="input" placeholder="🔍 Поиск по полке (название, автор, пиво)..." oninput="renderShelf()" />
+        <input type="text" id="shelfSearchInput" class="input" placeholder="🔍 Поиск по полке..." oninput="renderShelf()" />
         <button class="btn-primary" style="font-size:14px" onclick="openShelfEditor()">+ Запись</button>
       </div>
       <div class="list" id="shelfList"></div>
@@ -1318,7 +1329,7 @@
             <button class="icon-btn" onclick="lockPasswordVault()" title="Заблокировать сейф">🔒</button>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <span style="font-size:12px;color:var(--success);font-weight:700">🔓 Сейф разблокирован (Face ID активен)</span>
+            <span style="font-size:12px;color:var(--success);font-weight:700">🔓 Сейф разблокирован</span>
             <button class="cat-manage-btn" onclick="registerFaceIDCredential()">🆔 Настроить Face ID</button>
           </div>
           <div class="list" id="passwordsList"></div>
@@ -1396,7 +1407,7 @@
     </div>
   </div>
 
-  <!-- Category Manager Modal -->
+  <!-- Unified Category / Tags Manager Modal -->
   <div class="modal-backdrop" id="catManagerModal" onclick="if(event.target===this) closeCategoryManager()">
     <div class="modal-sheet">
       <div style="display:flex;justify-content:space-between;align-items:center">
@@ -1404,7 +1415,7 @@
         <button class="icon-btn" onclick="closeCategoryManager()">✕</button>
       </div>
       <div class="composer-row">
-        <input type="text" id="newCatMgrInput" class="input" placeholder="Новая категория..." onkeydown="if(event.key==='Enter') addCategoryFromMgr()" />
+        <input type="text" id="newCatMgrInput" class="input" placeholder="Новое название..." onkeydown="if(event.key==='Enter') addCategoryFromMgr()" />
         <button class="btn-primary" onclick="addCategoryFromMgr()">+</button>
       </div>
       <div class="list" id="catMgrList"></div>
@@ -1477,9 +1488,9 @@
       </div>
       <div class="composer-row">
         <select id="shelfCatSelect" class="input" style="background:var(--surface-2)"></select>
-        <button class="cat-manage-btn" onclick="openCategoryManager('shelf')">✎ Категории</button>
+        <button class="cat-manage-btn" onclick="openCategoryManager('shelf')">+ / ✎ Категории</button>
       </div>
-      <input type="text" id="shelfTitleInput" class="input" placeholder="Название (книга, фильм, сорт пива)..." />
+      <input type="text" id="shelfTitleInput" class="input" placeholder="Название..." />
       <div class="composer-row">
         <div class="time-box">
           <span class="time-box-label">Оценка (1-10)</span>
@@ -1491,7 +1502,7 @@
         </label>
       </div>
       <div id="shelfPhotoPreview" class="attachments-Wrap" style="display:none"></div>
-      <textarea id="shelfReviewInput" class="editor-body" style="min-height:120px" placeholder="Твои впечатления, цитаты, мысли, вкус..."></textarea>
+      <textarea id="shelfReviewInput" class="editor-body" style="min-height:120px" placeholder="Твои впечатления, цитаты, мысли..."></textarea>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn-danger-soft" id="shelfDeleteBtn" style="display:none" onclick="deleteShelfItem()">🗑</button>
         <button class="cat-manage-btn" id="shelfStoryModalBtn" style="display:none;padding:0 14px;height:44px" onclick="generateShelfStoryCard(editingShelfId)">📲 Сторис</button>
@@ -1603,7 +1614,7 @@
         </div>
       </div>
       <input type="text" id="editorTitle" class="editor-title" placeholder="Заголовок заметки..." />
-      <div style="display:flex;gap:8px;flex-wrap:wrap" id="editorTagsRow"></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center" id="editorTagsRow"></div>
       <textarea id="editorBody" class="editor-body" placeholder="Пиши свободно..."></textarea>
     </div>
   </div>
@@ -1678,9 +1689,9 @@
     const CLOUD_CFG_KEY = 'obsidian_cloud_cfg_v1';
     const BIOMETRIC_CRED_KEY = 'obsidian_faceid_cred_v1';
     const ICON_FILE = '5402452354927369627.jpg';
-    const TAGS = ['#важное', '#идеи', '#дневник', '#проект', '#учеба'];
     const DEFAULT_CATEGORIES = ['Все', 'Работа', 'Учеба', 'Быт'];
-    const DEFAULT_SHELF_CATS = ['🎬 Фильмы', '📖 Книги', '🍺 Пиво / Бар', '🎮 Игры'];
+    const OLD_DEFAULT_SHELF_CATS = ['🎬 Фильмы', '📖 Книги', '🍺 Пиво / Бар', '🎮 Игры'];
+    const OLD_DEFAULT_NOTE_TAGS = ['#важное', '#идеи', '#дневник', '#проект', '#учеба'];
     const ACCENTS = [
       { name: 'Blue', color: '#3b82f6', glow: 'rgba(59,130,246,0.24)' },
       { name: 'Violet', color: '#8b5cf6', glow: 'rgba(139,92,246,0.24)' },
@@ -1724,6 +1735,7 @@
 
     let state = {
       updatedAt: 0,
+      customCatsCleanedV2: true,
       theme: 'dark',
       accent: '#3b82f6',
       selectedDate: todayISO(),
@@ -1733,24 +1745,15 @@
       activeTaskCategory: 'Все',
       activeShelfCategory: 'Все',
       taskCategories: DEFAULT_CATEGORIES.slice(1),
-      shelfCategories: DEFAULT_SHELF_CATS.slice(),
+      shelfCategories: [],
+      noteTags: [],
       tasks: [],
       schedule: [],
       shelf: [],
       passwords: [],
       vaultPin: '',
       focusLogs: [],
-      notes: [
-        {
-          id: 'n1',
-          title: 'Добро пожаловать в OBSIDIAN',
-          body: 'Это твоя личная база заметок и распорядка дня. Долгосрочные заметки подходят для проектов, списков и учебы, а Быстрые — для мыслей и дневника.',
-          scope: 'long',
-          tag: '#важное',
-          pinned: true,
-          date: todayISO()
-        }
-      ],
+      notes: [],
       habits: [
         { id: 'h1', name: 'Отжимания', target: 50, history: {} },
         { id: 'h2', name: 'Вода (стаканы)', target: 8, history: {} }
@@ -1767,7 +1770,7 @@
     let editingShelfId = null;
     let editingPwdId = null;
     let editorPinned = false;
-    let editorTag = '#дневник';
+    let editorTag = '';
     let syncTimer = null;
 
     let stagingTaskFiles = [];
@@ -1780,20 +1783,19 @@
     let stagingShelfPhoto = null;
     let quickAttachTarget = null;
 
+    // Unified Category Manager scope: 'task' | 'shelf' | 'note'
     let catMgrScope = 'task';
     let lastDeletedBuffer = null;
     let undoTimeout = null;
 
-    // Password Vault runtime state
     let vaultUnlocked = false;
     let revealedPasswords = {};
 
-    // Focus Timer runtime state
     let focusState = {
       active: false,
       running: false,
-      mode: 'pomo25', // 'pomo25' | 'pomo45' | 'stopwatch'
-      targetType: null, // 'task' | 'sched'
+      mode: 'pomo25',
+      targetType: null,
       targetId: null,
       title: '',
       category: 'Общее',
@@ -1802,13 +1804,28 @@
       intervalId: null
     };
 
-    // Story canvas blob cache
     let latestStoryBlob = null;
 
     let calYear = new Date().getFullYear();
     let calMonth = new Date().getMonth();
     let calStreamMode = 'upcoming';
     let calGridVisible = true;
+
+    function stripPresetCatsAndTags() {
+      if (!Array.isArray(state.shelfCategories)) state.shelfCategories = [];
+      if (!Array.isArray(state.noteTags)) state.noteTags = [];
+      if (!state.customCatsCleanedV2) {
+        state.shelfCategories = state.shelfCategories.filter(c => !OLD_DEFAULT_SHELF_CATS.includes(c));
+        state.noteTags = state.noteTags.filter(t => !OLD_DEFAULT_NOTE_TAGS.includes(t));
+        state.customCatsCleanedV2 = true;
+      }
+      if (state.activeShelfCategory !== 'Все' && !state.shelfCategories.includes(state.activeShelfCategory)) {
+        state.activeShelfCategory = 'Все';
+      }
+      if (state.activeTag !== 'Все' && !state.noteTags.includes(state.activeTag)) {
+        state.activeTag = 'Все';
+      }
+    }
 
     function loadState() {
       try {
@@ -1823,8 +1840,8 @@
         }
       } catch (e) { console.error(e); }
       if (!state.selectedDate) state.selectedDate = todayISO();
-      if (!state.taskCategories || !state.taskCategories.length) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
-      if (!state.shelfCategories || !state.shelfCategories.length) state.shelfCategories = DEFAULT_SHELF_CATS.slice();
+      if (!Array.isArray(state.taskCategories)) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
+      stripPresetCatsAndTags();
       if (!state.passwords) state.passwords = [];
       if (!state.focusLogs) state.focusLogs = [];
       const selParts = state.selectedDate.split('-').map(Number);
@@ -1871,7 +1888,7 @@
       clearTimeout(undoTimeout);
       undoTimeout = setTimeout(() => {
         toast.classList.remove('show');
-      }, 4500);
+      }, 4000);
     }
 
     function undoLastDelete() {
@@ -2072,7 +2089,6 @@
         </div>
       `;
 
-      // Focus by category
       const catTotals = {};
       logs.forEach(l => {
         const c = l.category || 'Общее';
@@ -2097,7 +2113,6 @@
         }).join('');
       }
 
-      // Habits streaks
       const hContainer = document.getElementById('statsHabitsList');
       hContainer.innerHTML = (state.habits || []).map(h => {
         const hist = h.history || {};
@@ -2118,12 +2133,11 @@
         `;
       }).join('') || '<div style="font-size:13px;color:var(--text-muted)">Привычек пока нет</div>';
 
-      // Shelf Top Rated
       const topShelf = [...shelfItems].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 4);
       const sContainer = document.getElementById('statsShelfTop');
       sContainer.innerHTML = topShelf.map(item => `
         <div class="cat-mgr-row">
-          <span style="font-weight:700;font-size:14px">${escapeHtml(item.title)} <span style="font-size:11.5px;color:var(--text-muted)">(${escapeHtml(item.category)})</span></span>
+          <span style="font-weight:700;font-size:14px">${escapeHtml(item.title)} ${item.category ? `<span style="font-size:11.5px;color:var(--text-muted)">(${escapeHtml(item.category)})</span>` : ''}</span>
           <span style="color:var(--warning);font-weight:800">⭐ ${item.rating}/10</span>
         </div>
       `).join('') || '<div style="font-size:13px;color:var(--text-muted)">Записей на Полке пока нет</div>';
@@ -2188,7 +2202,6 @@
       canvas.height = 1920;
       const ctx = canvas.getContext('2d');
 
-      // 1. Dark Obsidian Background + Radial Neon Glow
       const bgGrad = ctx.createLinearGradient(0, 0, 1080, 1920);
       bgGrad.addColorStop(0, '#09090d');
       bgGrad.addColorStop(0.5, '#13131f');
@@ -2202,7 +2215,6 @@
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, 1080, 1920);
 
-      // 2. Main Glass Card Frame
       ctx.save();
       drawRoundedRect(ctx, 72, 110, 936, 1520, 52);
       ctx.fillStyle = 'rgba(22, 22, 32, 0.88)';
@@ -2212,9 +2224,8 @@
       ctx.stroke();
       ctx.restore();
 
-      // 3. Top Category Pill & Date
       ctx.font = '800 32px -apple-system, BlinkMacSystemFont, sans-serif';
-      const catText = (item.category || '⭐ Полка').toUpperCase();
+      const catText = (item.category || 'ПОЛКА').toUpperCase();
       ctx.fillStyle = state.accent;
       ctx.fillText(catText, 136, 200);
 
@@ -2224,7 +2235,6 @@
       const dW = ctx.measureText(dateTxt).width;
       ctx.fillText(dateTxt, 944 - dW, 200);
 
-      // 4. Cover Image or Stylish Graphic Box
       let contentY = 250;
       const coverImg = await loadImageElement(item.photo);
       if (coverImg) {
@@ -2250,7 +2260,6 @@
         contentY += 380;
       }
 
-      // 5. Title
       ctx.fillStyle = '#ffffff';
       ctx.font = '900 56px -apple-system, BlinkMacSystemFont, sans-serif';
       const titleLines = wrapCanvasText(ctx, item.title, 808, 2);
@@ -2259,7 +2268,6 @@
         contentY += 68;
       });
 
-      // 6. Rating Badge (⭐ X / 10)
       contentY += 20;
       ctx.save();
       drawRoundedRect(ctx, 136, contentY, 310, 82, 24);
@@ -2274,7 +2282,6 @@
       ctx.restore();
       contentY += 130;
 
-      // 7. Review / Thoughts Quote
       if (item.review && item.review.trim()) {
         ctx.fillStyle = '#d1d5db';
         ctx.font = '500 36px -apple-system, BlinkMacSystemFont, sans-serif';
@@ -2285,7 +2292,6 @@
         });
       }
 
-      // 8. Hamster Watermark Footer (5402452354927369627.jpg + OBSIDIAN)
       const hamsterImg = await loadImageElement(ICON_FILE);
       const footerY = 1710;
       if (hamsterImg) {
@@ -2672,11 +2678,23 @@
       renderAll();
     }
 
-    /* ================= CATEGORY MANAGER ================= */
+    /* ================= UNIFIED CATEGORY & TAGS MANAGER ('task' | 'shelf' | 'note') ================= */
     function openCategoryManager(scope) {
       catMgrScope = scope;
-      document.getElementById('catMgrTitle').textContent = scope === 'task' ? 'Категории задач' : 'Категории полки';
-      document.getElementById('newCatMgrInput').value = '';
+      const titles = {
+        task: 'Категории задач',
+        shelf: 'Категории Полки',
+        note: 'Теги заметок'
+      };
+      const placeholders = {
+        task: 'Новая категория задач...',
+        shelf: 'Новая категория полки...',
+        note: 'Новый тег / подпункт (напр. #мысли)...'
+      };
+      document.getElementById('catMgrTitle').textContent = titles[scope] || 'Управление категориями';
+      const inp = document.getElementById('newCatMgrInput');
+      inp.value = '';
+      inp.placeholder = placeholders[scope] || 'Новое название...';
       renderCategoryManagerList();
       document.getElementById('catManagerModal').classList.add('open');
     }
@@ -2686,19 +2704,33 @@
     }
 
     function getActiveCatArray() {
-      return catMgrScope === 'task' ? state.taskCategories : state.shelfCategories;
+      if (catMgrScope === 'task') {
+        if (!Array.isArray(state.taskCategories)) state.taskCategories = [];
+        return state.taskCategories;
+      }
+      if (catMgrScope === 'shelf') {
+        if (!Array.isArray(state.shelfCategories)) state.shelfCategories = [];
+        return state.shelfCategories;
+      }
+      if (!Array.isArray(state.noteTags)) state.noteTags = [];
+      return state.noteTags;
     }
 
     function addCategoryFromMgr() {
       const inp = document.getElementById('newCatMgrInput');
-      const val = inp.value.trim();
+      let val = inp.value.trim();
       if (!val) return;
       const arr = getActiveCatArray();
       if (!arr.includes(val)) {
         arr.push(val);
+        if (catMgrScope === 'note' && document.getElementById('noteModal').classList.contains('open')) {
+          editorTag = val;
+          renderEditorTags();
+        }
         saveState();
         renderAll();
         renderCategoryManagerList();
+        populateShelfModalSelect();
       }
       inp.value = '';
     }
@@ -2713,46 +2745,59 @@
       saveState();
       renderAll();
       renderCategoryManagerList();
+      populateShelfModalSelect();
     }
 
     function renameCategoryInMgr(index) {
       const arr = getActiveCatArray();
       const oldName = arr[index];
-      const newName = prompt('Новое название категории:', oldName);
+      const newName = prompt('Новое название:', oldName);
       if (!newName || !newName.trim() || newName.trim() === oldName) return;
       const clean = newName.trim();
       arr[index] = clean;
       if (catMgrScope === 'task') {
         (state.tasks || []).forEach(t => { if (t.category === oldName) t.category = clean; });
         if (state.activeTaskCategory === oldName) state.activeTaskCategory = clean;
-      } else {
+      } else if (catMgrScope === 'shelf') {
         (state.shelf || []).forEach(s => { if (s.category === oldName) s.category = clean; });
         if (state.activeShelfCategory === oldName) state.activeShelfCategory = clean;
+      } else if (catMgrScope === 'note') {
+        (state.notes || []).forEach(n => { if (n.tag === oldName) n.tag = clean; });
+        if (state.activeTag === oldName) state.activeTag = clean;
+        if (editorTag === oldName) editorTag = clean;
+        renderEditorTags();
       }
       saveState();
       renderAll();
       renderCategoryManagerList();
+      populateShelfModalSelect();
     }
 
     function deleteCategoryInMgr(index) {
       const arr = getActiveCatArray();
-      if (arr.length <= 1) {
-        alert('Должна остаться хотя бы одна категория.');
-        return;
-      }
       const removed = arr[index];
       arr.splice(index, 1);
       if (catMgrScope === 'task' && state.activeTaskCategory === removed) state.activeTaskCategory = 'Все';
       if (catMgrScope === 'shelf' && state.activeShelfCategory === removed) state.activeShelfCategory = 'Все';
+      if (catMgrScope === 'note') {
+        if (state.activeTag === removed) state.activeTag = 'Все';
+        if (editorTag === removed) editorTag = state.noteTags[0] || '';
+        renderEditorTags();
+      }
       saveState();
       renderAll();
       renderCategoryManagerList();
+      populateShelfModalSelect();
     }
 
     function renderCategoryManagerList() {
       const arr = getActiveCatArray();
       const list = document.getElementById('catMgrList');
       list.innerHTML = '';
+      if (!arr.length) {
+        list.innerHTML = '<div class="empty-state" style="padding:16px">Список пуст. Добавь свой первый пункт выше!</div>';
+        return;
+      }
       arr.forEach((cat, idx) => {
         const row = document.createElement('div');
         row.className = 'cat-mgr-row';
@@ -3063,8 +3108,7 @@
         if (manual || remoteTime > localTime) {
           const keepDate = state.selectedDate || todayISO();
           state = { ...state, ...remote, selectedDate: keepDate };
-          if (!state.taskCategories || !state.taskCategories.length) state.taskCategories = DEFAULT_CATEGORIES.slice(1);
-          if (!state.shelfCategories || !state.shelfCategories.length) state.shelfCategories = DEFAULT_SHELF_CATS.slice();
+          stripPresetCatsAndTags();
           saveState(false);
           applyTheme();
           renderAll();
@@ -3112,7 +3156,6 @@
       if (document.visibilityState === 'visible') {
         if (isCloudConfigured()) pullFromCloud(false);
       } else {
-        // Auto-lock password vault when app is minimized
         if (vaultUnlocked) {
           vaultUnlocked = false;
           revealedPasswords = {};
@@ -3288,7 +3331,7 @@
       });
       const mgrBtn = document.createElement('button');
       mgrBtn.className = 'cat-manage-btn';
-      mgrBtn.textContent = '✎ Категории';
+      mgrBtn.textContent = '+ / ✎ Категории';
       mgrBtn.onclick = () => openCategoryManager('task');
       filterRow.appendChild(mgrBtn);
 
@@ -3299,6 +3342,13 @@
         if (!sel) return;
         const curVal = sel.value;
         sel.innerHTML = '';
+        if (!state.taskCategories || !state.taskCategories.length) {
+          const opt = document.createElement('option');
+          opt.value = '';
+          opt.textContent = 'Без категории';
+          sel.appendChild(opt);
+          return;
+        }
         state.taskCategories.forEach(c => {
           const opt = document.createElement('option');
           opt.value = c;
@@ -3348,7 +3398,7 @@
           text,
           date: dIso,
           time: hasTime ? timeInp.value.trim() : '',
-          category: catSel ? catSel.value : (state.taskCategories[0] || 'Работа'),
+          category: catSel ? catSel.value : '',
           done: false,
           prio: currentTaskPrio,
           subtasks: stagingTaskSubtasks.map(s => ({ ...s, id: s.id + '_' + idx })),
@@ -3562,24 +3612,46 @@
       renderAll();
     }
 
-    /* ================= SHELF (ПОЛКА) ================= */
+    /* ================= SHELF (ПОЛКА — ПОЛНОСТЬЮ КАСТОМНЫЕ КАТЕГОРИИ) ================= */
+    function populateShelfModalSelect() {
+      const sel = document.getElementById('shelfCatSelect');
+      if (!sel) return;
+      const prev = sel.value;
+      sel.innerHTML = '';
+      const cats = state.shelfCategories || [];
+      if (!cats.length) {
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = 'Без категории (нажми + Категории справа)';
+        sel.appendChild(opt);
+        return;
+      }
+      cats.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        sel.appendChild(opt);
+      });
+      if (cats.includes(prev)) sel.value = prev;
+      else if (state.activeShelfCategory && state.activeShelfCategory !== 'Все' && cats.includes(state.activeShelfCategory)) {
+        sel.value = state.activeShelfCategory;
+      }
+    }
+
     function openShelfEditor(id = null) {
       editingShelfId = id;
       stagingShelfPhoto = null;
       const item = id ? (state.shelf || []).find(x => x.id === id) : null;
 
+      populateShelfModalSelect();
       const sel = document.getElementById('shelfCatSelect');
-      sel.innerHTML = '';
-      state.shelfCategories.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c; opt.textContent = c;
-        sel.appendChild(opt);
-      });
 
       document.getElementById('shelfTitleInput').value = item ? (item.title || '') : '';
       document.getElementById('shelfRatingInput').value = item ? (item.rating || 8) : 8;
       document.getElementById('shelfReviewInput').value = item ? (item.review || '') : '';
-      if (item && item.category) sel.value = item.category;
+      if (item && item.category && (state.shelfCategories || []).includes(item.category)) {
+        sel.value = item.category;
+      }
 
       if (item && item.photo) {
         stagingShelfPhoto = item.photo;
@@ -3627,7 +3699,7 @@
     function saveShelfItem() {
       const title = document.getElementById('shelfTitleInput').value.trim();
       if (!title) return;
-      const category = document.getElementById('shelfCatSelect').value;
+      const category = document.getElementById('shelfCatSelect').value || '';
       const rating = parseInt(document.getElementById('shelfRatingInput').value) || 8;
       const review = document.getElementById('shelfReviewInput').value.trim();
 
@@ -3681,19 +3753,19 @@
       });
       const mgrBtn = document.createElement('button');
       mgrBtn.className = 'cat-manage-btn';
-      mgrBtn.textContent = '✎ Категории';
+      mgrBtn.textContent = '+ / ✎ Категории';
       mgrBtn.onclick = () => openCategoryManager('shelf');
       row.appendChild(mgrBtn);
 
       const q = (document.getElementById('shelfSearchInput').value || '').toLowerCase();
       const filtered = (state.shelf || []).filter(item => {
         if (state.activeShelfCategory && state.activeShelfCategory !== 'Все' && item.category !== state.activeShelfCategory) return false;
-        if (q && !(item.title + ' ' + (item.review || '')).toLowerCase().includes(q)) return false;
+        if (q && !(item.title + ' ' + (item.review || '') + ' ' + (item.category || '')).toLowerCase().includes(q)) return false;
         return true;
       });
 
       const list = document.getElementById('shelfList');
-      list.innerHTML = filtered.length ? '' : '<div class="empty-state">На полке пока ничего нет. Добавь первую запись!</div>';
+      list.innerHTML = filtered.length ? '' : '<div class="empty-state">На полке пока ничего нет. Нажми «+ / ✎ Категории», чтобы создать свои разделы, или «+ Запись»!</div>';
 
       filtered.forEach(item => {
         const card = document.createElement('div');
@@ -3709,7 +3781,7 @@
               <button class="story-share-btn" onclick="event.stopPropagation(); generateShelfStoryCard('${item.id}')" title="Сделать карточку для Сторис / ТГ">📲 Сторис</button>
             </div>
             <div class="shelf-meta">
-              <span class="cat-badge">${escapeHtml(item.category)}</span>
+              ${item.category ? `<span class="cat-badge">${escapeHtml(item.category)}</span>` : ''}
               <span class="shelf-stars">⭐ ${item.rating}/10</span>
               <span>• ${formatShortDate(item.date)}</span>
             </div>
@@ -4118,7 +4190,7 @@
         const text = document.getElementById('qpTaskText').value.trim();
         if (!text) return;
         const time = targetDate ? (document.getElementById('qpTaskTime').value || '').trim() : '';
-        const cat = document.getElementById('qpTaskCat').value || 'Работа';
+        const cat = document.getElementById('qpTaskCat').value || '';
         if (!state.tasks) state.tasks = [];
         state.tasks.unshift({
           id: 't_' + Date.now(),
@@ -4164,7 +4236,7 @@
       renderAll();
     }
 
-    /* ================= NOTES & PASSWORDS TAB SWITCHING ================= */
+    /* ================= NOTES & CUSTOM TAGS ================= */
     function setNoteScope(scope) {
       if (scope !== 'passwords' && vaultUnlocked) {
         vaultUnlocked = false;
@@ -4191,12 +4263,13 @@
       if (!state.notes) state.notes = [];
       const now = new Date();
       const timeStr = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+      const chosenTag = (state.activeTag && state.activeTag !== 'Все') ? state.activeTag : ((state.noteTags && state.noteTags[0]) || '');
       state.notes.unshift({
         id: 'n_' + Date.now(),
         title: `Запись в ${timeStr}`,
         body: text,
         scope: 'quick',
-        tag: '#дневник',
+        tag: chosenTag,
         pinned: false,
         date: todayISO()
       });
@@ -4215,19 +4288,24 @@
 
       const tagRow = document.getElementById('tagsFilterRow');
       tagRow.innerHTML = '';
-      ['Все', ...TAGS].forEach(tag => {
+      ['Все', ...(state.noteTags || [])].forEach(tag => {
         const b = document.createElement('button');
         b.className = 'tag-pill' + (state.activeTag === tag ? ' active' : '');
         b.textContent = tag;
         b.onclick = () => { state.activeTag = tag; renderNotes(); };
         tagRow.appendChild(b);
       });
+      const mgrBtn = document.createElement('button');
+      mgrBtn.className = 'cat-manage-btn';
+      mgrBtn.textContent = '+ / ✎ Теги';
+      mgrBtn.onclick = () => openCategoryManager('note');
+      tagRow.appendChild(mgrBtn);
 
       const q = (document.getElementById('noteSearch').value || '').toLowerCase();
       const filtered = (state.notes || [])
         .filter(n => (n.scope || 'quick') === state.noteScope)
         .filter(n => state.activeTag === 'Все' || n.tag === state.activeTag)
-        .filter(n => !q || (n.title + ' ' + n.body).toLowerCase().includes(q))
+        .filter(n => !q || ((n.title || '') + ' ' + (n.body || '') + ' ' + (n.tag || '')).toLowerCase().includes(q))
         .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
 
       const list = document.getElementById('notesList');
@@ -4243,8 +4321,7 @@
           </div>
           <div class="note-preview">${escapeHtml(n.body || '')}</div>
           <div class="note-meta">
-            <span>${n.tag || '#заметка'}</span>
-            <span>•</span>
+            ${n.tag ? `<span class="cat-badge">${escapeHtml(n.tag)}</span><span>•</span>` : ''}
             <span>${n.date || ''}</span>
           </div>
         `;
@@ -4258,7 +4335,7 @@
       document.getElementById('editorTitle').value = existing ? existing.title : '';
       document.getElementById('editorBody').value = existing ? existing.body : '';
       editorPinned = existing ? !!existing.pinned : false;
-      editorTag = existing ? (existing.tag || '#дневник') : (state.noteScope === 'long' ? '#важное' : '#дневник');
+      editorTag = existing ? (existing.tag || '') : ((state.activeTag && state.activeTag !== 'Все') ? state.activeTag : ((state.noteTags && state.noteTags[0]) || ''));
       document.getElementById('editorPinBtn').style.opacity = editorPinned ? '1' : '0.4';
       document.getElementById('editorDelBtn').style.display = existing ? 'flex' : 'none';
       renderEditorTags();
@@ -4267,14 +4344,28 @@
 
     function renderEditorTags() {
       const row = document.getElementById('editorTagsRow');
+      if (!row) return;
       row.innerHTML = '';
-      TAGS.forEach(t => {
+
+      const noneBtn = document.createElement('button');
+      noneBtn.className = 'tag-pill' + (!editorTag ? ' active' : '');
+      noneBtn.textContent = 'Без тега';
+      noneBtn.onclick = () => { editorTag = ''; renderEditorTags(); };
+      row.appendChild(noneBtn);
+
+      (state.noteTags || []).forEach(t => {
         const b = document.createElement('button');
         b.className = 'tag-pill' + (editorTag === t ? ' active' : '');
         b.textContent = t;
         b.onclick = () => { editorTag = t; renderEditorTags(); };
         row.appendChild(b);
       });
+
+      const mgrBtn = document.createElement('button');
+      mgrBtn.className = 'cat-manage-btn';
+      mgrBtn.textContent = '+ / ✎ Теги';
+      mgrBtn.onclick = () => openCategoryManager('note');
+      row.appendChild(mgrBtn);
     }
 
     function toggleEditorPin() {
@@ -4479,6 +4570,7 @@
         try {
           const imported = JSON.parse(reader.result);
           state = { ...state, ...imported };
+          stripPresetCatsAndTags();
           saveState();
           applyTheme();
           renderAll();
